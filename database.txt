@@ -1,0 +1,5 @@
+v00egd00002l.lec-admin.dmu.ac.uk
+*choose SQL Server Authentifiaction
+P2867907
+TheChickenBrothers5 
+*Trust server certificate false
