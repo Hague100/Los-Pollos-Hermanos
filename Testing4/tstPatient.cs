@@ -10,7 +10,9 @@ namespace Testing4
         [TestMethod]
         public void InstanceOk()
         {
+            //create an instance of the class we want to create
             clsPatient aPatient = new clsPatient();
+            //test to see that it exists
             Assert.IsNotNull(aPatient);
         }
     }
