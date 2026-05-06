@@ -11,5 +11,7 @@ namespace ClassLibrary
         public int PatientID { get; set; }
         public int DoctorID { get; set; }
         public DateTime Date { get; set; }
+        public int recordId { get; set; }
+        
     }
 }
