@@ -7,6 +7,7 @@
     <title></title>
 </head>
 <body>
+    <p>This is the Room management viewer page</p>
     <form id="form1" runat="server">
         <div>
         </div>
