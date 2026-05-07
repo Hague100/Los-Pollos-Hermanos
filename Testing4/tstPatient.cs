@@ -65,9 +65,9 @@ namespace Testing4
             //create some test data to assign to the property
             String TestData = "0789 123456";
             //assign the data to the property
-            aPatient.pPhoneNO = TestData;
+            aPatient.pPhoneNo = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(aPatient.pPhoneNO, TestData);
+            Assert.AreEqual(aPatient.pPhoneNo, TestData);
 
         }
 
@@ -125,6 +125,199 @@ namespace Testing4
             //test to see that the two values are the same
             Assert.AreEqual(aPatient.pMainDocId, TestData);
 
+        }
+
+        [TestMethod]
+
+        public void FindMethodOk()
+        {
+            //create and instance of the class we want to create
+            clsPatient aPatient = new clsPatient();
+            //create Boolean var to store the results of the validation
+            Boolean found = false;
+            //create some test data to use with the method
+            Int32 patientId = 2;
+            //invoke mthe method
+            found = aPatient.Find(patientId);
+            //test to see if result is true
+            Assert.IsTrue(found);
+        }
+
+        [TestMethod]
+
+        public void TestPatientIdFound()
+        {
+            //create and instance of the class we want to create
+            clsPatient aPatient = new clsPatient();
+            //create Boolean var to store the results of the validation
+            Boolean found = false;
+            //create a Boolean variable to record if the data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 patientId = 2;
+            //invoke mthe method
+            found = aPatient.Find(patientId);
+            //chech the patient id
+            if (aPatient.patientId != 2)
+            {
+                OK = false;
+            }
+            //test to see if the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestPNameFound()
+        {
+            //create and instance of the class we want to create
+            clsPatient aPatient = new clsPatient();
+            //create Boolean var to store the results of the validation
+            Boolean found = false;
+            //create a Boolean variable to record if the data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 patientId = 2;
+            //invoke mthe method
+            found = aPatient.Find(patientId);
+            //chech the patient id
+            if (aPatient.pName != "Test name")
+            {
+                OK = false;
+            }
+            //test to see if the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestPEmailFound()
+        {
+            //create and instance of the class we want to create
+            clsPatient aPatient = new clsPatient();
+            //create Boolean var to store the results of the validation
+            Boolean found = false;
+            //create a Boolean variable to record if the data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 patientId = 2;
+            //invoke mthe method
+            found = aPatient.Find(patientId);
+            //chech the patient id
+            if (aPatient.pEmail != "test.email@testemail.com")
+            {
+                OK = false;
+            }
+            //test to see if the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestPPHoneNoFound()
+        {
+            //create and instance of the class we want to create
+            clsPatient aPatient = new clsPatient();
+            //create Boolean var to store the results of the validation
+            Boolean found = false;
+            //create a Boolean variable to record if the data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 patientId = 2;
+            //invoke mthe method
+            found = aPatient.Find(patientId);
+            //chech the patient id
+            if (aPatient.pPhoneNo != "1234567890")
+            {
+                OK = false;
+            }
+            //test to see if the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestPDOBFound()
+        {
+            //create and instance of the class we want to create
+            clsPatient aPatient = new clsPatient();
+            //create Boolean var to store the results of the validation
+            Boolean found = false;
+            //create a Boolean variable to record if the data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 patientId = 2;
+            //invoke mthe method
+            found = aPatient.Find(patientId);
+            //chech the patient id
+            if (aPatient.pDOB != Convert.ToDateTime("01/01/2000"))
+            {
+                OK = false;
+            }
+            //test to see if the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestPHomeAddFound()
+        {
+            //create and instance of the class we want to create
+            clsPatient aPatient = new clsPatient();
+            //create Boolean var to store the results of the validation
+            Boolean found = false;
+            //create a Boolean variable to record if the data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 patientId = 2;
+            //invoke mthe method
+            found = aPatient.Find(patientId);
+            //chech the patient id
+            if (aPatient.pHomeAdd != "1TestStreet,TestCity,Testshire,Te11AA")
+            {
+                OK = false;
+            }
+            //test to see if the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestPAccessReqFound()
+        {
+            //create and instance of the class we want to create
+            clsPatient aPatient = new clsPatient();
+            //create Boolean var to store the results of the validation
+            Boolean found = false;
+            //create a Boolean variable to record if the data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 patientId = 2;
+            //invoke mthe method
+            found = aPatient.Find(patientId);
+            //chech the patient id
+            if (aPatient.pAccessReq != false)
+            {
+                OK = false;
+            }
+            //test to see if the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestPMainDocIdFound()
+        {
+            //create and instance of the class we want to create
+            clsPatient aPatient = new clsPatient();
+            //create Boolean var to store the results of the validation
+            Boolean found = false;
+            //create a Boolean variable to record if the data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 patientId = 2;
+            //invoke mthe method
+            found = aPatient.Find(patientId);
+            //chech the patient id
+            if (aPatient.pMainDocId != 1)
+            {
+                OK = false;
+            }
+            //test to see if the result is correct
+            Assert.IsTrue(OK);
         }
     }
 }
