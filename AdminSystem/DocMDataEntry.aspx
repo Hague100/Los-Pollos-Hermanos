@@ -3,13 +3,35 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-        </div>
-    </form>
-</body>
+    <head runat="server">
+        <title>Doc Data Entry</title>
+    </head>
+    <body>
+        <header>
+        </header>
+        <main>
+            <form id="form1" runat="server">
+               <section style="height: 406px">
+                    <asp:Label ID="lbFirstName" runat="server" style="z-index: 1; left: 12px; top: 55px; position: absolute" Text="First Name"></asp:Label>
+                    <asp:TextBox ID="tbFirstName" runat="server" style="z-index: 1; left: 150px; top: 55px; position: absolute; margin-bottom: 0px"></asp:TextBox>
+                    <asp:Label ID="lbLastName" runat="server" style="z-index: 1; left: 12px; top: 95px; position: absolute" Text="Last Name"></asp:Label>
+                    <asp:TextBox ID="tbLastName" runat="server" style="z-index: 1; left: 150px; top: 95px; position: absolute"></asp:TextBox>
+                    <asp:Label ID="lbAddress" runat="server" style="z-index: 1; left: 12px; top: 135px; position: absolute" Text="Address"></asp:Label>
+                    <asp:TextBox ID="tbAddress" runat="server" style="z-index: 1; left: 150px; top: 135px; position: absolute"></asp:TextBox>
+                   <asp:Label ID="lbEmail" runat="server" style="z-index: 1; left: 12px; top: 180px; position: absolute" Text="Eamail"></asp:Label>
+                    <asp:TextBox ID="tbEmail" runat="server" style="z-index: 1; left: 150px; top: 180px; position: absolute"></asp:TextBox>
+                   <asp:Label ID="lbPhoneNumber" runat="server" style="z-index: 1; left: 12px; top: 225px; position: absolute" Text="Phone Number"></asp:Label>
+                    <asp:TextBox ID="tbPHoneNumber" runat="server" style="z-index: 1; left: 150px; top: 225px; position: absolute"></asp:TextBox>
+                   <asp:Label ID="lbAvailability" runat="server" style="z-index: 1; left: 12px; top: 270px; position: absolute" Text="Availability"></asp:Label>
+                   <asp:CheckBox ID="cbAvailability" runat="server" style="z-index: 1; left: 150px; top: 270px; position: absolute" Text="Available" />
+                    <asp:Label ID="lbError" runat="server" style="z-index: 1; left: 75px ; top: 310px; position: absolute"></asp:Label>
+
+                    <asp:Button ID="btnOK" runat="server" style="z-index: 1; left: 75px; top: 350px; position: absolute; right: 1264px;" Text="OK" OnClick="btnOK_Click" />
+                   <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 130px; top: 350px; position: absolute; right: 1264px;" Text="CANCEL" />
+               </section>
+            </form>
+        </main>
+        <footer>
+        </footer>
+    </body>
 </html>

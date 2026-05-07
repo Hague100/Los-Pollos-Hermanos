@@ -76,6 +76,18 @@ namespace Testing1
             Assert.AreEqual(AnAppointment.TimeOfAppointment, TestData);
         }
         [TestMethod]
+        public void FloorNUmberPropertyOK()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //create some test data to assign to the property
+            Int32 TestData = 1;
+            //assign the data to the property
+            AnAppointment.FloorNumber = TestData;
+            //test to see that the two values are the same
+            Assert.AreEqual(AnAppointment.FloorNumber, TestData);
+        }
+        [TestMethod]
         public void RoomNumberPropertyOK()
         {
             //create an instance of the class we want to create

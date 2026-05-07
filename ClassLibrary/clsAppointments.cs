@@ -6,9 +6,11 @@ namespace ClassLibrary
     {
         public int AppointmentNumber { get; set; }
         public int DoctorID { get; set; }
-        public int PatientID { get; set; }
+        public string PatientFirstName { get; set; }
+        public string PatientLastName { get; set; }
         public DateTime DateOfAppointment { get; set; }
         public DateTime TimeOfAppointment { get; set; }
+        public int FloorNumber { get; set; }
         public int RoomNumber { get; set; }
         public bool EmergencyAppointment { get; set; }
         public string Notes { get; set; }
