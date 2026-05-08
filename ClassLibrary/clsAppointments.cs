@@ -156,9 +156,35 @@ namespace ClassLibrary
         /***********************FIND METHOD***************************/
         public bool Find(int appointmentNumber)
         {
-            mAppointmentNumber = 1;
-            mDateOfAppointment = Convert.ToDateTime("2020-01-01");
-            return true;
+            //create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            //add the parameter for the appointment number to search for
+            DB.AddParameter("@AppointmentNumber", appointmentNumber);
+            //execute the stored procedure
+            DB.Execute("sproc_tblAppointments_FilterByAppointmentNumber");
+            //if one record is found (there should be either one or zero!)
+            if (DB.Count == 1)
+            {
+                //copy the data from the database to the private data members
+                mAppointmentNumber = Convert.ToInt32(DB.DataTable.Rows[0]["AppointmentNumber"]);
+                mDoctorID = Convert.ToInt32(DB.DataTable.Rows[0]["DoctorID"]);
+                mPatientFirstName = Convert.ToString(DB.DataTable.Rows[0]["PatientFirstName"]);
+                mPatientLastName = Convert.ToString(DB.DataTable.Rows[0]["PatientLastName"]);
+                mDateOfAppointment = Convert.ToDateTime(DB.DataTable.Rows[0]["DateOfAppointment"]);
+                mTimeOfAppointment = Convert.ToDateTime(DB.DataTable.Rows[0]["TimeOfAppointment"]);
+                mFloorNumber = Convert.ToInt32(DB.DataTable.Rows[0]["FloorNumber"]);
+                mRoomNumber = Convert.ToInt32(DB.DataTable.Rows[0]["RoomNumber"]);
+                mEmergencyAppointment = Convert.ToBoolean(DB.DataTable.Rows[0]["EmergencyAppointment"]);
+                mNotes = Convert.ToString(DB.DataTable.Rows[0]["Notes"]);
+                //return that everything worked OK
+                return true;
+             }
+             //if no record was found
+             else
+             {
+                 //return false indicating a problem
+                 return false;
+            }
         }
     }
 }

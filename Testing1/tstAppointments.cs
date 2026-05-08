@@ -41,6 +41,7 @@ namespace Testing1
             //test to see that the two values are the same
             Assert.AreEqual(AnAppointment.DoctorID, TestData);
         }
+
         /*[TestMethod]
         public void PatientIDPropertyOK()
         {
@@ -300,5 +301,5 @@ namespace Testing1
             }
             Assert.IsTrue(OK);
         }
-     }
+    }
  }
