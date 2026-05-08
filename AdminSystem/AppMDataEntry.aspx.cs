@@ -32,4 +32,29 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //navigate to view page
         Response.Redirect("AppMViewer.aspx");
     }
+
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+        //create an instance of the address class
+        clsAppointments AnAppointment = new clsAppointments();
+        //variable to store the primary key
+        Int32 AppointmentNumber;
+        //variable to store the result of the find operation
+        Boolean Found = false;
+        //get the primary key entered by the user
+        AppointmentNumber = Convert.ToInt32(txtAppointmentNumber.Text);
+        //find the record
+        Found = AnAppointment.Find(AppointmentNumber);
+        //if found
+        if (Found)
+        {
+            //display the values of the properties in the form
+            txtFirstName.Text = AnAppointment.PatientFirstName;
+            txtLastName.Text = AnAppointment.PatientLastName;
+            calAppointmentDate.SelectedDate = AnAppointment.DateOfAppointment;
+            txtAppointmentTime.Text = AnAppointment.TimeOfAppointment.ToString();
+            txtNotes.Text = AnAppointment.Notes;
+            chkEmergency.Checked = AnAppointment.EmergencyAppointment;
+        }
+    }
 }
