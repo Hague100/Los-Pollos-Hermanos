@@ -22,7 +22,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //email
         aPatient.pEmail = txtPEmail.Text;
         //phone number
-        aPatient.pPhoneNO = txtPPhoneNo.Text;
+        aPatient.pPhoneNo = txtPPhoneNo.Text;
         //dob
         aPatient.pDOB = Convert.ToDateTime(txtPDOB.Text);
         //home address
@@ -35,5 +35,33 @@ public partial class _1_DataEntry : System.Web.UI.Page
         Session["aPatient"] = aPatient;
         //nativigate to view page
         Response.Redirect("PatMViewer.aspx");
+    }
+
+
+
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+        //create an instance of the patient class
+        clsPatient aPatient = new clsPatient();
+        //create a variable to store a pk
+        Int32 patientId;
+        //create a var to store result of the find opp
+        Boolean found = false;
+        //get pk enterered by user
+        patientId = Convert.ToInt32(txtPatientId.Text);
+        //find record
+        found = aPatient.Find(patientId);
+        //if found
+        if (found)
+        {
+            //display the values of the properties in the form
+            txtPName.Text = aPatient.pName;
+            txtPEmail.Text = aPatient.pEmail;
+            txtPPhoneNo.Text = aPatient.pPhoneNo;
+            txtPDOB.Text = aPatient.pDOB.ToString();
+            txtPHomeAdd.Text = aPatient.pHomeAdd;
+            txtPMainDocId.Text = aPatient.pMainDocId.ToString();
+            chkPAccessReq.Checked = aPatient.pAccessReq;
+        }
     }
 }

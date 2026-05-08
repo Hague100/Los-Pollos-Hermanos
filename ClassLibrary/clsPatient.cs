@@ -109,17 +109,31 @@ namespace ClassLibrary
 
         public bool Find(int patientId)
         {
-            //set the private data members to the test data value
-            mPatientId = 2;   
-            mPName = "Test name";
-            mPEmail = "test.email@testemail.com";
-            mPPhoneNo = "1234567890";
-            mPDOB = Convert.ToDateTime("01/01/2000");
-            mPHomeAdd = "1TestStreet,TestCity,Testshire,Te11AA";
-            mPAccessReq = false;
-            mPMainDocId = 1;
-            //return always true
-            return true;
+            //create an instance if the data connection
+            clsDataConnection DB = new clsDataConnection();
+            //add the param for new patient id to search for
+            DB.AddParameter("@PatientId", patientId);
+            //execute stored procedure
+            DB.Execute("sproc_tblPatient_FilterByPatientId");
+            //if one record is found(should be 1 or 0)
+            if (DB.Count == 1)
+            {
+                //coppy the data from the database to the private data members
+                mPatientId = Convert.ToInt32(DB.DataTable.Rows[0]["PatientId"]);
+                mPName = Convert.ToString(DB.DataTable.Rows[0]["PName"]);
+                mPEmail = Convert.ToString(DB.DataTable.Rows[0]["PEmail"]);
+                mPPhoneNo = Convert.ToString(DB.DataTable.Rows[0]["PPhoneNo"]);
+                mPDOB = Convert.ToDateTime(DB.DataTable.Rows[0]["PDOB"]);
+                mPHomeAdd = Convert.ToString(DB.DataTable.Rows[0]["PHomeAdd"]);
+                mPAccessReq = Convert.ToBoolean(DB.DataTable.Rows[0]["PAccessReq"]);
+                mPMainDocId = Convert.ToInt32(DB.DataTable.Rows[0]["PMainDocId"]);
+                return true;
+            }
+            //if no record was found
+            else
+            {
+                return false;
+            }
         }
     }
 }

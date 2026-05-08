@@ -154,11 +154,11 @@ namespace Testing4
             //create a Boolean variable to record if the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 patientId = 2;
+            Int32 patientId = 6;
             //invoke mthe method
             found = aPatient.Find(patientId);
             //chech the patient id
-            if (aPatient.patientId != 2)
+            if (aPatient.patientId != 6)
             {
                 OK = false;
             }
@@ -176,11 +176,11 @@ namespace Testing4
             //create a Boolean variable to record if the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 patientId = 2;
+            Int32 patientId = 6;
             //invoke mthe method
             found = aPatient.Find(patientId);
             //chech the patient id
-            if (aPatient.pName != "Test name")
+            if (aPatient.pName != "Test Name")
             {
                 OK = false;
             }
@@ -198,7 +198,7 @@ namespace Testing4
             //create a Boolean variable to record if the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 patientId = 2;
+            Int32 patientId = 6;
             //invoke mthe method
             found = aPatient.Find(patientId);
             //chech the patient id
@@ -220,7 +220,7 @@ namespace Testing4
             //create a Boolean variable to record if the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 patientId = 2;
+            Int32 patientId = 6;
             //invoke mthe method
             found = aPatient.Find(patientId);
             //chech the patient id
@@ -242,7 +242,7 @@ namespace Testing4
             //create a Boolean variable to record if the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 patientId = 2;
+            Int32 patientId = 6;
             //invoke mthe method
             found = aPatient.Find(patientId);
             //chech the patient id
@@ -264,11 +264,11 @@ namespace Testing4
             //create a Boolean variable to record if the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 patientId = 2;
+            Int32 patientId = 6;
             //invoke mthe method
             found = aPatient.Find(patientId);
             //chech the patient id
-            if (aPatient.pHomeAdd != "1TestStreet,TestCity,Testshire,Te11AA")
+            if (aPatient.pHomeAdd != "1 Test Steet,TestTown,TestShire,TE11AA") 
             {
                 OK = false;
             }
@@ -286,7 +286,7 @@ namespace Testing4
             //create a Boolean variable to record if the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 patientId = 2;
+            Int32 patientId = 6;
             //invoke mthe method
             found = aPatient.Find(patientId);
             //chech the patient id
@@ -308,11 +308,11 @@ namespace Testing4
             //create a Boolean variable to record if the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 patientId = 2;
+            Int32 patientId = 6;
             //invoke mthe method
             found = aPatient.Find(patientId);
             //chech the patient id
-            if (aPatient.pMainDocId != 1)
+            if (aPatient.pMainDocId != 4)
             {
                 OK = false;
             }
