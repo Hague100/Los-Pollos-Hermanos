@@ -15,11 +15,12 @@ public partial class _1Viewer : System.Web.UI.Page
         // get the data from the session objedct 
         aDoc = (clsDoc)Session["aDoc"];
         // display the doc firstname 
-        Response.Write(aDoc.DFirstName);
-        Response.Write(aDoc.DLastName);
-        Response.Write(aDoc.DAddress);
-        Response.Write(aDoc.DEmail);
-        Response.Write(aDoc.DPhoneNumber);
-        Response.Write(aDoc.DAvailability);
+        Response.Write(aDoc.dId);
+        Response.Write(aDoc.dFirstName);
+        Response.Write(aDoc.dLastName);
+        Response.Write(aDoc.dAddress);
+        Response.Write(aDoc.dEmail);
+        Response.Write(aDoc.dPhoneNumber);
+        Response.Write(aDoc.dAvailability);
     }
 }
