@@ -163,11 +163,11 @@ namespace Testing5
             // boolean variable to record if the data is ok, hard coded/assumed it is
             Boolean ok = true;
             // test data
-            Int32 firstName = 1;
+            Int32 DoctorId = 1;
             // invoke the method
-            found = aDoc.Find(firstName);
+            found = aDoc.Find(DoctorId);
             // check FirstName property
-            if (aDoc.dFirstName != "Josh")
+            if (aDoc.dFirstName != "Thomas")
             {
                 ok = false;
             }
@@ -186,11 +186,11 @@ namespace Testing5
             // boolean variable to record if the data is ok, hard coded/assumed it is
             Boolean ok = true;
             // test data
-            Int32 firstName = 1;
+            Int32 DoctorId = 1;
             // invoke the method
-            found = aDoc.Find(firstName);
+            found = aDoc.Find(DoctorId);
             // check LastName property
-            if (aDoc.dLastName != "Heins")
+            if (aDoc.dLastName != "Hague")
             {
                 ok = false;
             }
@@ -209,11 +209,11 @@ namespace Testing5
             // boolean variable to record if the data is ok, hard coded/assumed it is
             Boolean ok = true;
             // test data
-            Int32 firstName = 1;
+            Int32 DoctorId = 1;
             // invoke the method
-            found = aDoc.Find(firstName);
+            found = aDoc.Find(DoctorId);
             // check Address property
-            if (aDoc.dAddress != "98 Nulview Rd")
+            if (aDoc.dAddress != "77 nullviewrd n23ard")
             {
                 ok = false;
             }
@@ -232,11 +232,11 @@ namespace Testing5
             // boolean variable to record if the data is ok, hard coded/assumed it is
             Boolean ok = true;
             // test data
-            Int32 firstName = 1;
+            Int32 DoctorId = 1;
             // invoke the method
-            found = aDoc.Find(firstName);
+            found = aDoc.Find(DoctorId);
             // check Email property
-            if (aDoc.dEmail != "Doc@Nullard.com")
+            if (aDoc.dEmail != "Thague@gmail.com")
             {
                 ok = false;
             }
@@ -255,11 +255,11 @@ namespace Testing5
             // boolean variable to record if the data is ok, hard coded/assumed it is
             Boolean ok = true;
             // test data
-            Int32 firstName = 1;
+            Int32 DoctorId = 1;
             // invoke the method
-            found = aDoc.Find(firstName);
+            found = aDoc.Find(DoctorId);
             // check PhoneNumber property
-            if (aDoc.dPhoneNumber != "07938383812")
+            if (aDoc.dPhoneNumber != "394850934")
             {
                 ok = false;
             }
@@ -278,9 +278,9 @@ namespace Testing5
             // boolean variable to record if the data is ok, hard coded/assumed it is
             Boolean ok = true;
             // test data
-            Int32 firstName = 1;
+            Int32 DoctorId = 1;
             // invoke the method
-            found = aDoc.Find(firstName);
+            found = aDoc.Find(DoctorId);
             // check Availability property
             if (aDoc.dAvailability != true)
             {
