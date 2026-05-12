@@ -23,14 +23,28 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //capture the date of appointment
         AnAppointment.DateOfAppointment = Convert.ToDateTime(calAppointmentDate.SelectedDate);
         //capture the time of appointment
-        AnAppointment.TimeOfAppointment = Convert.ToDateTime(txtAppointmentTime.Text);
+        string[] timeSplit = txtAppointmentTime.Text.Split(':');
+        AnAppointment.TimeOfAppointment = new TimeSpan(Convert.ToInt32(timeSplit[0]), Convert.ToInt32(timeSplit[1]), Convert.ToInt32(timeSplit[2]));
         //capture appointment notes
         AnAppointment.Notes = txtNotes.Text;
-        //capture emergency appointment
+        //capture emergency 
         AnAppointment.EmergencyAppointment = chkEmergency.Checked;
-        Session["AnAppointment"] = AnAppointment;
-        //navigate to view page
-        Response.Redirect("AppMViewer.aspx");
+        //variable to store any error messages
+        string Error = "";
+        //validate the data
+        Error = AnAppointment.Valid(AnAppointment.PatientFirstName, AnAppointment.PatientLastName, AnAppointment.DateOfAppointment.ToString(), AnAppointment.TimeOfAppointment.ToString(), "1", "1", AnAppointment.Notes, AnAppointment.EmergencyAppointment);
+        //if the data is valid
+        if (Error == "")
+        {
+            //store the appointment in the session object
+            Session["AnAppointment"] = AnAppointment;
+            //navigate to view page
+            Response.Redirect("AppMViewer.aspx");
+        } else
+        {
+            //display the error message
+            lblError.Text = Error;
+        }
     }
 
     protected void btnFind_Click(object sender, EventArgs e)
