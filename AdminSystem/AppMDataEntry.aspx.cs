@@ -46,7 +46,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //find the record
         Found = AnAppointment.Find(AppointmentNumber);
         //if found
-        if (Found)
+        if (Found == true)
         {
             //display the values of the properties in the form
             txtFirstName.Text = AnAppointment.PatientFirstName;
