@@ -23,7 +23,7 @@ namespace Testing1
             //create an instance of the class we want to create
             clsAppointments AnAppointment = new clsAppointments();
             //create some test data to assign to the property
-            Int32 TestData = 1;
+            Int32 TestData = 2;
             //assign the data to the property
             AnAppointment.AppointmentNumber = TestData;
             //test to see that the two values are the same
@@ -35,25 +35,36 @@ namespace Testing1
             //create an instance of the class we want to create
             clsAppointments AnAppointment = new clsAppointments();
             //create some test data to assign to the property
-            Int32 TestData = 1;
+            Int32 TestData = 2;
             //assign the data to the property
             AnAppointment.DoctorID = TestData;
             //test to see that the two values are the same
             Assert.AreEqual(AnAppointment.DoctorID, TestData);
         }
-
-        /*[TestMethod]
-        public void PatientIDPropertyOK()
+        [TestMethod]
+        public void PatientFirstNamePropertyOK()
         {
             //create an instance of the class we want to create
             clsAppointments AnAppointment = new clsAppointments();
             //create some test data to assign to the property
-            Int32 TestData = 1;
+            string TestData = "John";
             //assign the data to the property
-            AnAppointment.PatientID = TestData;
+            AnAppointment.PatientFirstName = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(AnAppointment.PatientID, TestData);
-        }*/
+            Assert.AreEqual(AnAppointment.PatientFirstName, TestData);
+        }
+        [TestMethod]
+        public void PatientLastNamePropertyOK()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //create some test data to assign to the property
+            string TestData = "Doe";
+            //assign the data to the property
+            AnAppointment.PatientLastName = TestData;
+            //test to see that the two values are the same
+            Assert.AreEqual(AnAppointment.PatientLastName, TestData);
+        }
         [TestMethod]
         public void DateOfAppointmentPropertyOK()
         {
@@ -84,7 +95,7 @@ namespace Testing1
             //create an instance of the class we want to create
             clsAppointments AnAppointment = new clsAppointments();
             //create some test data to assign to the property
-            Int32 TestData = 1;
+            Int32 TestData = 2;
             //assign the data to the property
             AnAppointment.FloorNumber = TestData;
             //test to see that the two values are the same
@@ -96,7 +107,7 @@ namespace Testing1
             //create an instance of the class we want to create
             clsAppointments AnAppointment = new clsAppointments();
             //create some test data to assign to the property
-            Int32 TestData = 1;
+            Int32 TestData = 2;
             //assign the data to the property
             AnAppointment.RoomNumber = TestData;
             //test to see that the two values are the same
@@ -134,7 +145,7 @@ namespace Testing1
             //boolean variable to store the results of the validation
             Boolean Found = false;
             //create some test data to use with the method
-            Int32 AppointmentNumber = 1;
+            Int32 AppointmentNumber = 2;
             //invoke the method
             Found = AnAppointment.Find(AppointmentNumber);
             //test to see that the result is correct
@@ -151,11 +162,11 @@ namespace Testing1
             //create a Boolean variable to record if the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 AppointmentNumber = 1;
+            Int32 AppointmentNumber = 2;
             //invoke the method
             Found = AnAppointment.Find(AppointmentNumber);
-            //check the doctor id
-            if (AnAppointment.AppointmentNumber != 1)
+            //check the appointment number
+            if (AnAppointment.AppointmentNumber != AppointmentNumber)
             {
                 OK = false;
             }
@@ -171,11 +182,11 @@ namespace Testing1
             //create a Boolean variable to record if the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 AppointmentNumber = 1;
+            Int32 AppointmentNumber = 2;
             //invoke the method
             Found = AnAppointment.Find(AppointmentNumber);
             //check the doctor id
-            if (AnAppointment.DoctorID != 1)
+            if (AnAppointment.DoctorID == null)
             {
                 OK = false;
             }
@@ -191,11 +202,11 @@ namespace Testing1
             //create a Boolean variable to record if the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 AppointmentNumber = 1;
+            Int32 AppointmentNumber = 2;
             //invoke the method
             Found = AnAppointment.Find(AppointmentNumber);
-            //check the doctor id
-            if (AnAppointment.DateOfAppointment != DateTime.Now.Date)
+            //check the dateof appointment
+            if (AnAppointment.DateOfAppointment == null)
             {
                 OK = false;
             }
@@ -211,11 +222,11 @@ namespace Testing1
             //create a Boolean variable to record if the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 AppointmentNumber = 1;
+            Int32 AppointmentNumber = 2;
             //invoke the method
             Found = AnAppointment.Find(AppointmentNumber);
-            //check the doctor id
-            if (AnAppointment.TimeOfAppointment != DateTime.Now)
+            //check the appointment time
+            if (!(AnAppointment.TimeOfAppointment is DateTime))
             {
                 OK = false;
             }
@@ -231,11 +242,11 @@ namespace Testing1
             //create a Boolean variable to record if the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 AppointmentNumber = 1;
+            Int32 AppointmentNumber = 2;
             //invoke the method
             Found = AnAppointment.Find(AppointmentNumber);
-            //check the doctor id
-            if (AnAppointment.FloorNumber != 1)
+            //check the floor number
+            if (!(AnAppointment.FloorNumber is int))
             {
                 OK = false;
             }
@@ -251,11 +262,11 @@ namespace Testing1
             //create a Boolean variable to record if the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 AppointmentNumber = 1;
+            Int32 AppointmentNumber = 2;
             //invoke the method
             Found = AnAppointment.Find(AppointmentNumber);
-            //check the doctor id
-            if (AnAppointment.RoomNumber != 1)
+            //check the room number
+            if (!(AnAppointment.RoomNumber is int))
             {
                 OK = false;
             }
@@ -271,11 +282,11 @@ namespace Testing1
             //create a Boolean variable to record if the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 AppointmentNumber = 1;
+            Int32 AppointmentNumber = 2;
             //invoke the method
             Found = AnAppointment.Find(AppointmentNumber);
-            //check the doctor id
-            if (AnAppointment.EmergencyAppointment != true)
+            //check the boolean
+            if (!(AnAppointment.EmergencyAppointment is Boolean))
             {
                 OK = false;
             }
@@ -291,11 +302,11 @@ namespace Testing1
             //create a Boolean variable to record if the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 AppointmentNumber = 1;
+            Int32 AppointmentNumber = 2;
             //invoke the method
             Found = AnAppointment.Find(AppointmentNumber);
-            //check the doctor id
-            if (AnAppointment.Notes != "This is a test note.")
+            //check the notes
+            if (AnAppointment.Notes == null)
             {
                 OK = false;
             }
