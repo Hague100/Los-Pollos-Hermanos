@@ -187,5 +187,18 @@ namespace ClassLibrary
                  return false;
             }
         }
+
+        public string Valid(string patientFirstName, string patientLastName, DateTime dateOfAppointment, DateTime timeOfAppointment, int floorNumber, int roomNumber, string notes, bool emergencyAppointment)
+        {
+            //create a string variable to store the error
+            String Error = "";
+            //if the patient first name is blank
+            if (patientFirstName.Length == 0)
+            {
+                //record the error
+                Error = Error + "The patient first name may not be blank : ";
+            }
+            return Error;
+        }
     }
 }
