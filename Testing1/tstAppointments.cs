@@ -7,6 +7,16 @@ namespace Testing1
     [TestClass]
     public class TstAppointments
     {
+        //good test data
+        //create some test data to pass to the method
+        string      PatientFirstName = "John",
+                    PatientLastName = "Doe";
+        DateTime    DateOfAppointment = DateTime.Now.Date,
+                    TimeOfAppointment = DateTime.Now;
+        int         FloorNumber = 2,
+                    RoomNumber = 2;
+        bool        EmergencyAppointment = true;
+        string      Notes = "This is a test note.";
         /*********************INSTANCE OF THE CLASS TEST*********************/
         [TestMethod]
         public void TestMethod1()
@@ -43,7 +53,6 @@ namespace Testing1
         }
         [TestMethod]
         public void PatientFirstNamePropertyOK()
-        public void PatientIDPropertyOK()
         {
             //create an instance of the class we want to create
             clsAppointments AnAppointment = new clsAppointments();
@@ -138,20 +147,6 @@ namespace Testing1
             //test to see that the two values are the same
             Assert.AreEqual(AnAppointment.Notes, TestData);
         }
-        [TestMethod]
-        public void FindMethodOK()
-        {
-            //create an instance of the class we want to create
-            clsAppointments AnAppointment = new clsAppointments();
-            //boolean variable to store the results of the validation
-            Boolean Found = false;
-            //create some test data to use with the method
-            Int32 AppointmentNumber = 2;
-            //invoke the method
-            Found = AnAppointment.Find(AppointmentNumber);
-            //test to see that the result is correct
-            Assert.IsTrue(Found);
-        }
         /***********************PROPERTY DATA TESTS***********************/
         [TestMethod]
         public void TestAppointmentNumberFound()
@@ -174,6 +169,46 @@ namespace Testing1
             Assert.IsTrue(OK);
         }
         [TestMethod]
+        public void TestPatientFirstNameFound()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //boolean variable to store the results of the validation
+            Boolean Found = false;
+            //create a Boolean variable to record if the data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 AppointmentNumber = 2;
+            //invoke the method
+            Found = AnAppointment.Find(AppointmentNumber);
+            //check the patient first name
+            if (AnAppointment.PatientFirstName != "Joe")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+        [TestMethod]
+        public void TestPatientLastNameFound()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //boolean variable to store the results of the validation
+            Boolean Found = false;
+            //create a Boolean variable to record if the data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 AppointmentNumber = 2;
+            //invoke the method
+            Found = AnAppointment.Find(AppointmentNumber);
+            //check the patient last name
+            if (AnAppointment.PatientLastName != "Biden")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+        [TestMethod]
         public void TestDoctorIDFound()
         {
             //create an instance of the class we want to create
@@ -187,7 +222,7 @@ namespace Testing1
             //invoke the method
             Found = AnAppointment.Find(AppointmentNumber);
             //check the doctor id
-            if (AnAppointment.DoctorID == null)
+            if (AnAppointment.DoctorID != 1)
             {
                 OK = false;
             }
@@ -287,7 +322,7 @@ namespace Testing1
             //invoke the method
             Found = AnAppointment.Find(AppointmentNumber);
             //check the boolean
-            if (!(AnAppointment.EmergencyAppointment is Boolean))
+            if (!(AnAppointment.EmergencyAppointment is bool))
             {
                 OK = false;
             }
@@ -313,5 +348,140 @@ namespace Testing1
             }
             Assert.IsTrue(OK);
         }
-     }
+        /****************MID MIN MAX PLUSONE LESSONE TESTS****************/
+        [TestMethod]
+        public void PatientFirstNameMinLessOne()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string PatientFirstName = ""; //this should trigger an error
+            //invoke the method
+            Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+        [TestMethod]
+        public void PatientFirstNameMin()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string PatientFirstName = "J"; //this should be OK
+            //invoke the method
+            Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+        [TestMethod]
+        public void PatientFirstNameMinPlusOne()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string PatientFirstName = "Jo"; //this should be OK
+            //invoke the method
+            Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+        [TestMethod]
+        public void PatientFirstNameMaxLessOne()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string PatientFirstName = "Maximilianoalexandertheodoredanielchristopherjonathanbenjaminnathanielsebastianmontgomeryfitzgerald"; //this should be OK
+            //invoke the method
+            Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+        [TestMethod]
+        public void PatientFirstNameMax()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string PatientFirstName = "Maximilianoalexandertheodoredanielchristopherjonathanbenjaminnathanielsebastianmontgomeryfitzgeralda"; //this should be OK
+            //invoke the method
+            Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+        [TestMethod]
+        public void PatientFirstNameMid()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            String PatientFirstName = "Maximilianaeuphrasiatheresaalexandriettavalerineph"; //this should be OK
+            //invoke the method
+            Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+        [TestMethod]
+        public void PatientFirstNameMaxPlusOne()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string PatientFirstName = "Maximilianoalexandertheodoredanielchristopherjonathanbenjaminnathanielsebastianmontgomeryfitzgeraldaa"; //this should trigger an error
+            //invoke the method
+            Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+        /************************VALID METHOD TESTS***********************/
+        [TestMethod]
+        public void FindMethodOK()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //boolean variable to store the results of the validation
+            Boolean Found = false;
+            //create some test data to use with the method
+            Int32 AppointmentNumber = 2;
+            //invoke the method
+            Found = AnAppointment.Find(AppointmentNumber);
+            //test to see that the result is correct
+            Assert.IsTrue(Found);
+        }
+        [TestMethod]
+        public void ValidMethodOK()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string PatientFirstName = "John";
+            string PatientLastName = "Doe";
+            DateTime DateOfAppointment = DateTime.Now.Date;
+            DateTime TimeOfAppointment = DateTime.Now;
+            int FloorNumber = 1;
+            int RoomNumber = 2;
+            bool EmergencyAppointment = true;
+            string Notes = "This is a test note.";
+            //invoke the method
+            Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+    }
  }
