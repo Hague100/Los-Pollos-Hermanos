@@ -26,7 +26,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         // get the data entered by the user
         AnMedicalRecords.recordId = int.Parse(txtRecordId.Text);
-        AnMedicalRecords.PatientID = int.Parse(txtPatientID.Text);
+        AnMedicalRecords.patientId = int.Parse(txtPatientID.Text);
         AnMedicalRecords.DoctorID = int.Parse(txtDoctorID.Text);
         AnMedicalRecords.Date = DateTime.Parse(txtDate.Text);
         AnMedicalRecords.appID = int.Parse(txtAppID.Text);

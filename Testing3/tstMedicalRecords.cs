@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.ComponentModel.Design;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Testing3
 {
@@ -38,9 +39,9 @@ namespace Testing3
             //create some test data to assign to the property
             Int32 TestData = 1;
             //assign the data to the property
-            AMedicalRecords.PatientID = TestData;
+            AMedicalRecords.patientId = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(AMedicalRecords.PatientID, TestData);
+            Assert.AreEqual(AMedicalRecords.patientId, TestData);
         }
         [TestMethod]
         public void DoctorIDPropertyOK()
@@ -105,5 +106,156 @@ namespace Testing3
             //test to see that the two values are the same
             Assert.AreEqual(AMedicalRecords.appNotes, TestData);
         }
+
+        [TestMethod]
+        public void FindMethodOK()
+        {
+            // create an instance of the class we want to create
+            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+            //boolean variable to store the result of the validation
+            Boolean Found = false;
+            //create some test data to use with the method
+            Int32 recordId = 1;
+            //invoke the method
+            Found = AMedicalRecords.Find(recordId);
+            //test to see that the result is true
+            Assert.IsTrue(Found);
+        }
+
+        [TestMethod]
+        public void TestRecordIDFound()
+        {
+            // create an instance of the class we want to create
+            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+            //boolean variable to store the result of the validation
+            Boolean Found = false;
+            // create a boolean variable to record if data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 recordId = 1;
+            //invoke the method
+            Found = AMedicalRecords.Find(recordId);
+            //check the record id
+            if (AMedicalRecords.recordId != 1)
+            {
+                OK = false;
+            }
+            //return the result of the test
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestPatientIDFound()
+        {
+            // create an instance of the class we want to create
+            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+            //boolean variable to store the result of the validation
+            Boolean Found = false;
+            // create a boolean variable to record if data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 recordId = 1;
+            //invoke the method
+            Found = AMedicalRecords.Find(recordId);
+            //check the patient id
+            if (AMedicalRecords.patientId != 456)
+            {
+                OK = false;
+            }
+            //return the result of the test
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestDoctorIDFound()
+        {
+            // create an instance of the class we want to create
+            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+            //boolean variable to store the result of the validation
+            Boolean Found = false;
+            // create a boolean variable to record if data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 recordId = 1;
+            //invoke the method
+            Found = AMedicalRecords.Find(recordId);
+            //check the doctor id
+            if (AMedicalRecords.doctorId != 123)
+            {
+                OK = false;
+            }
+            //return the result of the test
+            Assert.IsTrue(OK); 
+
+            }
+
+                [TestMethod]
+                public void TestAppIDFound()
+                {
+                    // create an instance of the class we want to create
+                    clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+                    //boolean variable to store the result of the validation
+                    Boolean Found = false;
+                    // create a boolean variable to record if data is OK (assume it is)
+                    Boolean OK = true;
+                    //create some test data to use with the method
+                    Int32 recordId = 1;
+                    //invoke the method
+                    Found = AMedicalRecords.Find(recordId);
+                    //check the app id
+                    if (AMedicalRecords.appID != 1)
+                    {
+                        OK = false;
+                    }
+                    //return the result of the test
+                    Assert.IsTrue(OK);
+
+        }
+
+                    [TestMethod]
+                    public void pendingAppFound()
+                    {
+                        // create an instance of the class we want to create
+                        clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+                        //boolean variable to store the result of the validation
+                        Boolean Found = false;
+                        // create a boolean variable to record if data is OK (assume it is)
+                        Boolean OK = true;
+                        //create some test data to use with the method
+                        Int32 recordId = 1;
+                        //invoke the method
+                        Found = AMedicalRecords.Find(recordId);
+                        //check the pending app
+                        if (AMedicalRecords.pendingApp != true)
+                        {
+                            OK = false;
+                        }
+                        //return the result of the test
+                        Assert.IsTrue(OK);
+                    }
+
+
+                    [TestMethod]
+                    public void AppNotesFound()
+                    {
+                        // create an instance of the class we want to create
+                        clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+                        //boolean variable to store the result of the validation
+                        Boolean Found = false;
+                        // create a boolean variable to record if data is OK (assume it is)
+                        Boolean OK = true;
+                        //create some test data to use with the method
+                        Int32 recordId = 1;
+                        //invoke the method
+                        Found = AMedicalRecords.Find(recordId);
+                        //check the app notes
+                        if (AMedicalRecords.appNotes != "Test note")
+                        {
+                            OK = false;
+                        }
+                        //return the result of the test
+                        Assert.IsTrue(OK);
+                    }
+
+           }
     }
-}
