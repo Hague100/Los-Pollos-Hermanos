@@ -21,8 +21,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
         aPatient.pName = txtPName.Text;
         //email
         aPatient.pEmail = txtPEmail.Text;
-        //phone number
-        aPatient.pPhoneNo = txtPPhoneNo.Text;
         //dob
         aPatient.pDOB = Convert.ToDateTime(txtPDOB.Text);
         //home address
@@ -57,7 +55,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
             //display the values of the properties in the form
             txtPName.Text = aPatient.pName;
             txtPEmail.Text = aPatient.pEmail;
-            txtPPhoneNo.Text = aPatient.pPhoneNo;
             txtPDOB.Text = aPatient.pDOB.ToString();
             txtPHomeAdd.Text = aPatient.pHomeAdd;
             txtPMainDocId.Text = aPatient.pMainDocId.ToString();
