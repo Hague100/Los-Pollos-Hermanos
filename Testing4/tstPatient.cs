@@ -7,6 +7,14 @@ namespace Testing4
     [TestClass]
     public class tstPatient
     {
+        //good test data
+        string patientName = "Test Name";
+        string email = "testemail@test.com";
+        string address = "1TestDrive,TestCity,Testshire,TE11ST";
+        DateTime dateOfBirth = Convert.ToDateTime("01/01/2000");
+        Int32 drId = 1;
+        Boolean acessibilityReq = true;
+
         [TestMethod]
         public void InstanceOk()
         {
@@ -77,7 +85,7 @@ namespace Testing4
             //create an instance of the class we want to create
             clsPatient aPatient = new clsPatient();
             //create some test data to assign to the property
-            String TestData = "Test Street,Leicster,LE11AA";
+            string TestData = "Test Street,Leicster,LE11AA";
             //assign the data to the property
             aPatient.pHomeAdd = TestData;
             //test to see that the two values are the same
@@ -283,6 +291,31 @@ namespace Testing4
             }
             //test to see if the result is correct
             Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        
+        public void ValidMethodOK()
+        {
+            //create an instance of the class we want to create
+            clsPatient aPatient = new clsPatient();
+            //string varible to store error message
+            String Error = "";
+            //invoke method
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId, acessibilityReq);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void pNameMinLessOne()
+        {
+            clsPatient aPatient = new clsPatient();
+            String Error = "";
+            String patientName = "";
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId, acessibilityReq);
+            Assert.AreNotEqual(Error, "");
         }
     }
 }

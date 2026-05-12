@@ -121,5 +121,18 @@ namespace ClassLibrary
             }
         }
 
+        public string Valid(string patientName, string email, string address, DateTime dateOfBirth, int drId, bool acessibilityReq)
+        {
+            //create a string variable to store the error
+            String Error = "";
+            //if the patientName is blank
+            if (patientName.Length == 0)
+            {
+                //record error
+                Error += "The patient name may not be blank : ";
+            }
+            //return error message
+            return Error;
+        }
     }
 }
