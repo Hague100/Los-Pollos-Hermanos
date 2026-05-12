@@ -43,6 +43,7 @@ namespace Testing1
         }
         [TestMethod]
         public void PatientFirstNamePropertyOK()
+        public void PatientIDPropertyOK()
         {
             //create an instance of the class we want to create
             clsAppointments AnAppointment = new clsAppointments();
@@ -312,5 +313,5 @@ namespace Testing1
             }
             Assert.IsTrue(OK);
         }
-    }
+     }
  }
