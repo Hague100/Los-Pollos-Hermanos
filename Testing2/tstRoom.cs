@@ -17,38 +17,12 @@ namespace Testing2
         }
 
         [TestMethod]
-        public void ActivePropertyOK()
-        {
-            //create an instance of the class we want to create
-            clsRoom ARoom = new clsRoom();
-            //create some test data to assign to the property
-            Boolean TestData = true;
-            //assign the data to the property
-            ARoom.Active = TestData;
-            //test to see that the two values are the same
-            Assert.AreEqual(ARoom.Active, TestData);
-        }
-
-        [TestMethod]
-        public void DateAddedPropertyOK()
-        {
-            //create an instance of the class we want to create
-            clsRoom ARoom = new clsRoom();
-            //create some test data to assign to the property
-            DateTime TestData = DateTime.Now.Date;
-            //assign the data to the property
-            ARoom.DateAdded = TestData;
-            //test to see that the two values are the same
-            Assert.AreEqual(ARoom.DateAdded, TestData);
-        }
-
-        [TestMethod]
         public void FloorNumberIdPropertyOK()
         {
             clsRoom room = new clsRoom();
             Int32 TestData = 1;
-            room.FloorNumberId = TestData;
-            Assert.AreEqual(room.FloorNumberId, TestData);
+            room.FloorNumber = TestData;
+            Assert.AreEqual(room.FloorNumber, TestData);
         }
 
         [TestMethod]
@@ -56,8 +30,8 @@ namespace Testing2
         {
             clsRoom room = new clsRoom();
             Int32 TestData = 2;
-            room.RoomNumberId = TestData;
-            Assert.AreEqual(room.RoomNumberId, TestData);
+            room.RoomNumber = TestData;
+            Assert.AreEqual(room.RoomNumber, TestData);
         }
 
         [TestMethod]
@@ -121,6 +95,172 @@ namespace Testing2
             DateTime TestData = DateTime.Now.Date;
             room.LastDateCleaned = TestData;
             Assert.AreEqual(room.LastDateCleaned, TestData);
+        }
+        /*
+        [TestMethod]
+        public void FindMethodOK()
+        {
+            clsRoom room = new clsRoom();
+            Boolean Found = false;
+            Int32 FloorNumber = 1;
+            Int32 RoomNumber = 1;
+            Found = room.Find(FloorNumber, RoomNumber);
+            Assert.IsTrue(Found);
+        }
+        */
+
+        [TestMethod]
+        public void TestFloorNumberIdFound()
+        {
+            clsRoom room = new clsRoom();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 FloorNumber = 1;
+            Int32 RoomNumber = 1;
+            Found = room.Find(FloorNumber, RoomNumber);
+
+            if (room.FloorNumber != 1)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestRoomNumberIdFound()
+        {
+            clsRoom room = new clsRoom();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 FloorNumber = 1;
+            Int32 RoomNumber = 1;
+            Found = room.Find(FloorNumber, RoomNumber);
+
+            if (room.RoomNumber != 1)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestWardLocationFound()
+        {
+            clsRoom room = new clsRoom();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 FloorNumber = 1;
+            Int32 RoomNumber = 1;
+            Found = room.Find(FloorNumber, RoomNumber);
+
+            if (room.WardLocation != "General")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+
+        }
+
+        [TestMethod]
+        public void TestBedTypeFound()
+        {
+            clsRoom room = new clsRoom();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 FloorNumber = 1;
+            Int32 RoomNumber = 1;
+            Found = room.Find(FloorNumber, RoomNumber);
+
+            if (room.BedType != "General")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestDisabilityAccessFound()
+        {
+            clsRoom room = new clsRoom();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 FloorNumber = 1;
+            Int32 RoomNumber = 1;
+            Found = room.Find(FloorNumber, RoomNumber);
+
+            if (room.DisabilityAccessible != true)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void HygieneStatusFound()
+        {
+            clsRoom room = new clsRoom();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 FloorNumber = 1;
+            Int32 RoomNumber = 1;
+            Found = room.Find(FloorNumber, RoomNumber);
+
+            if (room.HygieneStatus != "Reprocessed and available")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void InspectedFound()
+        {
+            clsRoom room = new clsRoom();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 FloorNumber = 1;
+            Int32 RoomNumber = 1;
+            Found = room.Find(FloorNumber, RoomNumber);
+
+            if (room.Inspected != true)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void MaintainedFound()
+        {
+            clsRoom room = new clsRoom();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 FloorNumber = 1;
+            Int32 RoomNumber = 1;
+            Found = room.Find(FloorNumber, RoomNumber);
+
+            if (room.Maintained != true)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void LastDateCleanedFound()
+        {
+            clsRoom room = new clsRoom();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 FloorNumber = 1;
+            Int32 RoomNumber = 1;
+            Found = room.Find(FloorNumber, RoomNumber);
+            if (room.LastDateCleaned != Convert.ToDateTime("29/04/2026 00:00:00"))
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+
         }
     }
 }

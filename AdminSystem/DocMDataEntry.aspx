@@ -12,6 +12,8 @@
         <main>
             <form id="form1" runat="server">
                <section style="height: 406px">
+                   <asp:Label ID="lbDoctorId" runat="server" style="z-index: 1; left: 12px; top: 15px; position: absolute" Text="DoctorId"></asp:Label>
+                    <asp:TextBox ID="tbDoctorId" runat="server" style="z-index: 1; left: 150px; top: 15px; position: absolute; margin-bottom: 0px"></asp:TextBox>
                     <asp:Label ID="lbFirstName" runat="server" style="z-index: 1; left: 12px; top: 55px; position: absolute" Text="First Name"></asp:Label>
                     <asp:TextBox ID="tbFirstName" runat="server" style="z-index: 1; left: 150px; top: 55px; position: absolute; margin-bottom: 0px"></asp:TextBox>
                     <asp:Label ID="lbLastName" runat="server" style="z-index: 1; left: 12px; top: 95px; position: absolute" Text="Last Name"></asp:Label>
@@ -28,6 +30,8 @@
 
                     <asp:Button ID="btnOK" runat="server" style="z-index: 1; left: 75px; top: 350px; position: absolute; right: 1264px;" Text="OK" OnClick="btnOK_Click" />
                    <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 130px; top: 350px; position: absolute; right: 1264px;" Text="CANCEL" />
+                   <asp:Button ID="btnFind" runat="server" style="z-index: 1; left: 350px; top: 15px; position: absolute; height: 29px;" Text="Find" OnClick="btnFind_Click"/>
+
                </section>
             </form>
         </main>

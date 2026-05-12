@@ -17,7 +17,7 @@ public partial class _1Viewer : System.Web.UI.Page
         // display the data for this record
         litRecord.Text =
             "Record ID: " + AnMedicalRecords.recordId + "<br />" +
-            "Patient ID: " + AnMedicalRecords.PatientID + "<br />" +
+            "Patient ID: " + AnMedicalRecords.patientId + "<br />" +
             "Doctor ID: " + AnMedicalRecords.DoctorID + "<br />" +
             "Date: " + AnMedicalRecords.Date + "<br />" +
             "Appointment ID: " + AnMedicalRecords.appID + "<br />" +

@@ -4,136 +4,14 @@ namespace ClassLibrary
 {
     public class clsPatient
     {
-        //private data member for the patient id property
-        private Int32 mPatientId;
-        private string mPName;
-        private string mPEmail;
-        private string mPPhoneNo;
-        private DateTime mPDOB;
-        private string mPHomeAdd;
-        private bool mPAccessReq;
-        private int mPMainDocId;
+        public string pName;
+        public string pEmail;
+        public DateTime pDOB;
+        public string pHomeAdd;
+        public bool pAccessReq;
+        public int pMainDocId;
 
-        //patientId public property
-        public Int32 patientId
-        {
-            get
-            {
-                //this line of code sends data out of the property
-                return mPatientId;
-            }
-            set
-            {
-                //this line of code allows data into the property
-                mPatientId = value;
-            }
-        }
-        public string pName
-        {
-            get
-            {
-                return mPName;
-            }
-            set
-            {
-                mPName = value;
-            }
-        }
-        public string pEmail
-        {
-            get
-            {
-                return mPEmail;
-            }
-            set
-            {
-                mPEmail = value;
-            }
-        }
-
-        public string pPhoneNo
-        {
-            get
-            {
-                return mPPhoneNo;
-            }
-            set
-            {
-                mPPhoneNo = value;
-            }
-        }
-        public DateTime pDOB
-        {
-            get
-            {
-                return mPDOB;
-            }
-            set
-            {
-                mPDOB = value;
-            }
-        }
-        public string pHomeAdd
-        {
-            get
-            {
-                return mPHomeAdd;
-            }
-            set
-            {
-                mPHomeAdd = value;
-            }
-        }
-        public bool pAccessReq
-        {
-            get
-            {
-                return mPAccessReq;
-            }
-            set
-            {
-                mPAccessReq = value;
-            }
-        }
-        public int pMainDocId
-        {
-            get
-            {
-                return mPMainDocId;
-            }
-            set
-            {
-                mPMainDocId = value;
-            }
-        }
-
-        public bool Find(int patientId)
-        {
-            //create an instance if the data connection
-            clsDataConnection DB = new clsDataConnection();
-            //add the param for new patient id to search for
-            DB.AddParameter("@PatientId", patientId);
-            //execute stored procedure
-            DB.Execute("sproc_tblPatient_FilterByPatientId");
-            //if one record is found(should be 1 or 0)
-            if (DB.Count == 1)
-            {
-                //coppy the data from the database to the private data members
-                mPatientId = Convert.ToInt32(DB.DataTable.Rows[0]["PatientId"]);
-                mPName = Convert.ToString(DB.DataTable.Rows[0]["PName"]);
-                mPEmail = Convert.ToString(DB.DataTable.Rows[0]["PEmail"]);
-                mPPhoneNo = Convert.ToString(DB.DataTable.Rows[0]["PPhoneNo"]);
-                mPDOB = Convert.ToDateTime(DB.DataTable.Rows[0]["PDOB"]);
-                mPHomeAdd = Convert.ToString(DB.DataTable.Rows[0]["PHomeAdd"]);
-                mPAccessReq = Convert.ToBoolean(DB.DataTable.Rows[0]["PAccessReq"]);
-                mPMainDocId = Convert.ToInt32(DB.DataTable.Rows[0]["PMainDocId"]);
-                return true;
-            }
-            //if no record was found
-            else
-            {
-                return false;
-            }
-        }
+        public int patientId { get; set; }
+        public string pPhoneNO { get; set; }
     }
 }

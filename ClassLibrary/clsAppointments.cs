@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace ClassLibrary
 {
@@ -67,12 +68,12 @@ namespace ClassLibrary
             get
             {
                 //sends data out of the property
-                return mPatientFirstName;
+                return mPatientLastName;
             }
             set
             {
                 //allows data into the property
-                mPatientFirstName = value;
+                mPatientLastName = value;
             }
         }
         //public property for the date of appointment
@@ -170,8 +171,8 @@ namespace ClassLibrary
                 mDoctorID = Convert.ToInt32(DB.DataTable.Rows[0]["DoctorID"]);
                 mPatientFirstName = Convert.ToString(DB.DataTable.Rows[0]["PatientFirstName"]);
                 mPatientLastName = Convert.ToString(DB.DataTable.Rows[0]["PatientLastName"]);
-                mDateOfAppointment = Convert.ToDateTime(DB.DataTable.Rows[0]["DateOfAppointment"]);
-                mTimeOfAppointment = Convert.ToDateTime(DB.DataTable.Rows[0]["TimeOfAppointment"]);
+                mDateOfAppointment = Convert.ToDateTime(DB.DataTable.Rows[0]["AppointmentDate"]);
+                mTimeOfAppointment = DateTime.ParseExact(DB.DataTable.Rows[0]["AppointmentTime"].ToString(), "HH:mm:ss", CultureInfo.InvariantCulture);
                 mFloorNumber = Convert.ToInt32(DB.DataTable.Rows[0]["FloorNumber"]);
                 mRoomNumber = Convert.ToInt32(DB.DataTable.Rows[0]["RoomNumber"]);
                 mEmergencyAppointment = Convert.ToBoolean(DB.DataTable.Rows[0]["EmergencyAppointment"]);
