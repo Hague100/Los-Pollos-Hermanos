@@ -17,7 +17,6 @@ public partial class _1Viewer : System.Web.UI.Page
         //display the patient name for this entry
         Response.Write("Name: " + aPatient.pName);
         Response.Write("<br/>Email: " + aPatient.pEmail);
-        Response.Write("<br/>Phone No: " + aPatient.pPhoneNo);
         Response.Write("<br/>DOB: " + aPatient.pDOB);
         Response.Write("<br/>Home Address" + aPatient.pHomeAdd);
         Response.Write("<br/>Main Doctor ID: " + aPatient.pMainDocId);

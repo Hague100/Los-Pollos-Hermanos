@@ -19,8 +19,6 @@
         <asp:TextBox ID="txtPName" runat="server" style="z-index: 1; left: 150px; top: 59px; position: absolute"></asp:TextBox>
         <asp:Label ID="lblPEmail" runat="server" style="z-index: 1; left: 15px; top: 83px; position: absolute" Text="Email" width="126px"></asp:Label>
         <asp:TextBox ID="txtPEmail" runat="server" style="z-index: 1; left: 150px; top: 85px; position: absolute"></asp:TextBox>
-        <asp:Label ID="lblPPhoneNo" runat="server" style="z-index: 1; left: 15px; top: 114px; position: absolute" Text="Phone Number " width="126px"></asp:Label>
-        <asp:TextBox ID="txtPPhoneNo" runat="server" style="z-index: 1; left: 150px; top: 112px; position: absolute"></asp:TextBox>
         <asp:Label ID="lblPDOB" runat="server" style="z-index: 1; left: 15px; top: 140px; position: absolute" Text="Date of Birth" width="126px"></asp:Label>
         <asp:TextBox ID="txtPDOB" runat="server" style="z-index: 1; left: 150px; top: 141px; position: absolute"></asp:TextBox>
         <asp:Label ID="lblPHomeAdd" runat="server" style="z-index: 1; left: 15px; top: 168px; position: absolute" Text="Home Address" width="126px"></asp:Label>
