@@ -91,15 +91,34 @@ namespace ClassLibrary
 
         public bool Find(int docId)
         {
-            // hardcoded to always return true for now
-            doctorId = 1;
-            doctorAvailability = true;
-            doctorFirstName = "Josh";
-            doctorLastName = "Heins";
-            doctorAddress = "98 Nulview Rd";
-            doctorEmail = "Doc@Nullard.com";
-            doctorPhoneNumber = "07938383812";
-            return true;
+
+            // create an instance of a dataconnection
+            clsDataConnection DB = new clsDataConnection();
+            // add the parameter for the address id to search for
+            DB.AddParameter("@DoctorId", docId);
+            // excute the stored procidure
+            DB.Execute("sproc_tblDoctors_FilterByDoctorId");
+            //  if one ecourd is found (there should be either one or zero)
+            if (DB.Count == 1)
+            {
+                // coppy the data from the database to ht private data members
+                doctorId = Convert.ToInt32(DB.DataTable.Rows[0]["DoctorId"]);
+                doctorAvailability = Convert.ToBoolean(DB.DataTable.Rows[0]["DAvailability"]); 
+                doctorFirstName = Convert.ToString(DB.DataTable.Rows[0]["DFirstName"]);
+                doctorLastName = Convert.ToString(DB.DataTable.Rows[0]["DLastName"]);
+                doctorAddress = Convert.ToString(DB.DataTable.Rows[0]["DAddress"]);
+                doctorEmail = Convert.ToString(DB.DataTable.Rows[0]["DEmail"]);
+                doctorPhoneNumber = Convert.ToString(DB.DataTable.Rows[0]["DPhoneNumber"]);
+                return true;
+            }
+            // if noo record was found
+            else
+            {
+                // return false indicating there was a problem
+                return false;
+            }
+           
+
         }
     }
 }
