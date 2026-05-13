@@ -13,8 +13,8 @@ public partial class _1Viewer : System.Web.UI.Page
         //create a new instance of clsRoom
         clsRoom Room = new clsRoom();
         Room = (clsRoom)Session["Room"];
-        Response.Write("Floor Number: " + Room.FloorNumberId + "<br>");
-        Response.Write("Room Number: " + Room.RoomNumberId + "<br>");
+        Response.Write("Floor Number: " + Room.FloorNumber + "<br>");
+        Response.Write("Room Number: " + Room.RoomNumber + "<br>");
         Response.Write("Ward Location: " + Room.WardLocation + "<br>");
         Response.Write("Bed Type: " + Room.BedType + "<br>");
         Response.Write("Disability accessible: " + Room.DisabilityAccessible + "<br>");

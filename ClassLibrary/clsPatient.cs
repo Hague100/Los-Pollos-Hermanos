@@ -8,12 +8,10 @@ namespace ClassLibrary
         private Int32 mPatientId;
         private string mPName;
         private string mPEmail;
-        private string mPPhoneNo;
         private DateTime mPDOB;
         private string mPHomeAdd;
         private bool mPAccessReq;
         private int mPMainDocId;
-
         //patientId public property
         public Int32 patientId
         {
@@ -48,18 +46,6 @@ namespace ClassLibrary
             set
             {
                 mPEmail = value;
-            }
-        }
-
-        public string pPhoneNo
-        {
-            get
-            {
-                return mPPhoneNo;
-            }
-            set
-            {
-                mPPhoneNo = value;
             }
         }
         public DateTime pDOB
@@ -122,7 +108,6 @@ namespace ClassLibrary
                 mPatientId = Convert.ToInt32(DB.DataTable.Rows[0]["PatientId"]);
                 mPName = Convert.ToString(DB.DataTable.Rows[0]["PName"]);
                 mPEmail = Convert.ToString(DB.DataTable.Rows[0]["PEmail"]);
-                mPPhoneNo = Convert.ToString(DB.DataTable.Rows[0]["PPhoneNo"]);
                 mPDOB = Convert.ToDateTime(DB.DataTable.Rows[0]["PDOB"]);
                 mPHomeAdd = Convert.ToString(DB.DataTable.Rows[0]["PHomeAdd"]);
                 mPAccessReq = Convert.ToBoolean(DB.DataTable.Rows[0]["PAccessReq"]);
@@ -134,6 +119,20 @@ namespace ClassLibrary
             {
                 return false;
             }
+        }
+
+        public string Valid(string patientName, string email, string address, DateTime dateOfBirth, int drId, bool acessibilityReq)
+        {
+            //create a string variable to store the error
+            String Error = "";
+            //if the patientName is blank
+            if (patientName.Length == 0)
+            {
+                //record error
+                Error += "The patient name may not be blank : ";
+            }
+            //return error message
+            return Error;
         }
     }
 }

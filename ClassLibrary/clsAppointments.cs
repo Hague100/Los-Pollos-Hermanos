@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace ClassLibrary
 {
@@ -15,7 +16,7 @@ namespace ClassLibrary
         //private data member for the date of appointment property
         private DateTime mDateOfAppointment;
         //private data member for the time of appointment property
-        private DateTime mTimeOfAppointment;
+        private TimeSpan mTimeOfAppointment;
         //private data member for the floor number property
         private Int32 mFloorNumber;
         //private data member for the room number property
@@ -67,12 +68,12 @@ namespace ClassLibrary
             get
             {
                 //sends data out of the property
-                return mPatientFirstName;
+                return mPatientLastName;
             }
             set
             {
                 //allows data into the property
-                mPatientFirstName = value;
+                mPatientLastName = value;
             }
         }
         //public property for the date of appointment
@@ -88,7 +89,7 @@ namespace ClassLibrary
                 mDateOfAppointment = value;
             }
         }
-        public DateTime TimeOfAppointment
+        public TimeSpan TimeOfAppointment
         {
             get
             {
@@ -170,8 +171,8 @@ namespace ClassLibrary
                 mDoctorID = Convert.ToInt32(DB.DataTable.Rows[0]["DoctorID"]);
                 mPatientFirstName = Convert.ToString(DB.DataTable.Rows[0]["PatientFirstName"]);
                 mPatientLastName = Convert.ToString(DB.DataTable.Rows[0]["PatientLastName"]);
-                mDateOfAppointment = Convert.ToDateTime(DB.DataTable.Rows[0]["DateOfAppointment"]);
-                mTimeOfAppointment = Convert.ToDateTime(DB.DataTable.Rows[0]["TimeOfAppointment"]);
+                mDateOfAppointment = Convert.ToDateTime(DB.DataTable.Rows[0]["AppointmentDate"]);
+                //mTimeOfAppointment = DateTime.ParseExact(DB.DataTable.Rows[0]["AppointmentTime"].ToString(), "HH:mm:ss", CultureInfo.InvariantCulture);
                 mFloorNumber = Convert.ToInt32(DB.DataTable.Rows[0]["FloorNumber"]);
                 mRoomNumber = Convert.ToInt32(DB.DataTable.Rows[0]["RoomNumber"]);
                 mEmergencyAppointment = Convert.ToBoolean(DB.DataTable.Rows[0]["EmergencyAppointment"]);
@@ -185,6 +186,152 @@ namespace ClassLibrary
                  //return false indicating a problem
                  return false;
             }
+        }
+
+        public string Valid(string patientFirstName, string patientLastName, string dateOfAppointment, string timeOfAppointment, string floorNumber, string roomNumber, string notes, bool emergencyAppointment)
+        {
+            //create a string variable to store the error
+            String Error = "";
+            //create a temporary variable to store the date of appointment
+            DateTime DateTemp;
+            /****Patient first name****/
+            //if the patient first name is blank
+            if (patientFirstName.Length == 0)
+            {
+                //record the error
+                Error = Error + "The patient first name may not be blank : ";
+            }
+            //if the patient first name is greater than 100 characters
+            if (patientFirstName.Length > 100)
+            {
+                //record the error
+                Error = Error + "The patient first name must be less than 100 characters : ";
+            }
+            //if the patient first name contains numbers or special characters
+            if (System.Text.RegularExpressions.Regex.IsMatch(patientFirstName, @"[^a-zA-Z\s]"))
+            {
+                //record the error
+                Error = Error + "The patient first name may only contain letters : ";
+            }
+            /****Patient last name****/
+            //if the patient last name is blank
+            if (patientLastName.Length == 0)
+            {
+                //record the error
+                Error = Error + "The patient last name may not be blank : ";
+            }
+            //if the patient last name is greater than 100 characters
+            if (patientLastName.Length > 100)
+            {
+                //record the error
+                Error = Error + "The patient last name must be less than 100 characters : ";
+            }
+            //if the patient last name contains numbers or special characters
+            if (System.Text.RegularExpressions.Regex.IsMatch(patientLastName, @"[^a-zA-Z\s]"))
+            {
+                //record the error
+                Error = Error + "The patient last name may only contain letters : ";
+            }
+            /****Date of appointment****/
+            //copy the date of appointment value to the temporary variable
+            try
+            {
+                DateTemp = Convert.ToDateTime(dateOfAppointment);
+                //if the date of appointment is in the past
+                if (DateTemp < DateTime.Now.Date)
+                {
+                    //record the error
+                    Error = Error + "The date of appointment cannot be in the past : ";
+                }
+                //if the date is more than a year from now
+                if (DateTemp > DateTime.Now.AddYears(1))
+                {
+                    //record the error
+                    Error = Error + "The date of appointment is not a valid date : ";
+                }
+            } catch
+            {
+                //record the error
+                Error = Error + "The date of appointment is not a valid date : ";
+            }
+            /****Time of appointment****/
+            try
+            {
+                string[] timeSplit = timeOfAppointment.Split(':');
+                TimeSpan TimeTemp = new TimeSpan(Convert.ToInt32(timeSplit[0]), Convert.ToInt32(timeSplit[1]), 00);
+                //if the time of appointment is less than 09:00:00 (open time)
+                if (TimeTemp < new TimeSpan(9, 0, 0))
+                {
+                    //record the error
+                    Error = Error + "The time of appointment cannot be before 09:00:00 : ";
+                }
+                //if the time of appointment is greater than 17:00:00 (close time)
+                if (TimeTemp > new TimeSpan(17, 00, 0))
+                {
+                    //record the error
+                    Error = Error + "The time of appointment cannot be after 17:00:00 : ";
+                }
+            } catch
+            {
+                //record the error
+                Error = Error + "The time of appointment is not a valid time : ";
+            }
+            /****Floor Number****/
+            try
+            {
+                int FloorTemp = Convert.ToInt32(floorNumber);
+                //if the floor number is less than 0
+                if (FloorTemp < 0)
+                {
+                    //record the error
+                    Error = Error + "The floor number cannot be negative : ";
+                }
+                //if the floor number is greater than 5
+                if (FloorTemp > 5)
+                {
+                    //record the error
+                    Error = Error + "The floor number cannot be greater than 5 : ";
+                }
+            } catch
+            {
+                //record the error
+                Error = Error + "The floor number is not a valid integer : ";
+            }
+            /****Room Number****/
+            try
+            {
+                int RoomTemp = Convert.ToInt32(roomNumber);
+                //if the room number is less than 0
+                if (RoomTemp < 1)
+                {
+                    //record the error
+                    Error = Error + "The room number cannot be negative : ";
+                }
+                //if the room number is greater than 100
+                if (RoomTemp > 100)
+                {
+                    //record the error
+                    Error = Error + "The room number cannot be greater than 100 : ";
+                }
+            } catch
+            {
+                //record the error
+                Error = Error + "The room number is not a valid integer : ";
+            }
+            /****Notes****/
+            //if the notes is greater than 500 characters
+            if (notes.Length > 500)
+            {
+                //record the error
+                Error = Error + "The notes must be less than 500 characters : ";
+            }
+            //if notes only contain numbers and/or special characters
+            if (System.Text.RegularExpressions.Regex.IsMatch(notes, @"^[^a-zA-Z]+$"))
+            {
+                //record the error
+                Error = Error + "The notes must contain letters : ";
+            }
+            return Error;
         }
     }
 }

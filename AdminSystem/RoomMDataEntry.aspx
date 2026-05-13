@@ -9,6 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" style="z-index: 1; left: 375px; top: 141px; position: absolute" Text="Find" />
         </div>
         <p>
             <asp:Label ID="lblFloorNumber" runat="server" style="z-index: 1; left: 28px; top: 72px; position: absolute; bottom: 566px" Text="Floor Number ID"></asp:Label>
@@ -26,7 +27,7 @@
         <asp:DropDownList ID="listWardLocation" runat="server" style="z-index: 1; left: 145px; top: 144px; position: absolute">
             <asp:ListItem Text="General" Value="General"></asp:ListItem>
             <asp:ListItem Text="Pediatric" Value="Pediatric"></asp:ListItem>
-            <asp:ListItem Text="Intensive Care Unit" Value="ICU"></asp:ListItem>
+            <asp:ListItem Text="Intensive Care Unit" Value="Intensive Care Unit"></asp:ListItem>
         </asp:DropDownList>
         <asp:Label ID="lblBedType" runat="server" style="z-index: 1; left: 30px; top: 171px; position: absolute" Text="Bed Type"></asp:Label>
         <asp:DropDownList ID="listBedType" runat="server" style="z-index: 1; left: 147px; top: 175px; position: absolute">
