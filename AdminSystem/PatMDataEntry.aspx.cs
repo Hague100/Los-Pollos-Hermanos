@@ -17,22 +17,42 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         //create a new instance of clsPatient
         clsPatient aPatient = new clsPatient();
-        //capture the name 
-        aPatient.pName = txtPName.Text;
-        //email
-        aPatient.pEmail = txtPEmail.Text;
-        //dob
-        aPatient.pDOB = Convert.ToDateTime(txtPDOB.Text);
-        //home address
-        aPatient.pHomeAdd = txtPHomeAdd.Text;
-        //Main doctor id
-        aPatient.pMainDocId = Convert.ToInt32(txtPMainDocId.Text);
-        //Access requirements
-        aPatient.pAccessReq = chkPAccessReq.Checked;
-        //store the address in the session object
-        Session["aPatient"] = aPatient;
-        //nativigate to view page
-        Response.Redirect("PatMViewer.aspx");
+        string pName = txtPName.Text;
+        string pEmail = txtPEmail.Text;
+        string pDOB = txtPDOB.Text;
+        string pHomeAdd = txtPHomeAdd.Text;
+        string pMainDocId = txtPMainDocId.Text;
+        string pAccessReq = chkPAccessReq.Text;
+        //variable for error messages
+        string Error = "";
+        //validate data
+        Error = aPatient.Valid(pName, pEmail, pHomeAdd, pDOB, pMainDocId);
+        
+        if (Error == "")
+        {
+            //capture the name 
+            aPatient.pName = pName;
+            //email
+            aPatient.pEmail = pEmail;
+            //dob
+            aPatient.pDOB = Convert.ToDateTime(pDOB);
+            //home address
+            aPatient.pHomeAdd = pHomeAdd;
+            //Main doctor id
+            aPatient.pMainDocId = Convert.ToInt32(pMainDocId);
+            
+            //store the address in the session object
+            Session["aPatient"] = aPatient;
+            //nativigate to view page
+            Response.Redirect("PatMViewer.aspx");
+        }
+        else
+        {
+            //display the error message
+            lblError.Text = Error;
+        }
+            //Access requirements
+            aPatient.pAccessReq = chkPAccessReq.Checked;
     }
 
 
@@ -60,5 +80,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
             txtPMainDocId.Text = aPatient.pMainDocId.ToString();
             chkPAccessReq.Checked = aPatient.pAccessReq;
         }
+    }
+
+    protected void txtPatientId_TextChanged(object sender, EventArgs e)
+    {
+
     }
 }
