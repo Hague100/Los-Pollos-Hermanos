@@ -121,7 +121,7 @@ namespace ClassLibrary
             }
         }
 
-        public string Valid(string patientName, string email, string address, DateTime dateOfBirth, int drId, bool acessibilityReq)
+        public string Valid(string patientName, string email, string address, DateTime dateOfBirth, int drId)
         {
             //create a string variable to store the error
             String Error = "";
@@ -130,6 +130,15 @@ namespace ClassLibrary
             {
                 //record error
                 Error += "The patient name may not be blank : ";
+            }
+            if(patientName.Length > 100)
+            {
+                //record error
+                Error += "The patient name may not be more than 100 char: ";
+            }
+            if (email.Length > 255)
+            {
+                Error += "The email may not be more than 256 char: ";
             }
             //return error message
             return Error;
