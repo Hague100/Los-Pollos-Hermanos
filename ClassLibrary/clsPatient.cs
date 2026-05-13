@@ -121,7 +121,7 @@ namespace ClassLibrary
             }
         }
 
-        public string Valid(string patientName, string email, string address, DateTime dateOfBirth, int drId)
+        public string Valid(string patientName, string email, string address, string dateOfBirthStr, string drIdStr)
         {
             //create a string variable to store the error
             String Error = "";
@@ -138,7 +138,43 @@ namespace ClassLibrary
             }
             if (email.Length > 255)
             {
-                Error += "The email may not be more than 256 char: ";
+                Error += "The email may not be more than 255 char: ";
+            }
+            if (address.Length > 125)
+            {
+                Error += "The address may not be more than 125 char: ";
+            }
+
+            try
+            {
+                DateTime dateOfBirth = Convert.ToDateTime(dateOfBirthStr);
+                if (dateOfBirth < Convert.ToDateTime("01/01/1884"))
+                {
+                    Error += "The dateOfBirth may not be before 01/01/1884: ";
+                }
+
+                if (dateOfBirth > DateTime.Now.Date)
+                {
+                    Error += "The dateOfBirth may be after todays date: ";
+                }
+
+            }
+            catch 
+            {
+                Error += "The date was not a valid date: ";
+            }
+
+            try
+            {
+                Int32 drId = Convert.ToInt32(drIdStr);
+                if (drId < 1)
+                {
+                    Error += "The doctor id have to be greater than 0: ";
+                }
+            }
+            catch 
+            {
+                Error += "Invalid data type or greater than Int32 max: ";
             }
             //return error message
             return Error;
