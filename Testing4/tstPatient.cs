@@ -1,6 +1,7 @@
 ﻿using ClassLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
 
 namespace Testing4
 {
@@ -302,7 +303,7 @@ namespace Testing4
             //string varible to store error message
             String Error = "";
             //invoke method
-            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId, acessibilityReq);
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId);
             //test to see that the result is correct
             Assert.AreEqual(Error, "");
         }
@@ -314,8 +315,162 @@ namespace Testing4
             clsPatient aPatient = new clsPatient();
             String Error = "";
             String patientName = "";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId, acessibilityReq);
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId);
             Assert.AreNotEqual(Error, "");
         }
+
+        [TestMethod]
+
+        public void pNameMin()
+        {
+            clsPatient aPatient = new clsPatient();
+            String Error = "";
+            String patientName = "A";
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void pNameMinMoreOne()
+        {
+            clsPatient aPatient = new clsPatient();
+            String Error = "";
+            String patientName = "aa";
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void pNameMaxLessOne()
+        {
+            clsPatient aPatient = new clsPatient();
+            String Error = "";
+            String patientName = new string('a', 99);
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void pNameMax()
+        {
+            clsPatient aPatient = new clsPatient();
+            String Error = "";
+            String patientName = new string('a', 100);
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void pNameMaxMoreOne()
+        {
+            clsPatient aPatient = new clsPatient();
+            String Error = "";
+            String patientName = new string('a', 101);
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void pNameMid()
+        {
+            clsPatient aPatient = new clsPatient();
+            String Error = "";
+            String patientName = new string('a', 50);
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void pNameExtremeMax()
+        {
+            clsPatient aPatient = new clsPatient();
+            String Error = "";
+            String patientName = new string('a', 500);
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void pEmailMin()
+        {
+            clsPatient aPatient = new clsPatient();
+            String Error = "";
+            String email = "";
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void pEmailMinMoreOne()
+        {
+            clsPatient aPatient = new clsPatient();
+            String Error = "";
+            String email = "b";
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void pEmailMaxLessOne()
+        {
+            clsPatient aPatient = new clsPatient();
+            String Error = "";
+            String email = new String('b', 254);
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void pEmailMax()
+        {
+            clsPatient aPatient = new clsPatient();
+            String Error = "";
+            String email = new String('b', 255);
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void pEmailMaxMoreOne()
+        {
+            clsPatient aPatient = new clsPatient();
+            String Error = "";
+            String email = new String('b', 256);
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void pEmailMid()
+        {
+            clsPatient aPatient = new clsPatient();
+            String Error = "";
+            String email = new String('b', 129);
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void pEmailExtreme()
+        {
+            clsPatient aPatient = new clsPatient();
+            String Error = "";
+            String email = new String('b', 1000);
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId);
+            Assert.AreNotEqual(Error, "");
+        }
+
     }
 }
