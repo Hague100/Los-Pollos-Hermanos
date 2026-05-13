@@ -13,7 +13,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     }
 
-    protected void btnOK_Click(object sender, EventArgs e)
+    protected void btnOK_Click(object sender, EventArgs e) 
     {
         // create new instance of  clsDoctor
         clsDoc aDoc = new clsDoc();
