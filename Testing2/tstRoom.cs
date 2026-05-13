@@ -7,6 +7,14 @@ namespace Testing2
     [TestClass]
     public class tstRoom
     {
+        String WardLocation = "General";
+        String BedType = "General";
+        String DisabilityAccess = "True";
+        String HygieneStatus = "Available";
+        String Inspected = "True";
+        String Maintained = "True";
+        String LastDateCleaned = "29/04/2026 00:00:00";
+
         [TestMethod]
         public void InstanceOK()
         {
@@ -205,7 +213,7 @@ namespace Testing2
             Int32 RoomNumber = 1;
             Found = room.Find(FloorNumber, RoomNumber);
 
-            if (room.HygieneStatus != "Reprocessed and available")
+            if (room.HygieneStatus != "Available")
             {
                 OK = false;
             }
@@ -262,5 +270,151 @@ namespace Testing2
             Assert.IsTrue(OK);
 
         }
+
+        [TestMethod]
+        public void ValidMethodOK()
+        {
+            clsRoom room = new clsRoom();
+            String error = "";
+            error = room.Valid(WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "");
+        }
+
+        [TestMethod]
+        public void WardLocationNotEqual()
+        {
+            clsRoom room = new clsRoom();
+            String error = "";
+            string WardLocation = "";
+            error = room.Valid(WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "\nWard Location is not valid");
+        }
+
+        [TestMethod]
+        public void WardLocationEqual()
+        {
+            clsRoom room = new clsRoom();
+            String error = "";
+            string WardLocation = "General";
+            error = room.Valid(WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "");
+        }
+
+        [TestMethod]
+        public void BedTypeNotEqual()
+        {
+            clsRoom room = new clsRoom();
+            String error = "";
+            string BedType = "";
+            error = room.Valid(WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "\nBed Type is not valid");
+        }
+
+        [TestMethod]
+        public void BedTypeEqual()
+        {
+            clsRoom room = new clsRoom();
+            String error = "";
+            string BedType = "General";
+            error = room.Valid(WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void HygieneStatusNotEqual()
+        {
+            clsRoom room = new clsRoom();
+            String error = "";
+            string HygieneStatus = "";
+            error = room.Valid(WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "\nHygiene Status is not valid");
+        }
+
+        [TestMethod]
+        public void HygieneStatusEqual()
+        {
+            clsRoom room = new clsRoom();
+            String error = "";
+            string HygieneStatus = "Available";
+            error = room.Valid(WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void LastDateCleanedExtremeMin()
+        {
+            clsRoom room = new clsRoom();
+            String error = "";
+            DateTime LastDateCleaned;
+            LastDateCleaned = DateTime.Now.Date;
+            LastDateCleaned = LastDateCleaned.AddYears(-100);
+            string LastDateCleanedString = LastDateCleaned.ToString();
+            error = room.Valid(WardLocation, BedType, HygieneStatus, LastDateCleanedString);
+            Assert.AreEqual(error, "");
+        }
+
+        [TestMethod]
+        public void LastDateCleanedExtremeMinLessOne()
+        {
+            clsRoom room = new clsRoom();
+            String error = "";
+            DateTime LastDateCleaned;
+            LastDateCleaned = DateTime.Now.Date;
+            LastDateCleaned = LastDateCleaned.AddDays(-1);
+            string LastDateCleanedString = LastDateCleaned.ToString();
+            error = room.Valid(WardLocation, BedType, HygieneStatus, LastDateCleanedString);
+            Assert.AreEqual(error, "");
+        }
+
+        [TestMethod]
+        public void LastDateCleanedMin()
+        {
+            clsRoom room = new clsRoom();
+            String error = "";
+            DateTime LastDateCleaned;
+            LastDateCleaned = DateTime.Now.Date;
+            String LastDateCleanedString = LastDateCleaned.ToString();
+            error = room.Valid(WardLocation, BedType, HygieneStatus, LastDateCleanedString);
+            Assert.AreEqual(error, "");
+        }
+
+        [TestMethod]
+        public void LastDateCleanedMinPlusOne()
+        {
+            clsRoom room = new clsRoom();
+            String error = "";
+            DateTime LastDateCleaned;
+            LastDateCleaned = DateTime.Now.Date;
+            LastDateCleaned = LastDateCleaned.AddDays(+1);
+            String LastDateCleanedString = LastDateCleaned.ToString();
+            error = room.Valid(WardLocation, BedType, HygieneStatus, LastDateCleanedString);
+            Assert.AreNotEqual(error, "");
+        }
+
+        [TestMethod]
+        public void LastDateCleanedExtremeMax()
+        {
+            clsRoom room = new clsRoom();
+            String error = "";
+            DateTime LastDateCleaned;
+            LastDateCleaned = DateTime.Now.Date;
+            LastDateCleaned = LastDateCleaned.AddYears(+100);
+            String LastDateCleanedString = LastDateCleaned.ToString();
+            error = room.Valid(WardLocation, BedType, HygieneStatus, LastDateCleanedString);
+            Assert.AreNotEqual(error, "");
+        }
+
+        [TestMethod]
+        public void LastDateCleanedInvalidData()
+        {
+            clsRoom room = new clsRoom();
+            String error = "";
+            string LastDateCleaned = "This is not a date";
+            error = room.Valid(WardLocation, BedType, HygieneStatus, LastDateCleaned);
+
+        }
+
     }
 }
