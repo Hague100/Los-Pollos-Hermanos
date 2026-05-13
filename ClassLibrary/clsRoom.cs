@@ -153,5 +153,67 @@ namespace ClassLibrary
 
             }
         }
+
+        public string Valid(String WardLocation,
+                            String BedType,
+                            String HygieneStatus,
+                            String LastDateCleaned)
+        {
+            String error = "";
+            DateTime DateTemp;
+
+            switch (WardLocation)
+            {
+                case "General":
+                    break;
+                case "Pediatric":
+                    break;
+                case "Intensive Care Unit":
+                    break;
+                default:
+                    error += "\nWard Location is not valid";
+                    break;
+            }
+
+            switch (BedType)
+            {
+                case "General":
+                    break;
+                case "Heavy":
+                    break;
+                default:
+                    error += "\nBed Type is not valid";
+                    break;
+            }
+
+            switch (HygieneStatus)
+            {
+                case "Available":
+                    break;
+                case "Occupied":
+                    break;
+                case "In Reprocessing":
+                    break;
+                default:
+                    error += "\nHygiene Status is not valid";
+                    break;
+            }
+
+            try 
+            { 
+            
+                DateTemp = Convert.ToDateTime(LastDateCleaned);
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    error += "\nLast Date Cleaned cannot be in the future";
+                }
+
+            }
+            catch 
+            {
+                error += "\nIncorrect";
+            }
+            return error;
+        }
     }
 }
