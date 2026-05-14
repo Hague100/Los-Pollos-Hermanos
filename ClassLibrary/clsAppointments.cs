@@ -3,6 +3,7 @@ using System.Globalization;
 
 namespace ClassLibrary
 {
+    //constructor for the class
     public class clsAppointments
     {
         //private data member for the appointment number property
@@ -172,7 +173,7 @@ namespace ClassLibrary
                 mPatientFirstName = Convert.ToString(DB.DataTable.Rows[0]["PatientFirstName"]);
                 mPatientLastName = Convert.ToString(DB.DataTable.Rows[0]["PatientLastName"]);
                 mDateOfAppointment = Convert.ToDateTime(DB.DataTable.Rows[0]["AppointmentDate"]);
-                //mTimeOfAppointment = DateTime.ParseExact(DB.DataTable.Rows[0]["AppointmentTime"].ToString(), "HH:mm:ss", CultureInfo.InvariantCulture);
+                mTimeOfAppointment = (TimeSpan)DB.DataTable.Rows[0]["AppointmentTime"];
                 mFloorNumber = Convert.ToInt32(DB.DataTable.Rows[0]["FloorNumber"]);
                 mRoomNumber = Convert.ToInt32(DB.DataTable.Rows[0]["RoomNumber"]);
                 mEmergencyAppointment = Convert.ToBoolean(DB.DataTable.Rows[0]["EmergencyAppointment"]);
