@@ -7,6 +7,14 @@ namespace Testing4
     [TestClass]
     public class tstPatient
     {
+        //good test data
+        string patientName = "Test Name";
+        string email = "testemail@test.com";
+        string address = "1TestDrive,TestCity,Testshire,TE11ST";
+        DateTime dateOfBirth = Convert.ToDateTime("01/01/2000");
+        Int32 drId = 1;
+        Boolean acessibilityReq = true;
+
         [TestMethod]
         public void InstanceOk()
         {
@@ -58,20 +66,6 @@ namespace Testing4
         }
 
         [TestMethod]
-        public void PPhoneNoPropertyOK()
-        {
-            //create an instance of the class we want to create
-            clsPatient aPatient = new clsPatient();
-            //create some test data to assign to the property
-            String TestData = "0789 123456";
-            //assign the data to the property
-            aPatient.pPhoneNo = TestData;
-            //test to see that the two values are the same
-            Assert.AreEqual(aPatient.pPhoneNo, TestData);
-
-        }
-
-        [TestMethod]
         public void PDOBPropertyOK()
         {
             //create an instance of the class we want to create
@@ -91,7 +85,7 @@ namespace Testing4
             //create an instance of the class we want to create
             clsPatient aPatient = new clsPatient();
             //create some test data to assign to the property
-            String TestData = "Test Street,Leicster,LE11AA";
+            string TestData = "Test Street,Leicster,LE11AA";
             //assign the data to the property
             aPatient.pHomeAdd = TestData;
             //test to see that the two values are the same
@@ -126,8 +120,9 @@ namespace Testing4
             Assert.AreEqual(aPatient.pMainDocId, TestData);
 
         }
+    
 
-        [TestMethod]
+    [TestMethod]
 
         public void FindMethodOk()
         {
@@ -211,28 +206,6 @@ namespace Testing4
         }
 
         [TestMethod]
-        public void TestPPHoneNoFound()
-        {
-            //create and instance of the class we want to create
-            clsPatient aPatient = new clsPatient();
-            //create Boolean var to store the results of the validation
-            Boolean found = false;
-            //create a Boolean variable to record if the data is OK (assume it is)
-            Boolean OK = true;
-            //create some test data to use with the method
-            Int32 patientId = 6;
-            //invoke mthe method
-            found = aPatient.Find(patientId);
-            //chech the patient id
-            if (aPatient.pPhoneNo != "1234567890")
-            {
-                OK = false;
-            }
-            //test to see if the result is correct
-            Assert.IsTrue(OK);
-        }
-
-        [TestMethod]
         public void TestPDOBFound()
         {
             //create and instance of the class we want to create
@@ -268,7 +241,7 @@ namespace Testing4
             //invoke mthe method
             found = aPatient.Find(patientId);
             //chech the patient id
-            if (aPatient.pHomeAdd != "1 Test Steet,TestTown,TestShire,TE11AA") 
+            if (aPatient.pHomeAdd != "1 Test Steet,TestTown,TestShire,TE11AA")
             {
                 OK = false;
             }
@@ -318,6 +291,31 @@ namespace Testing4
             }
             //test to see if the result is correct
             Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        
+        public void ValidMethodOK()
+        {
+            //create an instance of the class we want to create
+            clsPatient aPatient = new clsPatient();
+            //string varible to store error message
+            String Error = "";
+            //invoke method
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId, acessibilityReq);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void pNameMinLessOne()
+        {
+            clsPatient aPatient = new clsPatient();
+            String Error = "";
+            String patientName = "";
+            Error = aPatient.Valid(patientName, email, address, dateOfBirth, drId, acessibilityReq);
+            Assert.AreNotEqual(Error, "");
         }
     }
 }
