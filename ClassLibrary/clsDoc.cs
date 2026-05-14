@@ -157,13 +157,9 @@ namespace ClassLibrary
 
             }
             // email validation
-            if (email.Length < 7)
+            if (email.Length < 7 || email.Contains("@") == false)
             {
                 message += "Not A valid email : ";
-            }
-            if (email.Contains("@") == false)
-            {
-                message += "Not a valid email : ";
             }
             if(email.Length > 255)
             {
