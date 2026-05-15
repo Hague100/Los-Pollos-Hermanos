@@ -46,15 +46,6 @@ namespace Testing4
             Assert.AreEqual(allPatients.patientList, testList);
         }
 
-        [TestMethod]
-
-        public void CountPropertyOk()
-        {
-            clsPatientCollection allPatient = new clsPatientCollection();
-            Int32 someCount = 2;
-            allPatient.count = someCount;
-            Assert.AreEqual(allPatient.count, someCount);
-        }
 
         [TestMethod]
 
@@ -105,12 +96,5 @@ namespace Testing4
             Assert.AreEqual(allPatients.count, testList.Count);
         }
 
-        [TestMethod]
-
-        public void twoRecordsPresent()
-        {
-            clsPatientCollection allPatients = new clsPatientCollection();
-            Assert.AreEqual(allPatients.count, 2);
-        }
     }
 }

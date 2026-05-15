@@ -35,30 +35,33 @@ namespace ClassLibrary
 
         public clsPatientCollection()
         {
-            //create the item of test data
-            clsPatient testItem = new clsPatient();
-            //set its properties
-            testItem.patientId = 1;
-            testItem.pName = "Test Name";
-            testItem.pEmail = "test.email@test.com";
-            testItem.pDOB = Convert.ToDateTime("01/01/2000");
-            testItem.pHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA";
-            testItem.pAccessReq = true;
-            testItem.pMainDocId = 1;
-            //add the item to the test list
-            mPatientList.Add(testItem);
-            //re initialise the object for new data
-            testItem = new clsPatient();
-            //set its properties
-            testItem.patientId = 2;
-            testItem.pName = "Other Name";
-            testItem.pEmail = "other.email@test.com";
-            testItem.pDOB = Convert.ToDateTime("01/01/1999");
-            testItem.pHomeAdd = "1OtherStreet,TestCity,Testshire,TE11AA";
-            testItem.pAccessReq = false;
-            testItem.pMainDocId = 1;
-            //add the item to the test list
-            mPatientList.Add(testItem);
+            //variable for the index
+            Int32 Index = 0;
+            //variable to store the record count
+            Int32 RecordCount = 0;
+            //object for the new data connect
+            clsDataConnection DB = new clsDataConnection();
+            //execute stored procedure
+            DB.Execute("sproc_tblPatients_SelectAll");
+            //get count of records
+            RecordCount = DB.Count;
+            //While there are records to process
+            while (Index < RecordCount)
+            {
+                //create blank address
+                clsPatient aPatient = new clsPatient();
+                aPatient.patientId = Convert.ToInt32(DB.DataTable.Rows[Index]["PatientId"]);
+                aPatient.pName = Convert.ToString(DB.DataTable.Rows[Index]["PName"]);
+                aPatient.pEmail = Convert.ToString(DB.DataTable.Rows[Index]["PEmail"]);
+                aPatient.pDOB = Convert.ToDateTime(DB.DataTable.Rows[Index]["PDOB"]);
+                aPatient.pHomeAdd = Convert.ToString(DB.DataTable.Rows[Index]["PHomeAdd"]);
+                aPatient.pAccessReq = Convert.ToBoolean(DB.DataTable.Rows[Index]["PAccessReq"]);
+                aPatient.pMainDocId = Convert.ToInt32(DB.DataTable.Rows[Index]["PMainDocId"]);
+                //add the record to the private data member
+                mPatientList.Add(aPatient);
+                //point at the next record
+                Index++;
+            }
         }
     }
 }
