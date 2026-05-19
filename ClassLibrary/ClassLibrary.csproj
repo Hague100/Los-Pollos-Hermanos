@@ -45,9 +45,12 @@
     <Compile Include="clsAppointmentsCollection.cs" />
     <Compile Include="clsDataConnection.cs" />
     <Compile Include="clsDoc.cs" />
+    <Compile Include="clsDoctorCollection.cs" />
     <Compile Include="clsMedicalRecords.cs" />
     <Compile Include="clsPatient.cs" />
+    <Compile Include="clsPatientCollection.cs" />
     <Compile Include="clsRoom.cs" />
+    <Compile Include="clsRoomCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

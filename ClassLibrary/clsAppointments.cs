@@ -30,8 +30,7 @@ namespace ClassLibrary
         private string mNotes;
 
         //public property for the appointment number
-        public int AppointmentNumber
-        {
+        public int AppointmentNumber { 
             get
             {
                 //sends data out of the property
@@ -44,8 +43,7 @@ namespace ClassLibrary
             }
         }
         //public property for the doctor ID
-        public int DoctorID
-        {
+        public int DoctorID {
             get
             {
                 //sends data out of the property
@@ -71,7 +69,7 @@ namespace ClassLibrary
             }
         }
         //public property for the patient first name
-        public string PatientFirstName
+        public string PatientFirstName 
         {
             get
             {

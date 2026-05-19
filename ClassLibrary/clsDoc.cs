@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 
 namespace ClassLibrary
 {
@@ -119,6 +120,62 @@ namespace ClassLibrary
             }
            
 
+        }
+
+        public string isValid(string firstName, string lastName, string address, string email, string phoneNumber)
+        {
+            // initiation of the string variable
+            String message = "";
+            // check if ther is an entered first name
+            if (firstName.Length < 1)
+            {
+                // ammend to the error message if there is an error
+                message += "First name must not be empty : ";
+            }
+            if(firstName.Length > 100)
+            {
+                message += "Too long of a first name : ";
+            }
+            // lastname valid
+            if (lastName.Length < 1)
+            {
+                message += "Last Name must not be empty : ";
+            }
+            if(lastName.Length > 100)
+            {
+                message += "Too long of a last name : ";
+                
+            }
+            // address validation
+            if (address.Length < 9)
+            {
+                message += "Addres must not be empty : ";
+            }
+            if (address.Length > 255)
+            {
+                message += "Too long of an address, go live somewhere else : ";
+
+            }
+            // email validation
+            if (email.Length < 7 || email.Contains("@") == false)
+            {
+                message += "Not A valid email : ";
+            }
+            if(email.Length > 255)
+            {
+                message += "Email is too long : ";
+            }
+            // phone number validation
+            if(phoneNumber.Length < 9)
+            {
+                message += "Phone number is not valid";
+            }
+            if(phoneNumber.Length > 50)
+            {
+                message += "Phone number is too long";
+            }
+
+            return message;
         }
     }
 }
