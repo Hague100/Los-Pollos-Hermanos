@@ -13,26 +13,51 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     }
 
-    protected void btnOK_Click(object sender, EventArgs e)
+    protected void btnOK_Click(object sender, EventArgs e) 
     {
         // create new instance of  clsDoctor
         clsDoc aDoc = new clsDoc();
-        // capture the First Name
-        aDoc.dFirstName = tbFirstName.Text;
-        // capture the last Name
-        aDoc.dLastName = tbLastName.Text;
-        // capture the address
-        aDoc.dAddress = tbAddress.Text;
-        // capture the email
-        aDoc.dEmail = tbEmail.Text;
-        // capture the phone number
-        aDoc.dPhoneNumber = tbPHoneNumber.Text;
-        // capture the check box
-        aDoc.dAvailability = cbAvailability.Checked;
-        // store the first name in the session object
-        Session["aDoc"] = aDoc;
-        //button handler when the button is clicked redirect back to page
-        Response.Redirect("DocMViewer.aspx");
+        // capture first name
+        String firstName = tbFirstName.Text;
+        // capture lastName
+        String lastName = tbLastName.Text;
+        // capture address 
+        String address = tbAddress.Text;
+        // capture emaial
+        String email = tbEmail.Text;
+        // capture phone number
+        String phoneNumber = tbPHoneNumber.Text;
+        // capture active check box
+        String available = cbAvailability.Text;
+        // initialise error messages
+        String error = "";
+        error = aDoc.isValid(firstName, lastName, address, email, phoneNumber);
+
+        if ( error == "" )
+        {
+            // capture the First Name
+            aDoc.dFirstName = tbFirstName.Text;
+            // capture the last Name
+            aDoc.dLastName = tbLastName.Text;
+            // capture the address
+            aDoc.dAddress = tbAddress.Text;
+            // capture the email
+            aDoc.dEmail = tbEmail.Text;
+            // capture the phone number
+            aDoc.dPhoneNumber = tbPHoneNumber.Text;
+            // capture the check box
+            aDoc.dAvailability = cbAvailability.Checked;
+            // store the first name in the session object
+            Session["aDoc"] = aDoc;
+            //button handler when the button is clicked redirect back to page
+            Response.Redirect("DocMViewer.aspx");
+        }
+        else
+        {
+            // display error message
+            lbError.Text = error;
+        }
+
     }
 
     protected void btnFind_Click(object sender, EventArgs e)

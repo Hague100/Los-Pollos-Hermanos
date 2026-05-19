@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tstPatient.cs" />
+    <Compile Include="tstPatientCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -7,6 +7,16 @@ namespace Testing5
     [TestClass]
     public class tstDoc
     {
+        // some good test data
+        Int32 doctorId = 1;
+        String firstName = "Atana";
+        String lastName = "gran";
+        String address = "78 Bnull Rd";
+        String email = "Agran@gmail.com";
+        String phoneNumber = "123456789";
+        Boolean available = true;
+
+
         [TestMethod]
         public void InstanceOk()
         {
@@ -116,7 +126,7 @@ namespace Testing5
 
         [TestMethod]
         public void FindOk()
-        { 
+        {
             // new instance of doctor
             clsDoc aDoc = new clsDoc();
             // example doc id
@@ -144,7 +154,7 @@ namespace Testing5
             // invoke the method
             found = aDoc.Find(docId);
             // chaeck the doc Id
-            if ( aDoc.dId != 1)
+            if (aDoc.dId != 1)
             {
                 ok = false;
             }
@@ -292,9 +302,579 @@ namespace Testing5
         }
 
 
+        [TestMethod]
+        public void TestValidation()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // string variable to store any error message
+            String error = "";
+            // inove the method
+            error = testDoctor.isValid(firstName, lastName, address, email, phoneNumber);
+            // test to see if the result is correct 
+            Assert.AreEqual(error, "");
+        }
 
+        [TestMethod]
+        public void TestFirstNameLessOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testFristName = "";
+            // invoke the method
+            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber);
+            Assert.AreNotEqual(error, "");
 
+        }
 
+        [TestMethod]
+        public void TestFirstNameMin()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testFristName = "a";
+            // invoke the method
+            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestFirstNameMinPlusOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testFristName = "aa";
+            // invoke the method
+            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestFirstNameMaxMinusOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testFristName = "";
+            testFristName = testFristName.PadRight(98, 'a');
+            // invoke the method
+            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestFirstNameMax()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testFristName = "";
+            testFristName = testFristName.PadRight(100, 'a');
+            // invoke the method
+            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestFirstNameMaxPlusOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testFristName = "";
+            testFristName = testFristName.PadRight(101, 'a');
+            // invoke the method
+            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber);
+            Assert.AreNotEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestFirstNameMid()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testFristName = "";
+            testFristName = testFristName.PadRight(50, 'a');
+            // invoke the method
+            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestLastNameLessOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testLastName = "";
+            // invoke the method
+            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber);
+            Assert.AreNotEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestLastNameMin()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testLastName = "a";
+            // invoke the method
+            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestLastNameMinPlusOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testLastName = "aa";
+            // invoke the method
+            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestLastNameMaxMinusOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testLastName = "";
+            testLastName = testLastName.PadRight(98, 'a');
+            // invoke the method
+            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestLastNameMax()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testLastName = "";
+            testLastName = testLastName.PadRight(100, 'a');
+            // invoke the method
+            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestLastNameMaxPlusOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testLastName = "";
+            testLastName = testLastName.PadRight(101, 'a');
+            // invoke the method
+            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber);
+            Assert.AreNotEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestLastNameMid()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testLastName = "";
+            testLastName = testLastName.PadRight(50, 'a');
+            // invoke the method
+            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestAddressLessOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testAddress = "aaaa";
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber);
+            Assert.AreNotEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestAddressMin()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testAddress = "aqaqaqaqa";
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestAddressMinPlusOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testAddress = "aqaqaqaqaq";
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestAddressMaxMinusOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testAddress = "";
+            testAddress = testAddress.PadRight(254, 'a');
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestAddressMax()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testAddress = "";
+            testAddress = testAddress.PadRight(255, 'a');
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestAddressMaxPlusOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testAddress = "";
+            testAddress = testAddress.PadRight(256, 'a');
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber);
+            Assert.AreNotEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestAddressMid()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testAddress = "";
+            testAddress = testAddress.PadRight(127, 'a');
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestEmailLessOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testEmail = "@";
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber);
+            Assert.AreNotEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestEmailMin()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testEmail = "aqaqaq@qaq";
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestEmailMinPlusOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testEmail = "aqaqaqa@aqa";
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestEmailMaxMinusOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testEmail = "";
+            testEmail = testEmail.PadRight(254, '@');
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName,address , testEmail, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestEmailMax()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testEmail = "";
+            testEmail = testEmail.PadRight(255, '@');
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestEmailMaxPlusOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testEmail = "";
+            testEmail = testEmail.PadRight(256, '@');
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber);
+            Assert.AreNotEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestEmailMid()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testEmail = "";
+            testEmail = testEmail.PadRight(127, '@');
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestEmailContainsAt()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testEmail = "";
+            testEmail = testEmail.PadRight(127, 'a');
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber);
+            Assert.AreNotEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestPhoneNumberLessOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testPhoneNumber = "12345678";
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber);
+            Assert.AreNotEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestPhoneNumberMin()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testPhoneNumber = "123456789";
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestPhoneNumberMinPlusOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testPhoneNumber = "1234567899";
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestPhoneNumberMaxMinusOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testPhoneNumber = "";
+            testPhoneNumber = testPhoneNumber.PadRight(49, '1');
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestPhoneNumberMax()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testPhoneNumber = "";
+            testPhoneNumber = testPhoneNumber.PadRight(50, '1');
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestPhoneNumberMaxPlusOne()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testPhoneNumber = "";
+            testPhoneNumber = testPhoneNumber.PadRight(51, '1');
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber);
+            Assert.AreNotEqual(error, "");
+
+        }
+
+        [TestMethod]
+        public void TestPhoneNumberMid()
+        {
+            // create an instance of a doctor
+            clsDoc testDoctor = new clsDoc();
+            // create variable to store any error messages
+            String error = "";
+            // create test data
+            String testPhoneNumber = "";
+            testPhoneNumber = testPhoneNumber.PadRight(25, '1');
+            // invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber);
+            Assert.AreEqual(error, "");
+
+        }
 
     }
 }
