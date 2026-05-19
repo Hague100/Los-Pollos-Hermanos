@@ -39,12 +39,16 @@ public partial class _1_DataEntry : System.Web.UI.Page
             //home address
             aPatient.pHomeAdd = pHomeAdd;
             //Main doctor id
-            aPatient.pMainDocId = Convert.ToInt32(pMainDocId);
-            
-            //store the address in the session object
-            Session["aPatient"] = aPatient;
-            //nativigate to view page
-            Response.Redirect("PatMViewer.aspx");
+            aPatient.pMainDocId = pMainDocId.Trim().Length != 0 ? Convert.ToInt32(pMainDocId) : (int?)null;
+            aPatient.pAccessReq = chkPAccessReq.Checked;
+
+            //collection instance 
+            clsPatientCollection aPatientCollection = new clsPatientCollection
+            {
+                ThisPatient = aPatient
+            };
+            aPatientCollection.Add();
+            Response.Redirect("PatMList.aspx");
         }
         else
         {

@@ -23,7 +23,7 @@ public partial class _1_List : System.Web.UI.Page
         //create an instance of the Patient collection
         clsPatientCollection patients = new clsPatientCollection();
         //set the data source to list of Patients in the collection
-        lstPatientList.DataSource = patients.patientList;
+        lstPatientList.DataSource = patients.PatientList;
         //set the name of the primary key
         lstPatientList.DataValueField = "patientId";
         //set the data field to display
@@ -31,5 +31,13 @@ public partial class _1_List : System.Web.UI.Page
         //bind the data to the list
         lstPatientList.DataBind(); 
     }
-    
+
+
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        //store -1 into the session object to indicate this is a new record
+        Session["PatientId"] = -1;
+        //redirect to the data entry page
+        Response.Redirect("PatMDataEntry.aspx");
+    }
 }

@@ -11,7 +11,7 @@ namespace ClassLibrary
         private DateTime mPDOB;
         private string mPHomeAdd;
         private bool mPAccessReq;
-        private int mPMainDocId;
+        private int? mPMainDocId;
         //patientId public property
         public Int32 patientId
         {
@@ -81,7 +81,7 @@ namespace ClassLibrary
                 mPAccessReq = value;
             }
         }
-        public int pMainDocId
+        public int? pMainDocId
         {
             get
             {
@@ -111,7 +111,8 @@ namespace ClassLibrary
                 mPDOB = Convert.ToDateTime(DB.DataTable.Rows[0]["PDOB"]);
                 mPHomeAdd = Convert.ToString(DB.DataTable.Rows[0]["PHomeAdd"]);
                 mPAccessReq = Convert.ToBoolean(DB.DataTable.Rows[0]["PAccessReq"]);
-                mPMainDocId = Convert.ToInt32(DB.DataTable.Rows[0]["PMainDocId"]);
+                mPMainDocId = DB.DataTable.Rows[0]["PMainDocId"] != DBNull.Value ?
+                    Convert.ToInt32(DB.DataTable.Rows[0]["PMainDocId"]) : (int?)null;
                 return true;
             }
             //if no record was found
@@ -166,15 +167,15 @@ namespace ClassLibrary
 
             try
             {
-                Int32 drId = Convert.ToInt32(drIdStr);
-                if (drId < 1)
+                Int32? drId = drIdStr.Trim().Length != 0 ? Convert.ToInt32(drIdStr) : (int?)null;
+                if (drId.HasValue && drId < 1)
                 {
-                    Error += "The doctor id have to be greater than 0: ";
+                    Error += "The doctor id have to be greater than 0 or not null: ";
                 }
             }
             catch 
             {
-                Error += "Invalid data type or greater than Int32 max: ";
+                Error += "The doctor Id is an invalid data type or greater than Int32 max: ";
             }
             //return error message
             return Error;
