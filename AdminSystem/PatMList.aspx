@@ -9,8 +9,14 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:Button ID="btnEdit" runat="server" style="z-index: 1; left: 98px; top: 398px; position: absolute" Text="Edit" />
         </div>
         <asp:ListBox ID="lstPatientList" runat="server" style="z-index: 1; left: 10px; top: 37px; position: absolute; height: 338px; width: 475px"></asp:ListBox>
+        <p>
+            &nbsp;</p>
+        <p>
+            &nbsp;</p>
+        <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" style="z-index: 1; left: 15px; top: 398px; position: absolute" Text="Add" />
     </form>
 </body>
 </html>
