@@ -97,7 +97,8 @@ namespace ClassLibrary
             }
         }
         //public property for the date of appointment
-        public DateTime DateOfAppointment {
+        public DateTime DateOfAppointment
+        {
             get
             {
                 //sends data out of the property
@@ -216,12 +217,12 @@ namespace ClassLibrary
                 mNotes = Convert.ToString(DB.DataTable.Rows[0]["Notes"]);
                 //return that everything worked OK
                 return true;
-             }
-             //if no record was found
-             else
-             {
-                 //return false indicating a problem
-                 return false;
+            }
+            //if no record was found
+            else
+            {
+                //return false indicating a problem
+                return false;
             }
         }
 
@@ -286,7 +287,8 @@ namespace ClassLibrary
                     //record the error
                     Error = Error + "The date of appointment is not a valid date : ";
                 }
-            } catch
+            }
+            catch
             {
                 //record the error
                 Error = Error + "The date of appointment is not a valid date : ";
@@ -308,7 +310,8 @@ namespace ClassLibrary
                     //record the error
                     Error = Error + "The time of appointment cannot be after 17:00:00 : ";
                 }
-            } catch
+            }
+            catch
             {
                 //record the error
                 Error = Error + "The time of appointment is not a valid time : ";
@@ -329,7 +332,8 @@ namespace ClassLibrary
                     //record the error
                     Error = Error + "The floor number cannot be greater than 5 : ";
                 }
-            } catch
+            }
+            catch
             {
                 //record the error
                 Error = Error + "The floor number is not a valid integer : ";
@@ -350,7 +354,8 @@ namespace ClassLibrary
                     //record the error
                     Error = Error + "The room number cannot be greater than 100 : ";
                 }
-            } catch
+            }
+            catch
             {
                 //record the error
                 Error = Error + "The room number is not a valid integer : ";

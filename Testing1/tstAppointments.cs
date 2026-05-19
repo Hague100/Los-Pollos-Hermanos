@@ -758,7 +758,7 @@ namespace Testing1
             //string variable to store any error message
             String Error = "";
             //create some test data to pass to the method
-            string TimeOfAppointment = new TimeSpan(0,0,0).ToString(); //this should trigger an error
+            string TimeOfAppointment = new TimeSpan(0, 0, 0).ToString(); //this should trigger an error
             //invoke the method
             Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
             //test to see that the result is correct
@@ -1351,4 +1351,4 @@ namespace Testing1
             Assert.AreEqual(Error, "");
         }
     }
- }
+}
