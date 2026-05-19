@@ -183,7 +183,7 @@ namespace Testing1
             //invoke the method
             Found = AnAppointment.Find(AppointmentNumber);
             //check the patient first name
-            if (AnAppointment.PatientFirstName != "Joe")
+            if (AnAppointment.PatientFirstName != "David")
             {
                 OK = false;
             }
@@ -203,7 +203,7 @@ namespace Testing1
             //invoke the method
             Found = AnAppointment.Find(AppointmentNumber);
             //check the patient last name
-            if (AnAppointment.PatientLastName != "Biden")
+            if (AnAppointment.PatientLastName != "Johnston")
             {
                 OK = false;
             }

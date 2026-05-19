@@ -10,6 +10,8 @@ namespace ClassLibrary
         private Int32 mAppointmentNumber;
         //private data member for the doctor ID property
         private Int32 mDoctorID;
+        //private data member for the patient ID property
+        private int mPatientID;
         //private data member for the patient first name property
         private string mPatientFirstName;
         //private data member for the patient last name property
@@ -26,7 +28,8 @@ namespace ClassLibrary
         private bool mEmergencyAppointment;
         //private data member for the notes property
         private string mNotes;
-        //AppointmentNumber public property
+
+        //public property for the appointment number
         public int AppointmentNumber { 
             get
             {
@@ -39,6 +42,7 @@ namespace ClassLibrary
                 mAppointmentNumber = value;
             }
         }
+        //public property for the doctor ID
         public int DoctorID {
             get
             {
@@ -51,6 +55,20 @@ namespace ClassLibrary
                 mDoctorID = value;
             }
         }
+        //public property for the patient ID
+        public int PatientID
+        {
+            get
+            {
+                //sends data out of the property
+                return mPatientID;
+            }
+            set
+            {
+                mPatientID = value;
+            }
+        }
+        //public property for the patient first name
         public string PatientFirstName 
         {
             get
@@ -64,6 +82,7 @@ namespace ClassLibrary
                 mPatientFirstName = value;
             }
         }
+        //public property for the patient last name
         public string PatientLastName
         {
             get
@@ -90,6 +109,7 @@ namespace ClassLibrary
                 mDateOfAppointment = value;
             }
         }
+        //public property for the time of appointment
         public TimeSpan TimeOfAppointment
         {
             get
@@ -103,6 +123,7 @@ namespace ClassLibrary
                 mTimeOfAppointment = value;
             }
         }
+        //public property for the floor number
         public int FloorNumber
         {
             get
@@ -116,6 +137,7 @@ namespace ClassLibrary
                 mFloorNumber = value;
             }
         }
+        //public property for the room number
         public int RoomNumber
         {
             get
@@ -129,6 +151,7 @@ namespace ClassLibrary
                 mRoomNumber = value;
             }
         }
+        //public property for the emergency appointment
         public bool EmergencyAppointment
         {
             get
@@ -142,6 +165,7 @@ namespace ClassLibrary
                 mEmergencyAppointment = value;
             }
         }
+        //public property for the notes
         public string Notes
         {
             get
@@ -155,25 +179,37 @@ namespace ClassLibrary
                 mNotes = value;
             }
         }
+
         /***********************FIND METHOD***************************/
         public bool Find(int appointmentNumber)
         {
+            if (appointmentNumber < 1) return false;
             //create an instance of the data connection
             clsDataConnection DB = new clsDataConnection();
             //add the parameter for the appointment number to search for
             DB.AddParameter("@AppointmentNumber", appointmentNumber);
             //execute the stored procedure
             DB.Execute("sproc_tblAppointments_FilterByAppointmentNumber");
+            //check if data has been found, if not return false
+            if (DB.DataTable.Rows.Count == 0) return false;
+            //create an instance of the data connection to the patient database
+            clsDataConnection PatientDB = new clsDataConnection();
+            //add the parameter for the patient ID to search for
+            PatientDB.AddParameter("@PatientID", Convert.ToInt32(DB.DataTable.Rows[0]["PatientID"]));
+            //execute the stored procedure
+            PatientDB.Execute("sproc_tblAppointments_GetPatientById");
+            string[] patientName = Convert.ToString(PatientDB.DataTable.Rows[0]["PName"]).Split(' ');
             //if one record is found (there should be either one or zero!)
             if (DB.Count == 1)
             {
                 //copy the data from the database to the private data members
                 mAppointmentNumber = Convert.ToInt32(DB.DataTable.Rows[0]["AppointmentNumber"]);
                 mDoctorID = Convert.ToInt32(DB.DataTable.Rows[0]["DoctorID"]);
-                mPatientFirstName = Convert.ToString(DB.DataTable.Rows[0]["PatientFirstName"]);
-                mPatientLastName = Convert.ToString(DB.DataTable.Rows[0]["PatientLastName"]);
-                mDateOfAppointment = Convert.ToDateTime(DB.DataTable.Rows[0]["AppointmentDate"]);
+                mPatientID = Convert.ToInt32(DB.DataTable.Rows[0]["PatientID"]);
+                mPatientFirstName = patientName[0];
+                mPatientLastName = patientName[1];
                 mTimeOfAppointment = (TimeSpan)DB.DataTable.Rows[0]["AppointmentTime"];
+                mDateOfAppointment = Convert.ToDateTime(DB.DataTable.Rows[0]["AppointmentDate"]).Add(mTimeOfAppointment);
                 mFloorNumber = Convert.ToInt32(DB.DataTable.Rows[0]["FloorNumber"]);
                 mRoomNumber = Convert.ToInt32(DB.DataTable.Rows[0]["RoomNumber"]);
                 mEmergencyAppointment = Convert.ToBoolean(DB.DataTable.Rows[0]["EmergencyAppointment"]);
