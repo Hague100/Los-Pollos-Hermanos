@@ -60,4 +60,23 @@ public partial class _1_List : System.Web.UI.Page
             lblError.Text = "Please select a record from the list to edit";
         }
     }
+
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        int patientId;
+        //if a record has been selected from the list
+        if (lstPatientList.SelectedIndex != -1)
+        {
+            //get the pkey value of the record
+            patientId = Convert.ToInt32(lstPatientList.SelectedValue);
+            //store the data in the session obj
+            Session["PatientId"] = patientId;
+            //redirect to the delete page
+            Response.Redirect("PatMConfirmDelete.aspx");
+        }
+        else
+        {
+            lblError.Text = "Please select a record from the list to delete";
+        }
+    }
 }

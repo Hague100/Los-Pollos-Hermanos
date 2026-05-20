@@ -106,5 +106,16 @@ namespace ClassLibrary
 
             dB.Execute("sproc_tblPatient_Update");
         }
+
+        public void Delete()
+        {
+            //deletes the record pointed to by ThisPatient
+            //connect to the database
+            clsDataConnection dB = new clsDataConnection();
+            //set params for the stored procedure
+            dB.AddParameter("@PatientId", mThisPatient.patientId);
+            //execute the stored procedure
+            dB.Execute("sproc_tblPatients_Delete");
+        }
     }
 }

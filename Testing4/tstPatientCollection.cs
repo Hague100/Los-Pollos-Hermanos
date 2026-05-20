@@ -157,5 +157,30 @@ namespace Testing4
             allPatients.ThisPatient.Find(primaryKey);
             Assert.AreEqual(allPatients.ThisPatient, testItem);
         }
+
+        [TestMethod]
+
+        public void DeleteMethodOK()
+        {
+            clsPatientCollection allPatients = new clsPatientCollection();
+            clsPatient testItem = new clsPatient
+            {
+                pName = "Test Name",
+                pEmail = "test.email@test.com",
+                pDOB = Convert.ToDateTime("01/01/2000"),
+                pHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA",
+                pAccessReq = true,
+                pMainDocId = 1
+            };
+            allPatients.ThisPatient = testItem;
+            int primaryKey = allPatients.Add();
+            testItem.patientId = primaryKey;
+            //find record
+            allPatients.ThisPatient.Find(primaryKey);
+            //delete the record
+            allPatients.Delete();
+            //now check if record is found
+            Assert.IsFalse(allPatients.ThisPatient.Find(primaryKey)); 
+        }
     }
 }

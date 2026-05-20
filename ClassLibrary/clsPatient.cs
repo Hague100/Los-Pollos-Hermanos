@@ -110,7 +110,8 @@ namespace ClassLibrary
                 mPEmail = Convert.ToString(DB.DataTable.Rows[0]["PEmail"]);
                 mPDOB = Convert.ToDateTime(DB.DataTable.Rows[0]["PDOB"]);
                 mPHomeAdd = Convert.ToString(DB.DataTable.Rows[0]["PHomeAdd"]);
-                mPAccessReq = Convert.ToBoolean(DB.DataTable.Rows[0]["PAccessReq"]);
+                mPAccessReq = DB.DataTable.Rows[0]["PAccessReq"] != DBNull.Value ?
+                    Convert.ToBoolean(DB.DataTable.Rows[0]["PAccessReq"])  : false;
                 mPMainDocId = DB.DataTable.Rows[0]["PMainDocId"] != DBNull.Value ?
                     Convert.ToInt32(DB.DataTable.Rows[0]["PMainDocId"]) : (int?)null;
                 return true;
