@@ -40,4 +40,24 @@ public partial class _1_List : System.Web.UI.Page
         //redirect to the data entry page
         Response.Redirect("PatMDataEntry.aspx");
     }
+
+    protected void btnEdit_Click(object sender, EventArgs e)
+    {
+        //variable to store pk value of the record to be edited
+        int patientId;
+        //if a record has been selected from the list
+        if (lstPatientList.SelectedIndex != -1)
+        {
+            //get the pk value of the record to edit
+            patientId = Convert.ToInt32(lstPatientList.SelectedValue);
+            //store the data in the session object
+            Session["PatientId"] = patientId;
+            //redirect to the edit page 
+            Response.Redirect("PatMDataEntry.aspx");
+        }
+        else
+        {
+            lblError.Text = "Please select a record from the list to edit";
+        }
+    }
 }

@@ -8,8 +8,31 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    int PatientId;
     protected void Page_Load(object sender, EventArgs e)
     {
+        PatientId = Convert.ToInt32(Session["PatientId"]);
+        //get the number of the patient to be processed
+        if (!IsPostBack)
+        {
+            if(PatientId != -1)
+            {
+                DisplayAddress();
+            }
+        }
+    }
+
+    void DisplayAddress()
+    {
+        clsPatientCollection aPatientCollection = new clsPatientCollection();
+        aPatientCollection.ThisPatient.Find(PatientId);
+        txtPatientId.Text = aPatientCollection.ThisPatient.patientId.ToString();
+        txtPName.Text = aPatientCollection.ThisPatient.pName;
+        txtPEmail.Text = aPatientCollection.ThisPatient.pEmail;
+        txtPDOB.Text = aPatientCollection.ThisPatient.pDOB.ToString();
+        txtPHomeAdd.Text = aPatientCollection.ThisPatient.pHomeAdd;
+        txtPMainDocId.Text = aPatientCollection.ThisPatient.pMainDocId.ToString();
+        chkPAccessReq.Checked = aPatientCollection.ThisPatient.pAccessReq;
 
     }
 
@@ -17,6 +40,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         //create a new instance of clsPatient
         clsPatient aPatient = new clsPatient();
+        string patientId = txtPatientId.Text;
         string pName = txtPName.Text;
         string pEmail = txtPEmail.Text;
         string pDOB = txtPDOB.Text;
@@ -30,6 +54,8 @@ public partial class _1_DataEntry : System.Web.UI.Page
         
         if (Error == "")
         {
+
+            aPatient.patientId = Convert.ToInt32(patientId);
             //capture the name 
             aPatient.pName = pName;
             //email
@@ -43,13 +69,25 @@ public partial class _1_DataEntry : System.Web.UI.Page
             aPatient.pAccessReq = chkPAccessReq.Checked;
 
             //collection instance 
-            clsPatientCollection aPatientCollection = new clsPatientCollection
+            clsPatientCollection aPatientCollection = new clsPatientCollection();
+
+            if (PatientId == -1)
             {
-                ThisPatient = aPatient
-            };
-            aPatientCollection.Add();
-            Response.Redirect("PatMList.aspx");
+                aPatientCollection.ThisPatient = aPatient;
+                aPatientCollection.Add();
+            }
+            //otherwise it must be an update
+            else
+            {
+                //find the record to update
+                aPatientCollection.ThisPatient.Find(PatientId);
+                //set the ThisPatient property
+                aPatientCollection.ThisPatient = aPatient;
+                aPatientCollection.Update(); 
+            }
+                Response.Redirect("PatMList.aspx");
         }
+        
         else
         {
             //display the error message
