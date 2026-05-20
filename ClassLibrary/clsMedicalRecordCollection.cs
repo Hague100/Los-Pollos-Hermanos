@@ -5,12 +5,17 @@ namespace ClassLibrary
 {
     public class clsMedicalRecordCollection
     {
+
+
+
         // backing fields
         private List<clsMedicalRecords> mMedicalRecordList = new List<clsMedicalRecords>();
         private clsMedicalRecords mThisMedicalRecord;
 
         public clsMedicalRecordCollection()
         {
+            mThisMedicalRecord = new clsMedicalRecords();
+
             // construction for the class 
             clsDataConnection DB = new clsDataConnection();
             DB.Execute("Testing");
@@ -68,5 +73,7 @@ namespace ClassLibrary
             return DB.Execute("sproc_tblmedicalRecords_Insert");
             
         }
+
+
     }
 }

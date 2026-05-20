@@ -13,8 +13,10 @@
 </head>
 <body style="height: 566px; width: 494px">
     <form id="form1" runat="server">
+        <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click" style="z-index: 1; left: 105px; top: 450px; position: absolute" Text="Edit" />
         <asp:ListBox ID="lstMedicalRecordList" runat="server" style="z-index: 1; left: 36px; top: 46px; position: absolute; height: 386px; width: 429px" OnSelectedIndexChanged="lstMedicalRecordList_SelectedIndexChanged"></asp:ListBox>
         <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" style="z-index: 1; left: 38px; top: 450px; position: absolute; height: 26px" Text="Add" />
+        <asp:Label ID="lblError" runat="server" style="z-index: 1; left: 42px; top: 495px; position: absolute" Text="Error"></asp:Label>
     </form>
 </body>
 </html>

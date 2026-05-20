@@ -98,5 +98,22 @@ namespace ClassLibrary
             // execute the query returning the primart key valuse
             return DB.Execute("sproc_tblmedicalRecords_Insert");
         }
+
+        internal void Update()
+        {
+           // update an existing record based on the values of mThisMedicalRecord
+            // connect to the db
+            clsDataConnection DB = new clsDataConnection();
+            // set the parameters for the stored procedure
+            DB.AddParameter("@recordId", mThisMedicalRecord.recordId);
+            DB.AddParameter("@patientId", mThisMedicalRecord.patientId);
+            DB.AddParameter("@AppID", mThisMedicalRecord.AppID);
+            DB.AddParameter("@PendingApp", mThisMedicalRecord.PendingApp);
+            DB.AddParameter("@AppNotes", mThisMedicalRecord.AppNotes);
+            DB.AddParameter("@doctorId", mThisMedicalRecord.doctorId);
+            DB.AddParameter("@Date", mThisMedicalRecord.Date);
+            // execute the stored procedure
+            DB.Execute("sproc_tblmedicalRecords_Update");
+        }
     } 
 }
