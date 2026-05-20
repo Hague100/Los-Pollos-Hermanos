@@ -5,11 +5,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <style type="text/css">
+        #form1 {
+            height: 559px;
+        }
+    </style>
 </head>
-<body>
+<body style="height: 566px; width: 494px">
     <form id="form1" runat="server">
-        <div>
-        </div>
+        <asp:ListBox ID="lstMedicalRecordList" runat="server" style="z-index: 1; left: 36px; top: 46px; position: absolute; height: 386px; width: 429px" OnSelectedIndexChanged="lstMedicalRecordList_SelectedIndexChanged"></asp:ListBox>
+        <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" style="z-index: 1; left: 38px; top: 450px; position: absolute; height: 26px" Text="Add" />
     </form>
 </body>
 </html>
