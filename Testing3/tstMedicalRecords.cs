@@ -284,22 +284,7 @@ namespace Testing3
 
         // record id tests //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        [TestMethod]
-        public void RecordIDMinLessOne()
-        {
-            // create an instance of the class we want to create
-            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
-            //string variable to store any error message
-            String Error = "";
-            //create some test data to pass to the method
-            string RecordID = "";
-            //invoke the method
-            Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, RecordID);
-            //test to see that the result is correct
-            Assert.AreEqual(Error, "");
-
-        }
-
+        
         [TestMethod]
         public void RecordIDmin()
         {
@@ -1053,6 +1038,8 @@ namespace Testing3
 
             }
 
+        // all of the invalid data tests 
+
             [TestMethod]
             public void DateInvalidData()
             {
@@ -1068,10 +1055,74 @@ namespace Testing3
                 Assert.AreNotEqual(Error, "");
             }
 
+        [TestMethod]
+        public void DoctorIDInvalidData()
+        {
+            // create an instance of the class we want to create
+            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string DoctorID = "this is not a doctor ID";
+            //invoke the method
+            Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+
+        }
+
+        [TestMethod]
+        public void PatientIDInvalidData()
+        {
+            // create an instance of the class we want to create
+            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string PatientID = "this is not a patient ID";
+            //invoke the method
+            Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+
+        }
+
+        [TestMethod]
+        public void AppIDInvalidData()
+        {
+            // create an instance of the class we want to create
+            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string AppID = "this is not a Appointment ID";
+            //invoke the method
+            Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void AppNotesInvalidData()
+        {
+            // create an instance of the class we want to create
+            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string AppNotes = new string('a', 1001);
+            //invoke the method
+            Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+
+        }
+
+
 
             //pending app tests //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            // -- dont do that shi
+        // -- dont do that shi
 
         }
     }

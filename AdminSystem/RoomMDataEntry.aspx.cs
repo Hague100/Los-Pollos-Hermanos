@@ -8,9 +8,35 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 FloorNumber;
+    Int32 RoomNumber;
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        FloorNumber = Convert.ToInt32(Session["FloorNumber"]);
+        RoomNumber = Convert.ToInt32(Session["RoomNumber"]);
+        if (IsPostBack == false)
+        {
+            if (FloorNumber != -1 && RoomNumber != -1)
+            {
+                DisplayRoom();
+            }
+        }
+    }
+
+    void DisplayRoom()
+    {
+        clsRoomCollection RoomList = new clsRoomCollection();
+        RoomList.ThisRoom.Find(FloorNumber, RoomNumber);
+
+        txtFloorNumber.Text = RoomList.ThisRoom.FloorNumber.ToString();
+        txtRoomNumber.Text = RoomList.ThisRoom.RoomNumber.ToString();
+        listWardLocation.SelectedValue = RoomList.ThisRoom.WardLocation.ToString();
+        listBedType.SelectedValue = RoomList.ThisRoom.BedType.ToString();
+        chckbxDisabilityAccessible.Checked = RoomList.ThisRoom.DisabilityAccessible;
+        listHygieneStatus.SelectedValue = RoomList.ThisRoom.HygieneStatus.ToString();
+        chckbxInspected.Checked = RoomList.ThisRoom.Inspected;
+        chckbxMaintained.Checked = RoomList.ThisRoom.Maintained;
+        calLastDateCleaned.SelectedDate = RoomList.ThisRoom.LastDateCleaned;
     }
 
     protected void btnOK_Click(object sender, EventArgs e)
@@ -53,8 +79,18 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
             clsRoomCollection roomList = new clsRoomCollection();
 
-            roomList.ThisRoom = Room;
-            roomList.Add();
+            if (FloorNumber == -1 && RoomNumber == -1)
+            {
+                roomList.ThisRoom = Room;
+                roomList.Add();
+            }
+            else
+            {
+                roomList.ThisRoom.Find(FloorNumber, RoomNumber);
+                roomList.ThisRoom = Room;
+
+                roomList.Update();
+            }
 
             //naivgate to the viewer page
             Response.Redirect("RoomMList.aspx");

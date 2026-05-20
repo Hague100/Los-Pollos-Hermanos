@@ -105,7 +105,7 @@ namespace Testing2
         
             AllRooms.ThisRoom = TestItem;
 
-            PrimaryKeyFloor = AllRooms.Add();
+            AllRooms.Add();
 
             TestItem.FloorNumber = PrimaryKeyFloor;
             TestItem.RoomNumber = SecondaryKeyRoom;
@@ -113,6 +113,60 @@ namespace Testing2
             AllRooms.ThisRoom.Find(PrimaryKeyFloor, SecondaryKeyRoom);
 
             Assert.AreEqual(AllRooms.ThisRoom, TestItem);
+        }
+
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            clsRoomCollection allRooms = new clsRoomCollection();
+            clsRoom TestItem = new clsRoom();
+
+            // ADD THESE ATTRIBUTES
+
+            Int32 PrimaryKey = 3;
+            Int32 SecondaryKey = 1;
+            
+            TestItem.FloorNumber = PrimaryKey;
+            TestItem.RoomNumber = SecondaryKey;
+
+            TestItem.WardLocation = "Pediatric";
+            TestItem.BedType = "Heavy";
+            TestItem.DisabilityAccessible = true;
+            TestItem.HygieneStatus = "Occupied";
+            TestItem.Inspected = true;
+            TestItem.Maintained = true;
+            TestItem.LastDateCleaned = Convert.ToDateTime("01/05/2026 00:00:00");
+
+            allRooms.ThisRoom = TestItem;
+
+            // CHECK TO SEE IF THIS IS ALREADY IN DB
+         
+            if (!TestItem.Find(PrimaryKey, SecondaryKey))
+            { 
+                allRooms.Add(); 
+            }
+            else
+            {
+                allRooms.Update();
+            }
+
+            // UPDATE THE SAME ROW
+
+            TestItem.WardLocation = "General";
+            TestItem.BedType = "General";
+            TestItem.DisabilityAccessible = true;
+            TestItem.HygieneStatus = "Available";
+            TestItem.Inspected = true;
+            TestItem.Maintained = true;
+            TestItem.LastDateCleaned = Convert.ToDateTime("02/05/2026 00:00:00");
+
+            allRooms.ThisRoom = TestItem;
+
+            allRooms.Update();
+
+            allRooms.ThisRoom.Find(PrimaryKey, SecondaryKey);
+
+            Assert.AreEqual(allRooms.ThisRoom, TestItem);
         }
     }
 }
