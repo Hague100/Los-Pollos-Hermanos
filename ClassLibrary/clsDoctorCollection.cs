@@ -6,6 +6,9 @@ namespace ClassLibrary
     public class clsDoctorCollection
     {
         List<clsDoc> mDoctorsList = new List<clsDoc>();
+        // private data member for this address
+        clsDoc mThisDoctor = new clsDoc();
+
         public List<clsDoc> doctorList
         {
             get
@@ -28,7 +31,18 @@ namespace ClassLibrary
                
             }
         }
-        public clsDoc thisDoctor { get; set; }
+        public clsDoc thisDoctor {
+
+            get
+            {
+                return mThisDoctor;
+            }
+            set
+            {
+                mThisDoctor = value;
+            }
+
+        }
 
         // constructor for the class
         public clsDoctorCollection()
@@ -84,6 +98,39 @@ namespace ClassLibrary
             //testDoctor.dAvailability = false;
             //// assign the test data to the property
             //mDoctorsList.Add(testDoctor);       
+        }
+
+        public int Add()
+        {
+            // adds a record to the database based on the values of mThisDoctor
+            // connect ot the databse
+            clsDataConnection DB = new clsDataConnection();
+            // set the parameters for the stored procedure
+            DB.AddParameter("@DFirstName", mThisDoctor.dFirstName);
+            DB.AddParameter("@DLastName", mThisDoctor.dLastName);
+            DB.AddParameter("@DAddress", mThisDoctor.dAddress);
+            DB.AddParameter("@DEmail", mThisDoctor.dEmail);
+            DB.AddParameter("@DPhoneNumber", mThisDoctor.dPhoneNumber);
+            DB.AddParameter("@DAvailability", mThisDoctor.dAvailability);
+            // execute the query retuning the primary key value
+            return DB.Execute("sproc_tblDoctors_Insert");
+        }
+
+        public void Update()
+        {
+            // update an existing reecord based on the values of this doctor
+            // connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            // set the parameters for the new stored procedure
+            DB.AddParameter("@DoctorId", mThisDoctor.dId);
+            DB.AddParameter("@DFirstName", mThisDoctor.dFirstName);
+            DB.AddParameter("@DLastName", mThisDoctor.dLastName);
+            DB.AddParameter("@DAddress", mThisDoctor.dAddress);
+            DB.AddParameter("@DEmail", mThisDoctor.dEmail);
+            DB.AddParameter("@DPhoneNumber", mThisDoctor.dPhoneNumber);
+            DB.AddParameter("@DAvailability", mThisDoctor.dAvailability);
+            // execute the stored procedure
+            DB.Execute("sproc_tblDoctors_Update");
         }
     }
 }
