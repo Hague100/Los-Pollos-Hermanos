@@ -10,7 +10,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        
     }
 
     protected void btnOK_Click(object sender, EventArgs e)
@@ -18,36 +18,51 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //create a new instance of clsRoomNumber
         clsRoom Room = new clsRoom();
 
-        string FloorNumber = txtFloorNumber.Text;
-        string RoomNumber = txtRoomNumber.Text;
+        int FloorNumber = Convert.ToInt32(txtFloorNumber.Text);
+
+        int RoomNumber = Convert.ToInt32(txtRoomNumber.Text);
+
         string WardLocation = listWardLocation.SelectedValue;
+
         string BedType = listBedType.SelectedValue;
-        string DisabilityAccessible = chckbxDisabilityAccessible.Text;
-        string HygieneStatus = listHygieneStatus.Text;
-        string Inspected = chckbxInspected.Text;
-        string Maintained = chckbxMaintained.Text;
-        string LastDateCleaned = calLastDateCleaned.ToString();
+
+        Boolean DisabilityAccess = chckbxDisabilityAccessible.Checked;
+
+        string HygieneStatus = listHygieneStatus.SelectedValue;
+
+        Boolean Inspected = chckbxInspected.Checked;
+
+        Boolean Maintained = chckbxMaintained.Checked;
+  
+        string LastDateCleaned = calLastDateCleaned.SelectedDate.ToString();
 
         string error = "";
         error = Room.Valid(WardLocation, BedType, HygieneStatus, LastDateCleaned);
         if (error == "")
         {
             //Capture the data
+            Room.FloorNumber = FloorNumber;
+            Room.RoomNumber = RoomNumber;
             Room.WardLocation = WardLocation;
             Room.BedType = BedType;
+            Room.DisabilityAccessible = DisabilityAccess;
             Room.HygieneStatus = HygieneStatus;
+            Room.Inspected = Inspected;
+            Room.Maintained = Maintained;
             Room.LastDateCleaned = Convert.ToDateTime(LastDateCleaned);
+
+            clsRoomCollection roomList = new clsRoomCollection();
+
+            roomList.ThisRoom = Room;
+            roomList.Add();
+
+            //naivgate to the viewer page
+            Response.Redirect("RoomMList.aspx");
         }
         else
         {
             lblError.Text = error;
         }
-
-            //Store the room Data in the session obj
-            Session["Room"] = Room;
-
-        //naivgate to the viewer page
-        Response.Redirect("RoomMViewer.aspx");
 
     }
 
