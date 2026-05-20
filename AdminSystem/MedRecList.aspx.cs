@@ -49,4 +49,24 @@ public partial class _1_List : System.Web.UI.Page
         // redirecr to the data entry page 
         Response.Redirect("MedRecDataEntry.aspx");
     }
+
+    protected void btnEdit_Click(object sender, EventArgs e)
+    {
+        // variable to store the primary key value of the record to be edited
+        Int32 recordId;
+        // if the record has been selected from the list
+        if (lstMedicalRecordList.SelectedIndex != -1)
+        {
+            // get the primary key value of the record to edit
+            recordId = Convert.ToInt32(lstMedicalRecordList.SelectedValue);
+            // store the data in the session object
+            Session["recordId"] = recordId;
+            // redirecr to the edit page
+            Response.Redirect("MedRecDataEntry.aspx");
+        }
+        else // if no record has been selected
+        {
+            lblError.Text = "Please select a record to edit from the list";
+        }
+    }
 }
