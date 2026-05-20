@@ -6,7 +6,7 @@
 <head runat="server">
     <title></title>
 </head>
-<body style="height: 584px; width: 356px">
+<body style="height: 584px; width: 424px">
     <form id="form1" runat="server">
         <asp:Label ID="lblrecordId" runat="server" style="z-index: 1; left: 45px; top: 210px; position: absolute; width: 119px; bottom: 417px" Text="Record ID"></asp:Label>
         <asp:Label ID="lblpatientId" runat="server" height="23px" style="z-index: 1; left: 45px; top: 237px; position: absolute; width: 119px; bottom: 390px" Text="Patient ID"></asp:Label>
@@ -25,6 +25,7 @@
         <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 81px; top: 555px; position: absolute" Text="Cancel" />
         <p style="height: 566px">
             <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" style="z-index: 1; left: 176px; top: 542px; position: absolute; right: 275px; height: 42px" Text="OK" />
+            <asp:Button ID="btnFind" runat="server" OnClick="Button1_Click" style="z-index: 1; left: 347px; top: 120px; position: absolute" Text="Find" />
         </p>
     </form>
 </body>

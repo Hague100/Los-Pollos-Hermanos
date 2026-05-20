@@ -64,6 +64,8 @@ namespace ClassLibrary
             set { mDate = value; }
         }
 
+        public clsMedicalRecords ThisMedicalRecord { get; set; }
+
         // Lookup methods — overloads so callers can use whichever key(s) they have
         public bool Find(int recordId)
         {
@@ -164,6 +166,7 @@ namespace ClassLibrary
                 Error7 = Error7 + "The record ID cannot be greater than 1000. ";
             }
 
+          
             // Doctor ID bits /////////////////////////////////////////////////////////////////////////////////////////////////////
 
             // doctor id max min to be 1 
@@ -394,24 +397,55 @@ namespace ClassLibrary
                 return Error;
             }
 
-            // Rule: valid dates are today or today + 1 day
+            // Rule: valid dates are today up to today + 10 years
             DateTime today = DateTime.Now.Date;
-            DateTime maxDate = today.AddDays(1);
+            DateTime maxDate = today.AddYears(10);
 
-            // Too early
+            // Too early (yesterday or earlier)
             if (dateTemp < today)
             {
                 Error += "The date cannot be in the past. ";
             }
 
-            // Too far in the future
+            // Too far in the future (beyond 10 years)
             if (dateTemp > maxDate)
             {
-                Error += "The date cannot be more than one day in the future. ";
+                Error += "The date cannot be more than ten years in the future. ";
+            }
+
+
+            // invalid bits /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // doctor id invalid if not an integer
+            int doctorIdTemp;
+            if (!int.TryParse(doctorID, out doctorIdTemp))
+            {
+                Error += "The doctor ID was not a valid. ";
+            }
+
+            // patient id invalid if not an integer
+            int patientIdTemp;
+            if (!int.TryParse(patientID, out patientIdTemp))
+            {
+                Error += "The patient ID was not valid. ";
+            }
+
+            // app id invalid if not an integer
+            int appIdTemp;
+            if (!int.TryParse(appID, out appIdTemp))
+            {
+                Error += "The app ID was not valid. ";
+            }
+
+            // app notes invalid if greater than 1000 characters
+            if (appNotes.Length > 1000)
+            {
+                Error += "The app notes cannot be greater than 1000 characters. ";
             }
 
 
             return Error;
         }
+
     }
 }
