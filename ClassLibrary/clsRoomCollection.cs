@@ -79,7 +79,7 @@ namespace ClassLibrary
             }
         }
 
-        public int Add()
+        public void Add()
         {
             clsDataConnection DB = new clsDataConnection();
 
@@ -93,7 +93,24 @@ namespace ClassLibrary
             DB.AddParameter("@Maintained", mThisRoom.Maintained);
             DB.AddParameter("@LastDateCleaned", mThisRoom.LastDateCleaned);
 
-            return DB.Execute("sproc_tblRoom_Insert");
+            DB.Execute("sproc_tblRoom_Insert");
+        }
+
+        public void Update()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@FloorNumber", mThisRoom.FloorNumber);
+            DB.AddParameter("@RoomNumber", mThisRoom.RoomNumber);
+            DB.AddParameter("@WardLocation", mThisRoom.WardLocation);
+            DB.AddParameter("@BedType", mThisRoom.BedType);
+            DB.AddParameter("@DisabilityAccess", mThisRoom.DisabilityAccessible);
+            DB.AddParameter("@HygieneStatus", mThisRoom.HygieneStatus);
+            DB.AddParameter("@Inspected", mThisRoom.Inspected);
+            DB.AddParameter("@Maintained", mThisRoom.Maintained);
+            DB.AddParameter("@LastDateCleaned", mThisRoom.LastDateCleaned);
+
+            DB.Execute("sproc_tblRoom_Update");
         }
     }
 }
