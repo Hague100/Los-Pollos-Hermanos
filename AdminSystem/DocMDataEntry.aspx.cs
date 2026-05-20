@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -8,9 +9,35 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 doctorId;
     protected void Page_Load(object sender, EventArgs e)
     {
+        // get the number of the address to be processed
+        doctorId = Convert.ToInt32(Session["dId"]);
+        if (IsPostBack == false)
+        {
+            // if this is not a new record
+            if (doctorId != -1)
+            {
+                // display the current data for the record
+                DisplayDoctor();
+            }
+        }
+    }
 
+    void DisplayDoctor()
+    {
+        // create an instance of the doctors list
+        clsDoctorCollection doctorCollection = new clsDoctorCollection();
+        // find the record to update
+        doctorCollection.thisDoctor.Find(doctorId);
+        // display the data for the record
+        tbFirstName.Text = doctorCollection.thisDoctor.dFirstName.ToString();
+        tbLastName.Text = doctorCollection.thisDoctor.dLastName.ToString();
+        tbAddress.Text = doctorCollection.thisDoctor.dAddress.ToString();
+        tbEmail.Text = doctorCollection.thisDoctor.dEmail.ToString();
+        tbPHoneNumber.Text = doctorCollection.thisDoctor.dPhoneNumber.ToString();
+        cbAvailability.Checked = doctorCollection.thisDoctor.dAvailability;
     }
 
     protected void btnOK_Click(object sender, EventArgs e) 
@@ -35,6 +62,8 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         if ( error == "" )
         {
+            // capture doctor id
+            aDoc.dId = doctorId;
             // capture the First Name
             aDoc.dFirstName = tbFirstName.Text;
             // capture the last Name
@@ -47,10 +76,29 @@ public partial class _1_DataEntry : System.Web.UI.Page
             aDoc.dPhoneNumber = tbPHoneNumber.Text;
             // capture the check box
             aDoc.dAvailability = cbAvailability.Checked;
-            // store the first name in the session object
-            Session["aDoc"] = aDoc;
-            //button handler when the button is clicked redirect back to page
-            Response.Redirect("DocMViewer.aspx");
+            // create new instance of Doctor collection
+            clsDoctorCollection doctorList = new clsDoctorCollection();
+
+            if (doctorId == -1)
+            {
+                // set the this doctor property
+                doctorList.thisDoctor = aDoc;
+                // add the new record
+                doctorList.Add();
+            }
+            else
+            {
+                // find the record to update
+                doctorList.thisDoctor.Find(doctorId);
+                // set the this doctor property
+                doctorList.thisDoctor = aDoc;
+                // update the record
+                doctorList.Update();
+            }
+
+               
+            // button handler when the button is clicked redirect back to page
+            Response.Redirect("DocMList.aspx");
         }
         else
         {
