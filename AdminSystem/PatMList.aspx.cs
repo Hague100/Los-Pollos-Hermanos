@@ -23,7 +23,7 @@ public partial class _1_List : System.Web.UI.Page
         //create an instance of the Patient collection
         clsPatientCollection patients = new clsPatientCollection();
         //set the data source to list of Patients in the collection
-        lstPatientList.DataSource = patients.patientList;
+        lstPatientList.DataSource = patients.PatientList;
         //set the name of the primary key
         lstPatientList.DataValueField = "patientId";
         //set the data field to display
@@ -31,5 +31,33 @@ public partial class _1_List : System.Web.UI.Page
         //bind the data to the list
         lstPatientList.DataBind(); 
     }
-    
+
+
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        //store -1 into the session object to indicate this is a new record
+        Session["PatientId"] = -1;
+        //redirect to the data entry page
+        Response.Redirect("PatMDataEntry.aspx");
+    }
+
+    protected void btnEdit_Click(object sender, EventArgs e)
+    {
+        //variable to store pk value of the record to be edited
+        int patientId;
+        //if a record has been selected from the list
+        if (lstPatientList.SelectedIndex != -1)
+        {
+            //get the pk value of the record to edit
+            patientId = Convert.ToInt32(lstPatientList.SelectedValue);
+            //store the data in the session object
+            Session["PatientId"] = patientId;
+            //redirect to the edit page 
+            Response.Redirect("PatMDataEntry.aspx");
+        }
+        else
+        {
+            lblError.Text = "Please select a record from the list to edit";
+        }
+    }
 }

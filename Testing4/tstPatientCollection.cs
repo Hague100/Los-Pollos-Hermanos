@@ -41,9 +41,9 @@ namespace Testing4
             //add the item to the test list
             testList.Add(testItem);
             //assign the data to the property
-            allPatients.patientList = testList;
+            allPatients.PatientList = testList;
             //test to see that the two values are the same
-            Assert.AreEqual(allPatients.patientList, testList);
+            Assert.AreEqual(allPatients.PatientList, testList);
         }
 
 
@@ -54,23 +54,25 @@ namespace Testing4
             //create an instance of the class we want to create
             clsPatientCollection allPatients = new clsPatientCollection();
             //create some data to asign to the property
-            List<clsPatient> testList = new List<clsPatient>();
-            clsPatient testPatient = new clsPatient();
-            //set its properties
-            testPatient.patientId = 1;
-            testPatient.pName = "Test Name";
-            testPatient.pEmail = "test.email@test.com";
-            testPatient.pDOB = Convert.ToDateTime("01/01/2000");
-            testPatient.pHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA";
-            testPatient.pAccessReq = true;
-            testPatient.pMainDocId = 1;
-            allPatients.thisPatient = testPatient;
-            Assert.AreEqual(allPatients.thisPatient, testPatient);
+            _ = new List<clsPatient>();
+            clsPatient testPatient = new clsPatient
+            {
+                //set its properties
+                patientId = 1,
+                pName = "Test Name",
+                pEmail = "test.email@test.com",
+                pDOB = Convert.ToDateTime("01/01/2000"),
+                pHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA",
+                pAccessReq = true,
+                pMainDocId = 1
+            };
+            allPatients.ThisPatient = testPatient;
+            Assert.AreEqual(allPatients.ThisPatient, testPatient);
         }
 
         [TestMethod]
 
-        public void listAndCountOK()
+        public void ListAndCountOK()
         {
             //create an instance of the class we want to create
             clsPatientCollection allPatients = new clsPatientCollection();
@@ -79,22 +81,81 @@ namespace Testing4
             List<clsPatient> testList = new List<clsPatient>();
             //add an itme to the list
             //create the item of test data
-            clsPatient testItem = new clsPatient();
-            //set its properties
-            testItem.patientId = 1;
-            testItem.pName = "Test Name";
-            testItem.pEmail = "test.email@test.com";
-            testItem.pDOB = Convert.ToDateTime("01/01/2000");
-            testItem.pHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA";
-            testItem.pAccessReq = true;
-            testItem.pMainDocId = 1;
+            clsPatient testItem = new clsPatient
+            {
+                //set its properties
+                patientId = 1,
+                pName = "Test Name",
+                pEmail = "test.email@test.com",
+                pDOB = Convert.ToDateTime("01/01/2000"),
+                pHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA",
+                pAccessReq = true,
+                pMainDocId = 1
+            };
             //add the item to the test list
             testList.Add(testItem);
             //assign the data to the property
-            allPatients.patientList = testList;
+            allPatients.PatientList = testList;
             //test to see that the two values are the same
-            Assert.AreEqual(allPatients.count, testList.Count);
+            Assert.AreEqual(allPatients.Count, testList.Count);
         }
 
+        [TestMethod]
+
+        public void AddMethodOK()
+        {
+            clsPatientCollection allPatients = new clsPatientCollection();
+            clsPatient testItem = new clsPatient
+            { 
+                pName = "Test Name",
+                pEmail = "test.email@test.com",
+                pDOB = Convert.ToDateTime("01/01/2000"),
+                pHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA",
+                pAccessReq = true,
+                pMainDocId = 1
+            };
+            //set ThisAddress to the test data
+            allPatients.ThisPatient = testItem;
+            //add the record
+            int primaryKey = allPatients.Add();
+            //set the primary key of the test data
+            testItem.patientId = primaryKey;
+            //find the record
+            allPatients.ThisPatient.Find(primaryKey);
+            //test to see that the two values are the same
+            Assert.AreEqual(allPatients.ThisPatient, testItem);
+        }
+
+        [TestMethod]
+
+        public void UpdateMethodOK()
+        {
+            clsPatientCollection allPatients = new clsPatientCollection();
+            clsPatient testItem = new clsPatient
+            { 
+                pName = "Test Name",
+                pEmail = "test.email@test.com",
+                pDOB = Convert.ToDateTime("01/01/2000"),
+                pHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA",
+                pAccessReq = true,
+                pMainDocId = 1
+            };
+            allPatients.ThisPatient = testItem;
+            Int32 primaryKey = allPatients.Add();
+            testItem.patientId = primaryKey;
+            //mod testItem
+            testItem.pName = "Test Name2";
+            testItem.pEmail = "test.email2@test.com";
+            testItem.pDOB = Convert.ToDateTime("02/01/2000");
+            testItem.pHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA";
+            testItem.pAccessReq = false;
+            testItem.pMainDocId = null;
+            allPatients.ThisPatient = testItem;
+            //update record
+            allPatients.Update();
+            //find the record
+            allPatients.ThisPatient.Find(primaryKey);
+            Assert.AreEqual(allPatients.ThisPatient, testItem);
+        }
     }
 }

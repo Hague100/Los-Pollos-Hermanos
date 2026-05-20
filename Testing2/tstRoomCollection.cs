@@ -83,5 +83,36 @@ namespace Testing2
 
             Assert.AreEqual(rooms.Count, TestList.Count);
         }
+
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            clsRoomCollection AllRooms = new clsRoomCollection();
+            clsRoom TestItem = new clsRoom();
+
+            Int32 PrimaryKeyFloor = 2;
+            Int32 SecondaryKeyRoom = 6;
+
+            TestItem.FloorNumber = 2;
+            TestItem.RoomNumber = 6;
+            TestItem.WardLocation = "General";
+            TestItem.BedType = "General";
+            TestItem.DisabilityAccessible = true;
+            TestItem.HygieneStatus = "Available";
+            TestItem.Inspected = true;
+            TestItem.Maintained = true;
+            TestItem.LastDateCleaned = Convert.ToDateTime("29/04/2026 00:00:00");
+        
+            AllRooms.ThisRoom = TestItem;
+
+            PrimaryKeyFloor = AllRooms.Add();
+
+            TestItem.FloorNumber = PrimaryKeyFloor;
+            TestItem.RoomNumber = SecondaryKeyRoom;
+
+            AllRooms.ThisRoom.Find(PrimaryKeyFloor, SecondaryKeyRoom);
+
+            Assert.AreEqual(AllRooms.ThisRoom, TestItem);
+        }
     }
 }

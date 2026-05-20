@@ -12,12 +12,12 @@ public partial class _1_List : System.Web.UI.Page
     {
         if (IsPostBack == false)
         {
-            DisplayAddresses();
+            DisplayRooms();
         }
 
     }
 
-    void DisplayAddresses()
+    void DisplayRooms()
     {
         clsRoomCollection rooms = new clsRoomCollection();
         lstRoomsList.DataSource = rooms.RoomList;
@@ -28,5 +28,13 @@ public partial class _1_List : System.Web.UI.Page
         lstRoomsList.DataTextField = "WardLocation";
 
         lstRoomsList.DataBind();
+    }
+
+    protected void AddBtn_Click(object sender, EventArgs e)
+    {
+        Session["FloorNumber"] = -1;
+        Session["RoomNumber"] = -1;
+
+        Response.Redirect("RoomMDataEntry.aspx");
     }
 }

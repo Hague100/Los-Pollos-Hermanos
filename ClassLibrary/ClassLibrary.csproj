@@ -46,6 +46,7 @@
     <Compile Include="clsDataConnection.cs" />
     <Compile Include="clsDoc.cs" />
     <Compile Include="clsMedicalRecordCollection.cs" />
+    <Compile Include="clsDoctorCollection.cs" />
     <Compile Include="clsMedicalRecords.cs" />
     <Compile Include="clsPatient.cs" />
     <Compile Include="clsPatientCollection.cs" />

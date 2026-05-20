@@ -25,14 +25,14 @@
         <asp:TextBox ID="txtRoomNumber" runat="server" style="z-index: 1; left: 143px; top: 110px; position: absolute"></asp:TextBox>
         <asp:Label ID="lblWardLocation" runat="server" style="z-index: 1; left: 29px; top: 143px; position: absolute" Text="Ward Location"></asp:Label>
         <asp:DropDownList ID="listWardLocation" runat="server" style="z-index: 1; left: 145px; top: 144px; position: absolute">
-            <asp:ListItem Text="General" Value="General"></asp:ListItem>
-            <asp:ListItem Text="Pediatric" Value="Pediatric"></asp:ListItem>
-            <asp:ListItem Text="Intensive Care Unit" Value="Intensive Care Unit"></asp:ListItem>
+            <asp:ListItem Value="General">General</asp:ListItem>
+            <asp:ListItem Value="Pediatric">Pediatric</asp:ListItem>
+            <asp:ListItem Value="Intensive Care Unit">Intensive Care Unit</asp:ListItem>
         </asp:DropDownList>
         <asp:Label ID="lblBedType" runat="server" style="z-index: 1; left: 30px; top: 171px; position: absolute" Text="Bed Type"></asp:Label>
         <asp:DropDownList ID="listBedType" runat="server" style="z-index: 1; left: 147px; top: 175px; position: absolute">
-            <asp:ListItem Text="General" Value="General"></asp:ListItem>
-            <asp:ListItem Text="Heavy" Value="Heavy"></asp:ListItem>
+            <asp:ListItem Value="General">General</asp:ListItem>
+            <asp:ListItem Value="Heavy">Heavy</asp:ListItem>
         </asp:DropDownList>
         <p>
             <asp:CheckBox ID="chckbxDisabilityAccessible" runat="server" style="z-index: 1; left: 26px; top: 206px; position: absolute" Text="Disability Accessible" />
@@ -42,9 +42,9 @@
         </p>
         <asp:Label ID="lblHygieneStatus" runat="server" style="z-index: 1; left: 29px; top: 239px; position: absolute" Text="Hygiene Status"></asp:Label>
         <asp:DropDownList ID="listHygieneStatus" runat="server" style="z-index: 1; left: 143px; top: 239px; position: absolute">
-            <asp:ListItem Text="Available" Value="Available"></asp:ListItem>
-            <asp:ListItem Text="In Reprocessing" Value="In Reprocessing"></asp:ListItem>
-            <asp:ListItem Text="Occupied" Value="Occupied"></asp:ListItem>
+            <asp:ListItem Value="Available">Available</asp:ListItem>
+            <asp:ListItem Value="In Reprocessing">In Reprocessing</asp:ListItem>
+            <asp:ListItem Value="Occupied">Occupied</asp:ListItem>
         </asp:DropDownList>
         <p>
 &nbsp;&nbsp;&nbsp;

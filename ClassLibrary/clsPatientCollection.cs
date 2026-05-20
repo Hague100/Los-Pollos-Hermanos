@@ -6,8 +6,9 @@ namespace ClassLibrary
     public class clsPatientCollection
     {
         List<clsPatient> mPatientList = new List<clsPatient>();
+        clsPatient mThisPatient = new clsPatient();
 
-        public List<clsPatient> patientList
+        public List<clsPatient> PatientList
         {
             get
             {
@@ -19,11 +20,11 @@ namespace ClassLibrary
             }
         }
 
-        public int count
+        public int Count
         {
             get
             {
-                return patientList.Count;
+                return PatientList.Count;
             }
             set
             {
@@ -31,20 +32,29 @@ namespace ClassLibrary
             }
         }
 
-        public clsPatient thisPatient { get; set; }
-
+        public clsPatient ThisPatient 
+        { 
+            get
+            {
+                return mThisPatient;
+            }
+            set
+            {
+                mThisPatient = value;
+            } 
+        }
+        //constructor
         public clsPatientCollection()
         {
             //variable for the index
             Int32 Index = 0;
-            //variable to store the record count
-            Int32 RecordCount = 0;
             //object for the new data connect
             clsDataConnection DB = new clsDataConnection();
             //execute stored procedure
             DB.Execute("sproc_tblPatients_SelectAll");
+            //variable to store the record count
             //get count of records
-            RecordCount = DB.Count;
+            int RecordCount = DB.Count;
             //While there are records to process
             while (Index < RecordCount)
             {
@@ -55,13 +65,46 @@ namespace ClassLibrary
                 aPatient.pEmail = Convert.ToString(DB.DataTable.Rows[Index]["PEmail"]);
                 aPatient.pDOB = Convert.ToDateTime(DB.DataTable.Rows[Index]["PDOB"]);
                 aPatient.pHomeAdd = Convert.ToString(DB.DataTable.Rows[Index]["PHomeAdd"]);
-                aPatient.pAccessReq = Convert.ToBoolean(DB.DataTable.Rows[Index]["PAccessReq"]);
-                aPatient.pMainDocId = Convert.ToInt32(DB.DataTable.Rows[Index]["PMainDocId"]);
+                aPatient.pAccessReq = DB.DataTable.Rows[Index]["PAccessReq"] != DBNull.Value ?
+                    Convert.ToBoolean(DB.DataTable.Rows[Index]["PAccessReq"]): false;
+                aPatient.pMainDocId = DB.DataTable.Rows[Index]["PMainDocId"] != DBNull.Value ?
+                    Convert.ToInt32(DB.DataTable.Rows[Index]["PMainDocId"]) : (int?)null;
                 //add the record to the private data member
                 mPatientList.Add(aPatient);
                 //point at the next record
                 Index++;
             }
+        }
+
+        public int Add()
+        {
+            clsDataConnection dB = new clsDataConnection();
+            //set the parameters for the stored procedure
+            dB.AddParameter("@PName", mThisPatient.pName);
+            dB.AddParameter("@PEmail", mThisPatient.pEmail);
+            dB.AddParameter("@PDOB", mThisPatient.pDOB);
+            dB.AddParameter("@PHomeAdd", mThisPatient.pHomeAdd);
+            dB.AddParameter("@PAccessReq",  mThisPatient.pAccessReq);
+            dB.AddParameter("@PMainDocId", mThisPatient.pMainDocId != null ?
+                (object)mThisPatient.pMainDocId : DBNull.Value);
+
+            return dB.Execute("sproc_tblPatient_Insert");
+        }
+
+        public void Update()
+        {
+            clsDataConnection dB = new clsDataConnection();
+            //set the parameters for the stored procedure
+            dB.AddParameter("@PatientId", mThisPatient.patientId);
+            dB.AddParameter("@PName", mThisPatient.pName);
+            dB.AddParameter("@PEmail", mThisPatient.pEmail);
+            dB.AddParameter("@PDOB", mThisPatient.pDOB);
+            dB.AddParameter("@PHomeAdd", mThisPatient.pHomeAdd);
+            dB.AddParameter("@PAccessReq", mThisPatient.pAccessReq);
+            dB.AddParameter("@PMainDocId", mThisPatient.pMainDocId != null ?
+                (object)mThisPatient.pMainDocId : DBNull.Value);
+
+            dB.Execute("sproc_tblPatient_Update");
         }
     }
 }
