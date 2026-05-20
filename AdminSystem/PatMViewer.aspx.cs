@@ -10,16 +10,14 @@ public partial class _1Viewer : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //create a new instance of clsPatient
-        clsPatient aPatient = new clsPatient();
         //get data from session object
-        aPatient = (clsPatient)Session["aPatient"];
+        clsPatient aPatient = (clsPatient)Session["aPatient"];
         //display the patient name for this entry
-        Response.Write("Name: " + aPatient.pName);
-        Response.Write("<br/>Email: " + aPatient.pEmail);
-        Response.Write("<br/>DOB: " + aPatient.pDOB);
-        Response.Write("<br/>Home Address" + aPatient.pHomeAdd);
-        Response.Write("<br/>Main Doctor ID: " + aPatient.pMainDocId);
-        Response.Write("<br/>Access Requirments: " + aPatient.pAccessReq);
+        Response.Write("Name: " + aPatient.PName);
+        Response.Write("<br/>Email: " + aPatient.PEmail);
+        Response.Write("<br/>DOB: " + aPatient.PDOB);
+        Response.Write("<br/>Home Address" + aPatient.PHomeAdd);
+        Response.Write("<br/>Main Doctor ID: " + aPatient.PMainDocId);
+        Response.Write("<br/>Access Requirments: " + aPatient.PAccessReq);
     }
 }

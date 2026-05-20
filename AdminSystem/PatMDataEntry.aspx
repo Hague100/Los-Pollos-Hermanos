@@ -14,7 +14,7 @@
 <body style="height: 380px">
     <form id="form1" runat="server">
         <asp:Label ID="lblPatientId" runat="server" style="z-index: 1; left: 15px; top: 32px; position: absolute; right: 1182px;" Text="Patient ID" width="126px"></asp:Label>
-        <asp:TextBox ID="txtPatientId" runat="server" style="z-index: 1; left: 147px; top: 29px; position: absolute; margin-bottom: 0px" OnTextChanged="txtPatientId_TextChanged"></asp:TextBox>
+        <asp:TextBox ID="txtPatientId" runat="server" style="z-index: 1; left: 147px; top: 29px; position: absolute; margin-bottom: 0px"></asp:TextBox>
         <asp:Label ID="lblPName" runat="server" style="z-index: 1; left: 15px; top: 59px; position: absolute" Text="Name" width="126px"></asp:Label>
         <asp:TextBox ID="txtPName" runat="server" style="z-index: 1; left: 147px; top: 56px; position: absolute"></asp:TextBox>
         <asp:Label ID="lblPEmail" runat="server" style="z-index: 1; left: 15px; top: 83px; position: absolute" Text="Email" width="126px"></asp:Label>

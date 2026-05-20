@@ -13,7 +13,7 @@ namespace ClassLibrary
         private bool mPAccessReq;
         private int? mPMainDocId;
         //patientId public property
-        public Int32 patientId
+        public Int32 PatientId
         {
             get
             {
@@ -26,7 +26,7 @@ namespace ClassLibrary
                 mPatientId = value;
             }
         }
-        public string pName
+        public string PName
         {
             get
             {
@@ -37,7 +37,7 @@ namespace ClassLibrary
                 mPName = value;
             }
         }
-        public string pEmail
+        public string PEmail
         {
             get
             {
@@ -48,7 +48,7 @@ namespace ClassLibrary
                 mPEmail = value;
             }
         }
-        public DateTime pDOB
+        public DateTime PDOB
         {
             get
             {
@@ -59,7 +59,7 @@ namespace ClassLibrary
                 mPDOB = value;
             }
         }
-        public string pHomeAdd
+        public string PHomeAdd
         {
             get
             {
@@ -70,7 +70,7 @@ namespace ClassLibrary
                 mPHomeAdd = value;
             }
         }
-        public bool pAccessReq
+        public bool PAccessReq
         {
             get
             {
@@ -81,7 +81,7 @@ namespace ClassLibrary
                 mPAccessReq = value;
             }
         }
-        public int? pMainDocId
+        public int? PMainDocId
         {
             get
             {
@@ -96,23 +96,23 @@ namespace ClassLibrary
         public bool Find(int patientId)
         {
             //create an instance if the data connection
-            clsDataConnection DB = new clsDataConnection();
+            clsDataConnection dB = new clsDataConnection();
             //add the param for new patient id to search for
-            DB.AddParameter("@PatientId", patientId);
+            dB.AddParameter("@PatientId", patientId);
             //execute stored procedure
-            DB.Execute("sproc_tblPatient_FilterByPatientId");
+            dB.Execute("sproc_tblPatient_FilterByPatientId");
             //if one record is found(should be 1 or 0)
-            if (DB.Count == 1)
+            if (dB.Count == 1)
             {
                 //coppy the data from the database to the private data members
-                mPatientId = Convert.ToInt32(DB.DataTable.Rows[0]["PatientId"]);
-                mPName = Convert.ToString(DB.DataTable.Rows[0]["PName"]);
-                mPEmail = Convert.ToString(DB.DataTable.Rows[0]["PEmail"]);
-                mPDOB = Convert.ToDateTime(DB.DataTable.Rows[0]["PDOB"]);
-                mPHomeAdd = Convert.ToString(DB.DataTable.Rows[0]["PHomeAdd"]);
-                mPAccessReq = Convert.ToBoolean(DB.DataTable.Rows[0]["PAccessReq"]);
-                mPMainDocId = DB.DataTable.Rows[0]["PMainDocId"] != DBNull.Value ?
-                    Convert.ToInt32(DB.DataTable.Rows[0]["PMainDocId"]) : (int?)null;
+                mPatientId = Convert.ToInt32(dB.DataTable.Rows[0]["PatientId"]);
+                mPName = Convert.ToString(dB.DataTable.Rows[0]["PName"]);
+                mPEmail = Convert.ToString(dB.DataTable.Rows[0]["PEmail"]);
+                mPDOB = Convert.ToDateTime(dB.DataTable.Rows[0]["PDOB"]);
+                mPHomeAdd = Convert.ToString(dB.DataTable.Rows[0]["PHomeAdd"]);
+                mPAccessReq = dB.DataTable.Rows[0]["PAccessReq"] != DBNull.Value && Convert.ToBoolean(dB.DataTable.Rows[0]["PAccessReq"]);
+                mPMainDocId = dB.DataTable.Rows[0]["PMainDocId"] != DBNull.Value ?
+                    Convert.ToInt32(dB.DataTable.Rows[0]["PMainDocId"]) : (int?)null;
                 return true;
             }
             //if no record was found
@@ -125,25 +125,25 @@ namespace ClassLibrary
         public string Valid(string patientName, string email, string address, string dateOfBirthStr, string drIdStr)
         {
             //create a string variable to store the error
-            String Error = "";
+            String error = "";
             //if the patientName is blank
             if (patientName.Length == 0)
             {
                 //record error
-                Error += "The patient name may not be blank : ";
+                error += "The patient name may not be blank : ";
             }
             if(patientName.Length > 100)
             {
                 //record error
-                Error += "The patient name may not be more than 100 char: ";
+                error += "The patient name may not be more than 100 char: ";
             }
             if (email.Length > 255)
             {
-                Error += "The email may not be more than 255 char: ";
+                error += "The email may not be more than 255 char: ";
             }
             if (address.Length > 125)
             {
-                Error += "The address may not be more than 125 char: ";
+                error += "The address may not be more than 125 char: ";
             }
 
             try
@@ -151,18 +151,18 @@ namespace ClassLibrary
                 DateTime dateOfBirth = Convert.ToDateTime(dateOfBirthStr);
                 if (dateOfBirth < Convert.ToDateTime("01/01/1884"))
                 {
-                    Error += "The dateOfBirth may not be before 01/01/1884: ";
+                    error += "The dateOfBirth may not be before 01/01/1884: ";
                 }
 
                 if (dateOfBirth > DateTime.Now.Date)
                 {
-                    Error += "The dateOfBirth may be after todays date: ";
+                    error += "The dateOfBirth may be after todays date: ";
                 }
 
-            }
+            }   
             catch 
             {
-                Error += "The date was not a valid date: ";
+                error += "The date was not a valid date: ";
             }
 
             try
@@ -170,15 +170,15 @@ namespace ClassLibrary
                 Int32? drId = drIdStr.Trim().Length != 0 ? Convert.ToInt32(drIdStr) : (int?)null;
                 if (drId.HasValue && drId < 1)
                 {
-                    Error += "The doctor id have to be greater than 0 or not null: ";
+                    error += "The doctor id have to be greater than 0 or not null: ";
                 }
             }
             catch 
             {
-                Error += "The doctor Id is an invalid data type or greater than Int32 max: ";
+                error    += "The doctor Id is an invalid data type or greater than Int32 max: ";
             }
             //return error message
-            return Error;
+            return error;
         }
     }
 }
