@@ -24,7 +24,7 @@ namespace ClassLibrary
         {
             get
             {
-                return PatientList.Count;
+                return mPatientList.Count;
             }
             set
             {
@@ -46,34 +46,12 @@ namespace ClassLibrary
         //constructor
         public clsPatientCollection()
         {
-            //variable for the index
-            Int32 Index = 0;
             //object for the new data connect
-            clsDataConnection DB = new clsDataConnection();
+            clsDataConnection dB = new clsDataConnection();
             //execute stored procedure
-            DB.Execute("sproc_tblPatients_SelectAll");
-            //variable to store the record count
-            //get count of records
-            int RecordCount = DB.Count;
-            //While there are records to process
-            while (Index < RecordCount)
-            {
-                //create blank address
-                clsPatient aPatient = new clsPatient();
-                aPatient.patientId = Convert.ToInt32(DB.DataTable.Rows[Index]["PatientId"]);
-                aPatient.pName = Convert.ToString(DB.DataTable.Rows[Index]["PName"]);
-                aPatient.pEmail = Convert.ToString(DB.DataTable.Rows[Index]["PEmail"]);
-                aPatient.pDOB = Convert.ToDateTime(DB.DataTable.Rows[Index]["PDOB"]);
-                aPatient.pHomeAdd = Convert.ToString(DB.DataTable.Rows[Index]["PHomeAdd"]);
-                aPatient.pAccessReq = DB.DataTable.Rows[Index]["PAccessReq"] != DBNull.Value ?
-                    Convert.ToBoolean(DB.DataTable.Rows[Index]["PAccessReq"]): false;
-                aPatient.pMainDocId = DB.DataTable.Rows[Index]["PMainDocId"] != DBNull.Value ?
-                    Convert.ToInt32(DB.DataTable.Rows[Index]["PMainDocId"]) : (int?)null;
-                //add the record to the private data member
-                mPatientList.Add(aPatient);
-                //point at the next record
-                Index++;
-            }
+            dB.Execute("sproc_tblPatients_SelectAll");
+            //populate the array list with the data table
+            PopulateArray(dB);
         }
 
         public int Add()
@@ -116,6 +94,44 @@ namespace ClassLibrary
             dB.AddParameter("@PatientId", mThisPatient.patientId);
             //execute the stored procedure
             dB.Execute("sproc_tblPatients_Delete");
+        }
+
+        public void ReportByName(string pName)
+        {
+            //filters the records based on a full or partial name
+            clsDataConnection dB = new clsDataConnection();
+            dB.AddParameter("@PName", pName);
+            dB.Execute("sproc_tblPatients_FilterByName");
+            //populate the array list the data table
+            PopulateArray(dB);
+        }
+
+        void PopulateArray(clsDataConnection dB)
+        {
+            //variable for the index
+            int Index = 0;
+            //variable to store the record 
+            int RecordCount = dB.Count;
+            //While there are records to process
+            mPatientList = new List<clsPatient>();
+            while (Index < RecordCount)
+            {
+                //create blank address
+                clsPatient aPatient = new clsPatient();
+                aPatient.patientId = Convert.ToInt32(dB.DataTable.Rows[Index]["PatientId"]);
+                aPatient.pName = Convert.ToString(dB.DataTable.Rows[Index]["PName"]);
+                aPatient.pEmail = Convert.ToString(dB.DataTable.Rows[Index]["PEmail"]);
+                aPatient.pDOB = Convert.ToDateTime(dB.DataTable.Rows[Index]["PDOB"]);
+                aPatient.pHomeAdd = Convert.ToString(dB.DataTable.Rows[Index]["PHomeAdd"]);
+                aPatient.pAccessReq = dB.DataTable.Rows[Index]["PAccessReq"] != DBNull.Value ?
+                    Convert.ToBoolean(dB.DataTable.Rows[Index]["PAccessReq"]) : false;
+                aPatient.pMainDocId = dB.DataTable.Rows[Index]["PMainDocId"] != DBNull.Value ?
+                    Convert.ToInt32(dB.DataTable.Rows[Index]["PMainDocId"]) : (int?)null;
+                //add the record to the private data member
+                mPatientList.Add(aPatient);
+                //point at the next record
+                Index++;
+            }
         }
     }
 }

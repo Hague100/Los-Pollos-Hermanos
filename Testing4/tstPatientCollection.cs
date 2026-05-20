@@ -182,5 +182,29 @@ namespace Testing4
             //now check if record is found
             Assert.IsFalse(allPatients.ThisPatient.Find(primaryKey)); 
         }
+
+        [TestMethod]
+
+        public void ReportByNameMethodOK()
+        {
+            //create a cls collection instance
+            clsPatientCollection allPatients = new clsPatientCollection();
+            //filter data
+            clsPatientCollection filteredPatients = new clsPatientCollection();
+            //apply a blank string to return all records
+            filteredPatients.ReportByName("");
+            //test to check are equal
+            Assert.AreEqual(allPatients.Count, filteredPatients.Count);
+        }
+
+        [TestMethod]
+
+        public void ReportByNameNoneFound()
+        {
+            clsPatientCollection filteredPatients = new clsPatientCollection();
+            filteredPatients.ReportByName("xxx xxx");
+            //test to see that there are no records
+            Assert.AreEqual(0, filteredPatients.Count);
+        }
     }
 }
