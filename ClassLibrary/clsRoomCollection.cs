@@ -6,6 +6,9 @@ namespace ClassLibrary
     public class clsRoomCollection
     {
         List<clsRoom> mRoomsList = new List<clsRoom>();
+
+        clsRoom mThisRoom = new clsRoom();
+
         public List<clsRoom> RoomList
         {
 
@@ -33,7 +36,17 @@ namespace ClassLibrary
             }
         
         }
-        public clsRoom ThisRoom { get; set; }
+        public clsRoom ThisRoom 
+        { 
+            get
+            {
+                return mThisRoom;
+            }
+            set 
+            {
+                mThisRoom = value;
+            }
+        }
 
         public clsRoomCollection()
         {
@@ -66,5 +79,21 @@ namespace ClassLibrary
             }
         }
 
+        public int Add()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@FloorNumber", mThisRoom.FloorNumber);
+            DB.AddParameter("@RoomNumber", mThisRoom.RoomNumber);
+            DB.AddParameter("@WardLocation", mThisRoom.WardLocation);
+            DB.AddParameter("@BedType", mThisRoom.BedType);
+            DB.AddParameter("@DisabilityAccess", mThisRoom.DisabilityAccessible);
+            DB.AddParameter("@HygieneStatus", mThisRoom.HygieneStatus);
+            DB.AddParameter("@Inspected", mThisRoom.Inspected);
+            DB.AddParameter("@Maintained", mThisRoom.Maintained);
+            DB.AddParameter("@LastDateCleaned", mThisRoom.LastDateCleaned);
+
+            return DB.Execute("sproc_tblRoom_Insert");
+        }
     }
 }

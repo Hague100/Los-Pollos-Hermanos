@@ -154,13 +154,14 @@ namespace ClassLibrary
             }
         }
 
-        public string Valid(String WardLocation,
-                            String BedType,
-                            String HygieneStatus,
-                            String LastDateCleaned)
+        public string Valid(string WardLocation,
+                            string BedType,
+                            string HygieneStatus,
+                            string LastDateCleaned)
         {
-            String error = "";
+            string error = "";
             DateTime DateTemp;
+            DateTime PastMinDate;
 
             switch (WardLocation)
             {
@@ -171,7 +172,7 @@ namespace ClassLibrary
                 case "Intensive Care Unit":
                     break;
                 default:
-                    error += "\nWard Location is not valid";
+                    error += "Ward Location is not valid, ";
                     break;
             }
 
@@ -182,7 +183,7 @@ namespace ClassLibrary
                 case "Heavy":
                     break;
                 default:
-                    error += "\nBed Type is not valid";
+                    error += "Bed Type is not valid, ";
                     break;
             }
 
@@ -195,24 +196,33 @@ namespace ClassLibrary
                 case "In Reprocessing":
                     break;
                 default:
-                    error += "\nHygiene Status is not valid";
+                    error += "Hygiene Status is not valid, ";
                     break;
             }
 
             try 
             { 
             
+                
+
                 DateTemp = Convert.ToDateTime(LastDateCleaned);
+                PastMinDate = Convert.ToDateTime("01/04/2026 00:00:00");
                 if (DateTemp > DateTime.Now.Date)
                 {
-                    error += "\nLast Date Cleaned cannot be in the future";
+                    error += "Last Date Cleaned cannot be in the future, ";
+                }
+                if (DateTemp < PastMinDate)
+                {
+                    error = error + "Last Date Cleaned cannot be too far in the past, ";
                 }
 
             }
             catch 
             {
-                error += "\nIncorrect";
+                error += "Incorrect, ";
             }
+
+            System.Diagnostics.Debug.WriteLine("Errors: " + error);
             return error;
         }
     }
