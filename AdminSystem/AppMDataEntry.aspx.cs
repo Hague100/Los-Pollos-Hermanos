@@ -8,23 +8,61 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    //variable to store the primary key value of the record to be processed
+    Int32 AppointmentNumber;
+
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        //get the number of the appointment to be processed
+        AppointmentNumber = Convert.ToInt32(Session["AppointmentNumber"]);
+        //if this is the first time the page is displayed
+        if (IsPostBack == false)
+        {
+            System.Diagnostics.Debug.WriteLine("AppNum: " + AppointmentNumber);
+            //if we are not adding a new record
+            if (AppointmentNumber != -1)
+            {
+                //display the current data for the record
+                DisplayAppointments();
+            }
+        }
     }
+
+    void DisplayAppointments()
+    {
+        //create an instance of the appointment book
+        clsAppointments AnAppointment = new clsAppointments();
+        //find the record to update
+        AnAppointment.Find(AppointmentNumber);
+        //display the data for this record
+        txtAppointmentNumber.Text = AnAppointment.AppointmentNumber.ToString();
+        txtFirstName.Text = AnAppointment.PatientFirstName;
+        txtLastName.Text = AnAppointment.PatientLastName;
+        calAppointmentDate.SelectedDate = AnAppointment.DateOfAppointment;
+        txtAppointmentTime.Text = AnAppointment.TimeOfAppointment.ToString();
+        txtNotes.Text = AnAppointment.Notes;
+        chkEmergency.Checked = AnAppointment.EmergencyAppointment;
+    }
+
     protected void btnOK_Click(object sender, EventArgs e)
     {
         //create a new instance of clsAppointments
         clsAppointments AnAppointment = new clsAppointments();
+        //(temporarily) set Doctor ID
+        AnAppointment.DoctorID = 1;
         //capture the patient first name
         AnAppointment.PatientFirstName = txtFirstName.Text;
         //capture the patient last name
         AnAppointment.PatientLastName = txtLastName.Text;
-        //capture the date of appointment
-        AnAppointment.DateOfAppointment = Convert.ToDateTime(calAppointmentDate.SelectedDate);
         //capture the time of appointment
         string[] timeSplit = txtAppointmentTime.Text.Split(':');
         AnAppointment.TimeOfAppointment = new TimeSpan(Convert.ToInt32(timeSplit[0]), Convert.ToInt32(timeSplit[1]), Convert.ToInt32(timeSplit[2]));
+        //capture the date of appointment
+        AnAppointment.DateOfAppointment = Convert.ToDateTime(calAppointmentDate.SelectedDate).Add(AnAppointment.TimeOfAppointment);
+        //(temporarily) set floor number
+        AnAppointment.FloorNumber = 1;
+        //(temprarily) set room number
+        AnAppointment.RoomNumber = 1;
         //capture appointment notes
         AnAppointment.Notes = txtNotes.Text;
         //capture emergency 
@@ -33,13 +71,33 @@ public partial class _1_DataEntry : System.Web.UI.Page
         string Error = "";
         //validate the data
         Error = AnAppointment.Valid(AnAppointment.PatientFirstName, AnAppointment.PatientLastName, AnAppointment.DateOfAppointment.ToString(), AnAppointment.TimeOfAppointment.ToString(), "1", "1", AnAppointment.Notes, AnAppointment.EmergencyAppointment);
+        System.Diagnostics.Debug.WriteLine("Error: ");
         //if the data is valid
         if (Error == "")
         {
-            //store the appointment in the session object
-            Session["AnAppointment"] = AnAppointment;
+            //create an instance of the appointment collection
+            clsAppointmentsCollection AppointmentsList = new clsAppointmentsCollection();
+            //if this is a new record i.e. AppointmentNumber = -1 then add the data
+            if (AppointmentNumber == -1)
+            {
+                //set ThisAppointment to the appointment to be added
+                AppointmentsList.ThisAppointment = AnAppointment;
+                //add the appointment
+                AppointmentsList.Add();
+            }
+            //otherwise it must be an update
+            else
+            {
+                //find the record to update
+                AppointmentsList.ThisAppointment.Find(AppointmentNumber);
+                //set ThisAppointment to the appointment to be updated
+                AppointmentsList.ThisAppointment = AnAppointment;
+                //update the record
+                AppointmentsList.Update();
+            }
+            System.Diagnostics.Debug.WriteLine("Redirected");
             //navigate to view page
-            Response.Redirect("AppMViewer.aspx");
+            Response.Redirect("AppMList.aspx");
         } else
         {
             //display the error message
@@ -62,10 +120,19 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //if found
         if (Found == true)
         {
+            //create connection to patient DB
+            clsDataConnection DB = new clsDataConnection();
+            //add the parameters for the patient name
+            DB.AddParameter("@FirstName", AnAppointment.PatientFirstName);
+            DB.AddParameter("@LastName", AnAppointment.PatientLastName);
+            //execute the stored procedure to find the patient name
+            DB.Execute("sproc_tblAppointments_GetPatientByName");
             //display the values of the properties in the form
-            txtFirstName.Text = AnAppointment.PatientFirstName;
-            txtLastName.Text = AnAppointment.PatientLastName;
-            calAppointmentDate.SelectedDate = AnAppointment.DateOfAppointment;
+            txtFirstName.Text = Convert.ToString(DB.DataTable.Rows[0]["PName"]).Split(' ')[0];
+            txtLastName.Text = Convert.ToString(DB.DataTable.Rows[0]["PName"]).Split(' ')[1];
+            calAppointmentDate.Style["display"] = "none";
+            txtAppointmentDate.Style["display"] = "block";
+            txtAppointmentDate.Text = Convert.ToString(AnAppointment.DateOfAppointment);
             txtAppointmentTime.Text = AnAppointment.TimeOfAppointment.ToString();
             txtNotes.Text = AnAppointment.Notes;
             chkEmergency.Checked = AnAppointment.EmergencyAppointment;

@@ -11,7 +11,7 @@ namespace ClassLibrary
         private DateTime mPDOB;
         private string mPHomeAdd;
         private bool mPAccessReq;
-        private int mPMainDocId;
+        private int? mPMainDocId;
         //patientId public property
         public Int32 patientId
         {
@@ -81,7 +81,7 @@ namespace ClassLibrary
                 mPAccessReq = value;
             }
         }
-        public int pMainDocId
+        public int? pMainDocId
         {
             get
             {
@@ -111,7 +111,8 @@ namespace ClassLibrary
                 mPDOB = Convert.ToDateTime(DB.DataTable.Rows[0]["PDOB"]);
                 mPHomeAdd = Convert.ToString(DB.DataTable.Rows[0]["PHomeAdd"]);
                 mPAccessReq = Convert.ToBoolean(DB.DataTable.Rows[0]["PAccessReq"]);
-                mPMainDocId = Convert.ToInt32(DB.DataTable.Rows[0]["PMainDocId"]);
+                mPMainDocId = DB.DataTable.Rows[0]["PMainDocId"] != DBNull.Value ?
+                    Convert.ToInt32(DB.DataTable.Rows[0]["PMainDocId"]) : (int?)null;
                 return true;
             }
             //if no record was found
@@ -121,7 +122,7 @@ namespace ClassLibrary
             }
         }
 
-        public string Valid(string patientName, string email, string address, DateTime dateOfBirth, int drId, bool acessibilityReq)
+        public string Valid(string patientName, string email, string address, string dateOfBirthStr, string drIdStr)
         {
             //create a string variable to store the error
             String Error = "";
@@ -130,6 +131,51 @@ namespace ClassLibrary
             {
                 //record error
                 Error += "The patient name may not be blank : ";
+            }
+            if(patientName.Length > 100)
+            {
+                //record error
+                Error += "The patient name may not be more than 100 char: ";
+            }
+            if (email.Length > 255)
+            {
+                Error += "The email may not be more than 255 char: ";
+            }
+            if (address.Length > 125)
+            {
+                Error += "The address may not be more than 125 char: ";
+            }
+
+            try
+            {
+                DateTime dateOfBirth = Convert.ToDateTime(dateOfBirthStr);
+                if (dateOfBirth < Convert.ToDateTime("01/01/1884"))
+                {
+                    Error += "The dateOfBirth may not be before 01/01/1884: ";
+                }
+
+                if (dateOfBirth > DateTime.Now.Date)
+                {
+                    Error += "The dateOfBirth may be after todays date: ";
+                }
+
+            }
+            catch 
+            {
+                Error += "The date was not a valid date: ";
+            }
+
+            try
+            {
+                Int32? drId = drIdStr.Trim().Length != 0 ? Convert.ToInt32(drIdStr) : (int?)null;
+                if (drId.HasValue && drId < 1)
+                {
+                    Error += "The doctor id have to be greater than 0 or not null: ";
+                }
+            }
+            catch 
+            {
+                Error += "The doctor Id is an invalid data type or greater than Int32 max: ";
             }
             //return error message
             return Error;
