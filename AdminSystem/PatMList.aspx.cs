@@ -60,4 +60,49 @@ public partial class _1_List : System.Web.UI.Page
             lblError.Text = "Please select a record from the list to edit";
         }
     }
+
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        int patientId;
+        //if a record has been selected from the list
+        if (lstPatientList.SelectedIndex != -1)
+        {
+            //get the pkey value of the record
+            patientId = Convert.ToInt32(lstPatientList.SelectedValue);
+            //store the data in the session obj
+            Session["PatientId"] = patientId;
+            //redirect to the delete page
+            Response.Redirect("PatMConfirmDelete.aspx");
+        }
+        else
+        {
+            lblError.Text = "Please select a record from the list to delete";
+        }
+    }
+
+    protected void btnApplyFilter_Click(object sender, EventArgs e)
+    {
+        clsPatientCollection patientCollection = new clsPatientCollection();
+        patientCollection.ReportByName(txtFilter.Text);
+        lstPatientList.DataSource = patientCollection.PatientList;
+        //set name of the pk
+        lstPatientList.DataValueField = "PatientId";
+        //set name of field to display
+        lstPatientList.DataTextField = "PName";
+        lstPatientList.DataBind();
+
+    }
+
+    protected void btnClearFilter_Click(object sender, EventArgs e)
+    {
+        clsPatientCollection patientCollection = new clsPatientCollection();
+        txtFilter.Text = "";
+        //set data source
+        lstPatientList.DataSource = patientCollection.PatientList;
+        //set name of the pk
+        lstPatientList.DataValueField = "PatientId";
+        //set name of field to display
+        lstPatientList.DataTextField = "PName";
+        lstPatientList.DataBind();
+    }
 }

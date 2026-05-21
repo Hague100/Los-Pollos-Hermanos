@@ -26,13 +26,13 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         clsPatientCollection aPatientCollection = new clsPatientCollection();
         aPatientCollection.ThisPatient.Find(PatientId);
-        txtPatientId.Text = aPatientCollection.ThisPatient.patientId.ToString();
-        txtPName.Text = aPatientCollection.ThisPatient.pName;
-        txtPEmail.Text = aPatientCollection.ThisPatient.pEmail;
-        txtPDOB.Text = aPatientCollection.ThisPatient.pDOB.ToString();
-        txtPHomeAdd.Text = aPatientCollection.ThisPatient.pHomeAdd;
-        txtPMainDocId.Text = aPatientCollection.ThisPatient.pMainDocId.ToString();
-        chkPAccessReq.Checked = aPatientCollection.ThisPatient.pAccessReq;
+        txtPatientId.Text = aPatientCollection.ThisPatient.PatientId.ToString();
+        txtPName.Text = aPatientCollection.ThisPatient.PName;
+        txtPEmail.Text = aPatientCollection.ThisPatient.PEmail;
+        txtPDOB.Text = aPatientCollection.ThisPatient.PDOB.ToString();
+        txtPHomeAdd.Text = aPatientCollection.ThisPatient.PHomeAdd;
+        txtPMainDocId.Text = aPatientCollection.ThisPatient.PMainDocId.ToString();
+        chkPAccessReq.Checked = aPatientCollection.ThisPatient.PAccessReq;
 
     }
 
@@ -47,26 +47,24 @@ public partial class _1_DataEntry : System.Web.UI.Page
         string pHomeAdd = txtPHomeAdd.Text;
         string pMainDocId = txtPMainDocId.Text;
         string pAccessReq = chkPAccessReq.Text;
-        //variable for error messages
-        string Error = "";
         //validate data
-        Error = aPatient.Valid(pName, pEmail, pHomeAdd, pDOB, pMainDocId);
+        string error = aPatient.Valid(pName, pEmail, pHomeAdd, pDOB, pMainDocId);
         
-        if (Error == "")
+        if (error == "")
         {
 
-            aPatient.patientId = Convert.ToInt32(patientId);
+            if (patientId != "") { aPatient.PatientId = Convert.ToInt32(patientId); }
             //capture the name 
-            aPatient.pName = pName;
+            aPatient.PName = pName;
             //email
-            aPatient.pEmail = pEmail;
+            aPatient.PEmail = pEmail;
             //dob
-            aPatient.pDOB = Convert.ToDateTime(pDOB);
+            aPatient.PDOB = Convert.ToDateTime(pDOB);
             //home address
-            aPatient.pHomeAdd = pHomeAdd;
+            aPatient.PHomeAdd = pHomeAdd;
             //Main doctor id
-            aPatient.pMainDocId = pMainDocId.Trim().Length != 0 ? Convert.ToInt32(pMainDocId) : (int?)null;
-            aPatient.pAccessReq = chkPAccessReq.Checked;
+            aPatient.PMainDocId = pMainDocId.Trim().Length != 0 ? Convert.ToInt32(pMainDocId) : (int?)null;
+            aPatient.PAccessReq = chkPAccessReq.Checked;
 
             //collection instance 
             clsPatientCollection aPatientCollection = new clsPatientCollection();
@@ -91,10 +89,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
         else
         {
             //display the error message
-            lblError.Text = Error;
+            lblError.Text = error;
         }
             //Access requirements
-            aPatient.pAccessReq = chkPAccessReq.Checked;
+            aPatient.PAccessReq = chkPAccessReq.Checked;
     }
 
 
@@ -105,27 +103,22 @@ public partial class _1_DataEntry : System.Web.UI.Page
         clsPatient aPatient = new clsPatient();
         //create a variable to store a pk
         Int32 patientId;
-        //create a var to store result of the find opp
-        Boolean found = false;
         //get pk enterered by user
         patientId = Convert.ToInt32(txtPatientId.Text);
         //find record
-        found = aPatient.Find(patientId);
+        Boolean found = aPatient.Find(patientId);
         //if found
         if (found)
         {
             //display the values of the properties in the form
-            txtPName.Text = aPatient.pName;
-            txtPEmail.Text = aPatient.pEmail;
-            txtPDOB.Text = aPatient.pDOB.ToString();
-            txtPHomeAdd.Text = aPatient.pHomeAdd;
-            txtPMainDocId.Text = aPatient.pMainDocId.ToString();
-            chkPAccessReq.Checked = aPatient.pAccessReq;
+            txtPName.Text = aPatient.PName;
+            txtPEmail.Text = aPatient.PEmail;
+            txtPDOB.Text = aPatient.PDOB.ToString();
+            txtPHomeAdd.Text = aPatient.PHomeAdd;
+            txtPMainDocId.Text = aPatient.PMainDocId.ToString();
+            chkPAccessReq.Checked = aPatient.PAccessReq;
         }
     }
 
-    protected void txtPatientId_TextChanged(object sender, EventArgs e)
-    {
-
-    }
+    
 }

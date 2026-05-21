@@ -29,15 +29,17 @@ namespace Testing4
             List<clsPatient> testList = new List<clsPatient>();
             //add an itme to the list
             //create the item of test data
-            clsPatient testItem = new clsPatient();
-            //set its properties
-            testItem.patientId = 1;
-            testItem.pName = "Test Name";
-            testItem.pEmail = "test.email@test.com";
-            testItem.pDOB = Convert.ToDateTime("01/01/2000");
-            testItem.pHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA";
-            testItem.pAccessReq = true;
-            testItem.pMainDocId = 1;
+            clsPatient testItem = new clsPatient
+            {
+                //set its properties
+                PatientId = 1,
+                PName = "Test Name",
+                PEmail = "test.email@test.com",
+                PDOB = Convert.ToDateTime("01/01/2000"),
+                PHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA",
+                PAccessReq = true,
+                PMainDocId = 1
+            };
             //add the item to the test list
             testList.Add(testItem);
             //assign the data to the property
@@ -58,13 +60,13 @@ namespace Testing4
             clsPatient testPatient = new clsPatient
             {
                 //set its properties
-                patientId = 1,
-                pName = "Test Name",
-                pEmail = "test.email@test.com",
-                pDOB = Convert.ToDateTime("01/01/2000"),
-                pHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA",
-                pAccessReq = true,
-                pMainDocId = 1
+                PatientId = 1,
+                PName = "Test Name",
+                PEmail = "test.email@test.com",
+                PDOB = Convert.ToDateTime("01/01/2000"),
+                PHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA",
+                PAccessReq = true,
+                PMainDocId = 1
             };
             allPatients.ThisPatient = testPatient;
             Assert.AreEqual(allPatients.ThisPatient, testPatient);
@@ -84,13 +86,13 @@ namespace Testing4
             clsPatient testItem = new clsPatient
             {
                 //set its properties
-                patientId = 1,
-                pName = "Test Name",
-                pEmail = "test.email@test.com",
-                pDOB = Convert.ToDateTime("01/01/2000"),
-                pHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA",
-                pAccessReq = true,
-                pMainDocId = 1
+                PatientId = 1,
+                PName = "Test Name",
+                PEmail = "test.email@test.com",
+                PDOB = Convert.ToDateTime("01/01/2000"),
+                PHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA",
+                PAccessReq = true,
+                PMainDocId = 1
             };
             //add the item to the test list
             testList.Add(testItem);
@@ -107,19 +109,19 @@ namespace Testing4
             clsPatientCollection allPatients = new clsPatientCollection();
             clsPatient testItem = new clsPatient
             { 
-                pName = "Test Name",
-                pEmail = "test.email@test.com",
-                pDOB = Convert.ToDateTime("01/01/2000"),
-                pHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA",
-                pAccessReq = true,
-                pMainDocId = 1
+                PName = "Test Name",
+                PEmail = "test.email@test.com",
+                PDOB = Convert.ToDateTime("01/01/2000"),
+                PHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA",
+                PAccessReq = true,
+                PMainDocId = 1
             };
             //set ThisAddress to the test data
             allPatients.ThisPatient = testItem;
             //add the record
             int primaryKey = allPatients.Add();
             //set the primary key of the test data
-            testItem.patientId = primaryKey;
+            testItem.PatientId = primaryKey;
             //find the record
             allPatients.ThisPatient.Find(primaryKey);
             //test to see that the two values are the same
@@ -133,29 +135,95 @@ namespace Testing4
             clsPatientCollection allPatients = new clsPatientCollection();
             clsPatient testItem = new clsPatient
             { 
-                pName = "Test Name",
-                pEmail = "test.email@test.com",
-                pDOB = Convert.ToDateTime("01/01/2000"),
-                pHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA",
-                pAccessReq = true,
-                pMainDocId = 1
+                PName = "Test Name",
+                PEmail = "test.email@test.com",
+                PDOB = Convert.ToDateTime("01/01/2000"),
+                PHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA",
+                PAccessReq = true,
+                PMainDocId = 1
             };
             allPatients.ThisPatient = testItem;
             Int32 primaryKey = allPatients.Add();
-            testItem.patientId = primaryKey;
+            testItem.PatientId = primaryKey;
             //mod testItem
-            testItem.pName = "Test Name2";
-            testItem.pEmail = "test.email2@test.com";
-            testItem.pDOB = Convert.ToDateTime("02/01/2000");
-            testItem.pHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA";
-            testItem.pAccessReq = false;
-            testItem.pMainDocId = null;
+            testItem.PName = "Test Name2";
+            testItem.PEmail = "test.email2@test.com";
+            testItem.PDOB = Convert.ToDateTime("02/01/2000");
+            testItem.PHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA";
+            testItem.PAccessReq = false;
+            testItem.PMainDocId = null;
             allPatients.ThisPatient = testItem;
             //update record
             allPatients.Update();
             //find the record
             allPatients.ThisPatient.Find(primaryKey);
             Assert.AreEqual(allPatients.ThisPatient, testItem);
+        }
+
+        [TestMethod]
+
+        public void DeleteMethodOK()
+        {
+            clsPatientCollection allPatients = new clsPatientCollection();
+            clsPatient testItem = new clsPatient
+            {
+                PName = "Test Name",
+                PEmail = "test.email@test.com",
+                PDOB = Convert.ToDateTime("01/01/2000"),
+                PHomeAdd = "1TestStreet,TestCity,Testshire,TE11AA",
+                PAccessReq = true,
+                PMainDocId = 1
+            };
+            allPatients.ThisPatient = testItem;
+            int primaryKey = allPatients.Add();
+            testItem.PatientId = primaryKey;
+            //find record
+            allPatients.ThisPatient.Find(primaryKey);
+            //delete the record
+            allPatients.Delete();
+            //now check if record is found
+            Assert.IsFalse(allPatients.ThisPatient.Find(primaryKey)); 
+        }
+
+        [TestMethod]
+
+        public void ReportByNameMethodOK()
+        {
+            //create a cls collection instance
+            clsPatientCollection allPatients = new clsPatientCollection();
+            //filter data
+            clsPatientCollection filteredPatients = new clsPatientCollection();
+            //apply a blank string to return all records
+            filteredPatients.ReportByName("");
+            //test to check are equal
+            Assert.AreEqual(allPatients.Count, filteredPatients.Count);
+        }
+
+        [TestMethod]
+
+        public void ReportByNameNoneFound()
+        {
+            clsPatientCollection filteredPatients = new clsPatientCollection();
+            filteredPatients.ReportByName("xxx xxx");
+            //test to see that there are no records
+            Assert.AreEqual(0, filteredPatients.Count);
+        }
+
+        [TestMethod]
+
+        public void ReportByNameTestDataFound()
+        {
+            clsPatientCollection filteredPatients = new clsPatientCollection();
+            filteredPatients.ReportByName("Test Filter");
+            Boolean OK = false;
+            if (filteredPatients.Count == 2 &&
+                filteredPatients.PatientList[0].PatientId == 36 &&
+                filteredPatients.PatientList[1].PatientId == 37)
+            {
+                    OK = true;
+            }
+
+            Assert.IsTrue(OK);
         }
     }
 }
