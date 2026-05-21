@@ -32,11 +32,11 @@ public partial class _1_DataEntry : System.Web.UI.Page
         // find the record to update
         doctorCollection.thisDoctor.Find(doctorId);
         // display the data for the record
-        tbFirstName.Text = doctorCollection.thisDoctor.dFirstName.ToString();
-        tbLastName.Text = doctorCollection.thisDoctor.dLastName.ToString();
-        tbAddress.Text = doctorCollection.thisDoctor.dAddress.ToString();
-        tbEmail.Text = doctorCollection.thisDoctor.dEmail.ToString();
-        tbPHoneNumber.Text = doctorCollection.thisDoctor.dPhoneNumber.ToString();
+        tbFirstName.Text = doctorCollection.thisDoctor.dFirstName;
+        tbLastName.Text = doctorCollection.thisDoctor.dLastName;
+        tbAddress.Text = doctorCollection.thisDoctor.dAddress;
+        tbEmail.Text = doctorCollection.thisDoctor.dEmail;
+        tbPHoneNumber.Text = doctorCollection.thisDoctor.dPhoneNumber;
         cbAvailability.Checked = doctorCollection.thisDoctor.dAvailability;
     }
 
