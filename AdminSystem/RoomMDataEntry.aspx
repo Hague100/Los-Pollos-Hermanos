@@ -43,7 +43,7 @@
         <asp:Label ID="lblHygieneStatus" runat="server" style="z-index: 1; left: 29px; top: 239px; position: absolute" Text="Hygiene Status"></asp:Label>
         <asp:DropDownList ID="listHygieneStatus" runat="server" style="z-index: 1; left: 143px; top: 239px; position: absolute">
             <asp:ListItem Value="Available">Available</asp:ListItem>
-            <asp:ListItem Value="In Reprocessing">In Reprocessing</asp:ListItem>
+            <asp:ListItem Value="Reprocessing">Reprocessing</asp:ListItem>
             <asp:ListItem Value="Occupied">Occupied</asp:ListItem>
         </asp:DropDownList>
         <p>
