@@ -163,5 +163,40 @@ namespace Testing3
             // test to see that the two values are the same
             Assert.AreEqual(AllMedicalRecords.ThisMedicalRecord, TestItem);
         }
+
+        [TestMethod]
+        // create an instance of th class we want to create 
+        public void DeleteMethodOk()
+        {
+            // create an instance of the class we want to create
+            clsMedicalRecordCollection AllMedicalRecords = new clsMedicalRecordCollection();
+            // create the item of the test data 
+            clsMedicalRecords TestItem = new clsMedicalRecords();
+            // variable to store the primary key
+            Int32 PrimaryKey = 0;
+            // set the properties
+            TestItem.recordId = 1;
+            TestItem.patientId = 1;
+            TestItem.appID = 1;
+            TestItem.PendingApp = true;
+            TestItem.AppNotes = "Test Notes";
+            TestItem.doctorId = 1;
+            TestItem.Date = DateTime.Now.Date;
+            // set ThisMedicalRecord to the test data
+            AllMedicalRecords.ThisMedicalRecord = TestItem;
+            // add the record
+            PrimaryKey = AllMedicalRecords.Add();
+            // set the primary key of the test data
+            TestItem.recordId = PrimaryKey;
+            // find the record
+            AllMedicalRecords.ThisMedicalRecord.Find(PrimaryKey);
+            // delete the record
+            AllMedicalRecords.Delete();
+            // now find the record
+            Boolean Found = AllMedicalRecords.ThisMedicalRecord.Find(PrimaryKey);
+            // test to see that the record was not found
+            Assert.IsFalse(Found);
+
+        }
     }
 }
