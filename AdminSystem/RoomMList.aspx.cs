@@ -20,7 +20,7 @@ public partial class _1_List : System.Web.UI.Page
     void DisplayRooms()
     {
         clsRoomCollection allRooms = new clsRoomCollection();
-        var query = from rooms in allRooms.RoomList select new { CombinedNo = "FloorNumber." + rooms.FloorNumber + ".RoomNumber." + rooms.RoomNumber};
+        var query = from rooms in allRooms.RoomList select new { CombinedNo = "Room" + " " + rooms.FloorNumber + "0" + rooms.RoomNumber + " " + rooms.WardLocation + " Ward " + "Currently: " + rooms.HygieneStatus };
 
         lstRoomsList.DataSource = query;
 
@@ -39,21 +39,10 @@ public partial class _1_List : System.Web.UI.Page
 
     protected void EditBtn_Click(object sender, EventArgs e)
     {
-        int FloorNumber = -1;
-        int RoomNumber = -1;
-        string Keys;
-        Keys = lstRoomsList.SelectedValue;
+        int FloorNumber = GetKeys(1);
+        int RoomNumber = GetKeys(2);
 
-        string[] SubKeys = Keys.Split(' ', '.');
-
-        try 
-        {
-            FloorNumber = Convert.ToInt32(SubKeys[1]);
-            RoomNumber = Convert.ToInt32(SubKeys[3]);
-        }
-        catch { lblError.Text = "Please Select a record from the list to edit"; }
-
-        //System.Diagnostics.Debug.WriteLine("Room:" + SubKeys[1] + SubKeys[3]);
+        System.Diagnostics.Debug.WriteLine("Floor:" + FloorNumber, "\nRoom:" + RoomNumber);
 
         if (FloorNumber != -1 &&  RoomNumber != -1) 
         {
@@ -66,5 +55,86 @@ public partial class _1_List : System.Web.UI.Page
         {
             lblError.Text = "Please Select a record from the list to edit";
         }
+    }
+
+    protected void DeleteBtn_Click(object sender, EventArgs e)
+    {
+        int FloorNumber = GetKeys(1);
+        int RoomNumber = GetKeys(2);
+
+        if (FloorNumber != -1 && RoomNumber != -1)
+        {
+            Session["FloorNumber"] = FloorNumber;
+            Session["RoomNumber"] = RoomNumber;
+
+            Response.Redirect("RoomMConfirmDelete.aspx");
+        }
+        else
+        {
+            lblError.Text = "please Select a record from the list to delete";
+        }
+    }
+
+    // This will return the primary keys for the selected value
+    public int GetKeys(int Value) 
+    {
+        string Keys;
+        //int SelectedKey = -1;
+        Keys = lstRoomsList.SelectedValue;
+
+        string[] SubKeys = Keys.Split(' ');
+
+        string SelectedRoom = SubKeys[1].Replace(" ", string.Empty);
+
+        //System.Diagnostics.Debug.WriteLine("Floor:" + char.GetNumericValue(SelectedRoom[0]), "Room:" + char.GetNumericValue(SelectedRoom[2]));
+
+        try
+        {
+            if (Value == 1) { return Convert.ToInt32(char.GetNumericValue(SelectedRoom[0])); }
+            else if (Value == 2) { return Convert.ToInt32(char.GetNumericValue(SelectedRoom[2])); }
+        }
+        catch 
+        {
+            lblError.Text = "Please Select a record from the list to edit";
+            return -1;
+        }
+
+        return -1;
+    }
+
+    protected void ApplyBtn_Click(object sender, EventArgs e)
+    {
+        clsRoomCollection room = new clsRoomCollection();
+        room.FilterByWard(WardList.SelectedValue);
+
+        var query = from rooms in room.RoomList select new { CombinedNo = "Room" + " " + rooms.FloorNumber + "0" + rooms.RoomNumber + "\nWard Location: " + rooms.WardLocation + "\nCurrently: " + rooms.HygieneStatus };
+
+        lstRoomsList.DataSource = query;
+
+        lstRoomsList.DataValueField = "CombinedNo";
+
+        //lstRoomsList.DataTextField = "WardLocation";
+        
+        lstRoomsList.DataBind();
+    }
+
+    protected void RstFltrBtn_Click(object sender, EventArgs e)
+    {
+        clsRoomCollection room = new clsRoomCollection();
+
+        room.FilterByWard("");
+
+        WardList.SelectedIndex = 0;
+
+        lstRoomsList.DataSource = room.RoomList;
+
+        var query = from rooms in room.RoomList select new { CombinedNo = "Room" + " " + rooms.FloorNumber + "0" + rooms.RoomNumber + "\nWard Location: " + rooms.WardLocation + "\nCurrently: " + rooms.HygieneStatus };
+
+        lstRoomsList.DataSource = query;
+
+        lstRoomsList.DataValueField = "CombinedNo";
+
+        lstRoomsList.DataBind();
+
     }
 }

@@ -168,5 +168,78 @@ namespace Testing2
 
             Assert.AreEqual(allRooms.ThisRoom, TestItem);
         }
+
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+            clsRoomCollection allRooms = new clsRoomCollection();
+            clsRoom TestItem = new clsRoom();
+
+            Int32 primaryKey = 5;
+            Int32 SecondaryKey = 1;
+
+            TestItem.WardLocation = "General";
+            TestItem.BedType = "General";
+            TestItem.DisabilityAccessible = true;
+            TestItem.HygieneStatus = "Available";
+            TestItem.Inspected = true;
+            TestItem.Maintained = true;
+            TestItem.LastDateCleaned = Convert.ToDateTime("02/05/2026 00:00:00");
+
+            allRooms.ThisRoom = TestItem;
+
+            allRooms.Add();
+
+            allRooms.ThisRoom.Find(primaryKey, SecondaryKey);
+
+            allRooms.Delete();
+
+            Boolean Found = allRooms.ThisRoom.Find(primaryKey, SecondaryKey);
+
+            Assert.IsFalse(Found);
+        }
+
+        [TestMethod]
+        public void FilterByWardMethodOK()
+        {
+            clsRoomCollection allRooms = new clsRoomCollection();
+
+            clsRoomCollection FilteredRooms = new clsRoomCollection();
+
+            FilteredRooms.FilterByWard("");
+
+            Assert.AreEqual(allRooms.Count, FilteredRooms.Count);
+        }
+
+        [TestMethod]
+        public void FilterByWardMethodNotFound()
+        {
+            clsRoomCollection FilteredRooms = new clsRoomCollection();
+            FilteredRooms.FilterByWard("XXXXX");
+            Assert.AreEqual(0, FilteredRooms.Count);
+        }
+
+        [TestMethod]
+        public void FilterByWardTestDataFound()
+        {
+            clsRoomCollection FilteredRooms = new clsRoomCollection();
+
+            Boolean OK = true;
+
+            // 7 in general
+            // 4 in ICU
+            FilteredRooms.FilterByWard("General");
+
+            if (FilteredRooms.Count == 7)
+            {
+                OK = true;
+            }
+            else 
+            {
+                OK = false;
+            }
+
+            Assert.IsTrue(OK);
+        }
     }
 }

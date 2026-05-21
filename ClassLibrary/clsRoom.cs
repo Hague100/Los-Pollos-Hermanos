@@ -122,6 +122,24 @@ namespace ClassLibrary
             }
         }
 
+        public bool Exists(int FloorNumber, int RoomNumber)
+        {
+            bool exists = false;
+            int returned;
+
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@FloorNumber", FloorNumber);
+            DB.AddParameter("@RoomNumber", RoomNumber);
+
+            returned = DB.Execute("sproc_tblRoom_RoomExists");
+
+            if (returned == 1) { exists = true; }
+            else { exists = false; }
+
+            return exists;
+        }
+
         public bool Find(int FloorNumber, int RoomNumber)
         {
             clsDataConnection DB = new clsDataConnection();
@@ -143,6 +161,8 @@ namespace ClassLibrary
                 mMaintained = Convert.ToBoolean(DB.DataTable.Rows[0]["Maintained"]);
                 mLastDateCleaned = Convert.ToDateTime(DB.DataTable.Rows[0]["LastDateCleaned"]);
 
+                // PROBLEM IS HERE
+                System.Diagnostics.Debug.WriteLine("Fuck" + mHygieneStatus);
 
                 return true;
             }
@@ -193,7 +213,7 @@ namespace ClassLibrary
                     break;
                 case "Occupied":
                     break;
-                case "In Reprocessing":
+                case "Reprocessing":
                     break;
                 default:
                     error += "Hygiene Status is not valid, ";
