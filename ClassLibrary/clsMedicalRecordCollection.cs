@@ -5,12 +5,17 @@ namespace ClassLibrary
 {
     public class clsMedicalRecordCollection
     {
+
+
+
         // backing fields
         private List<clsMedicalRecords> mMedicalRecordList = new List<clsMedicalRecords>();
-        private clsMedicalRecords mThisMedicalRecord;
+        private clsMedicalRecords mThisMedicalRecord = new clsMedicalRecords()  ;
 
         public clsMedicalRecordCollection()
         {
+            mThisMedicalRecord = new clsMedicalRecords();
+
             // construction for the class 
             clsDataConnection DB = new clsDataConnection();
             DB.Execute("Testing");
@@ -67,6 +72,36 @@ namespace ClassLibrary
             // execute the query returning the primart key valuse
             return DB.Execute("sproc_tblmedicalRecords_Insert");
             
+        }
+
+        public void Delete()
+        {
+            // deletes the record pointed to by ThisMedicalRecord
+            // connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            // set the primary key value of the record to delete
+            DB.AddParameter("@recordId", mThisMedicalRecord.recordId);
+            // execute the query
+            DB.Execute("sproc_tblmedicalRecords_Delete");
+
+
+        }
+
+        public void Update()
+        {
+            // update an existing record based on the values of ThisMedicalRecord
+            // connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            // set the parameters for the stored procedure
+            DB.AddParameter("@recordId", mThisMedicalRecord.recordId);
+            DB.AddParameter("@patientId", mThisMedicalRecord.patientId);
+            DB.AddParameter("@AppID", mThisMedicalRecord.AppID);
+            DB.AddParameter("@PendingApp", mThisMedicalRecord.PendingApp);
+            DB.AddParameter("@AppNotes", mThisMedicalRecord.AppNotes);
+            DB.AddParameter("@doctorId", mThisMedicalRecord.doctorId);
+            DB.AddParameter("@Date", mThisMedicalRecord.Date);
+            // execute the stored procedure
+            DB.Execute("sproc_tblmedicalRecords_Update");
         }
     }
 }

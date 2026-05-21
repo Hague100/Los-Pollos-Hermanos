@@ -9,12 +9,11 @@ namespace Testing4
     public class tstPatient
     {
         //good test data
-        string patientName = "Test Name";
-        string email = "testemail@test.com";
-        string address = "1TestDrive,TestCity,Testshire,TE11ST";
-        string dateOfBirthStr ="01/01/2000";
-        string drIdStr = "1";
-        Boolean acessibilityReq = true;
+        private string patientName = "Test Name";
+        private string email = "testemail@test.com";
+        private string address = "1TestDrive,TestCity,Testshire,TE11ST";
+        private string dateOfBirthStr ="01/01/2000";
+        private string drIdStr = "1";
 
         [TestMethod]
         public void InstanceOk()
@@ -30,11 +29,11 @@ namespace Testing4
             //create an instance of the class we want to create
             clsPatient aPatient = new clsPatient();
             //create some test data to assign to the property
-            Int32 TestData = 1;
+            int testData = 1;
             //assign the data to the property
-            aPatient.patientId = TestData;
+            aPatient.PatientId = testData;
             //test to see that the two values are the same
-            Assert.AreEqual(aPatient.patientId, TestData);
+            Assert.AreEqual(aPatient.PatientId, testData);
 
         }
 
@@ -44,25 +43,25 @@ namespace Testing4
             //create an instance of the class we want to create
             clsPatient aPatient = new clsPatient();
             //create some test data to assign to the property
-            string TestData = "Test Name";
+            string testData = "Test Name";
             //assign the data to the property
-            aPatient.pName = TestData;
+            aPatient.PName = testData;
             //test to see that the two values are the same
-            Assert.AreEqual(aPatient.pName, TestData);
+            Assert.AreEqual(aPatient.PName, testData);
 
         }
 
         [TestMethod]
-        public void pEmailPropertyOK()
+        public void PEmailPropertyOK()
         {
             //create an instance of the class we want to create
             clsPatient aPatient = new clsPatient();
             //create some test data to assign to the property
-            string TestData = "test.email@testemail.com";
+            string testData = "test.email@testemail.com";
             //assign the data to the property
-            aPatient.pEmail = TestData;
+            aPatient.PEmail = testData;
             //test to see that the two values are the same
-            Assert.AreEqual(aPatient.pEmail, TestData);
+            Assert.AreEqual(aPatient.PEmail, testData);
 
         }
 
@@ -72,11 +71,11 @@ namespace Testing4
             //create an instance of the class we want to create
             clsPatient aPatient = new clsPatient();
             //create some test data to assign to the property
-            DateTime TestData = DateTime.Now.Date;
+            DateTime testData = DateTime.Now.Date;
             //assign the data to the property
-            aPatient.pDOB = TestData;
+            aPatient.PDOB = testData;
             //test to see that the two values are the same
-            Assert.AreEqual(aPatient.pDOB, TestData);
+            Assert.AreEqual(aPatient.PDOB, testData);
 
         }
 
@@ -86,11 +85,11 @@ namespace Testing4
             //create an instance of the class we want to create
             clsPatient aPatient = new clsPatient();
             //create some test data to assign to the property
-            string TestData = "Test Street,Leicster,LE11AA";
+            string testData = "Test Street,Leicster,LE11AA";
             //assign the data to the property
-            aPatient.pHomeAdd = TestData;
+            aPatient.PHomeAdd = testData;
             //test to see that the two values are the same
-            Assert.AreEqual(aPatient.pHomeAdd, TestData);
+            Assert.AreEqual(aPatient.PHomeAdd, testData);
 
         }
 
@@ -100,11 +99,11 @@ namespace Testing4
             //create an instance of the class we want to create
             clsPatient aPatient = new clsPatient();
             //create some test data to assign to the property
-            Boolean TestData = true;
+            Boolean testData = true;
             //assign the data to the property
-            aPatient.pAccessReq = TestData;
+            aPatient.PAccessReq = testData;
             //test to see that the two values are the same
-            Assert.AreEqual(aPatient.pAccessReq, TestData);
+            Assert.AreEqual(aPatient.PAccessReq, testData);
 
         }
 
@@ -114,11 +113,11 @@ namespace Testing4
             //create an instance of the class we want to create
             clsPatient aPatient = new clsPatient();
             //create some test data to assign to the property
-            int TestData = 1;
+            int testData = 1;
             //assign the data to the property
-            aPatient.pMainDocId = TestData;
+            aPatient.PMainDocId = testData;
             //test to see that the two values are the same
-            Assert.AreEqual(aPatient.pMainDocId, TestData);
+            Assert.AreEqual(aPatient.PMainDocId, testData);
 
         }
     
@@ -129,12 +128,10 @@ namespace Testing4
         {
             //create and instance of the class we want to create
             clsPatient aPatient = new clsPatient();
-            //create Boolean var to store the results of the validation
-            Boolean found = false;
             //create some test data to use with the method
-            Int32 patientId = 2;
+            int patientId = 2;
             //invoke mthe method
-            found = aPatient.Find(patientId);
+            Boolean found = aPatient.Find(patientId);
             //test to see if result is true
             Assert.IsTrue(found);
         }
@@ -145,21 +142,19 @@ namespace Testing4
         {
             //create and instance of the class we want to create
             clsPatient aPatient = new clsPatient();
-            //create Boolean var to store the results of the validation
-            Boolean found = false;
             //create a Boolean variable to record if the data is OK (assume it is)
-            Boolean OK = true;
+            Boolean ok = true;
             //create some test data to use with the method
-            Int32 patientId = 6;
+            int patientId = 6;
             //invoke mthe method
-            found = aPatient.Find(patientId);
+            aPatient.Find(patientId);
             //chech the patient id
-            if (aPatient.patientId != 6)
+            if (aPatient.PatientId != 6)
             {
-                OK = false;
+                ok = false;
             }
             //test to see if the result is correct
-            Assert.IsTrue(OK);
+            Assert.IsTrue(ok);
         }
 
         [TestMethod]
@@ -167,21 +162,18 @@ namespace Testing4
         {
             //create and instance of the class we want to create
             clsPatient aPatient = new clsPatient();
-            //create Boolean var to store the results of the validation
-            Boolean found = false;
             //create a Boolean variable to record if the data is OK (assume it is)
-            Boolean OK = true;
+            Boolean ok = true;
             //create some test data to use with the method
-            Int32 patientId = 6;
-            //invoke mthe method
-            found = aPatient.Find(patientId);
+            int patientId = 6;
+            aPatient.Find(patientId);
             //chech the patient id
-            if (aPatient.pName != "Test Name")
+            if (aPatient.PName != "Test Name")
             {
-                OK = false;
+                ok = false;
             }
             //test to see if the result is correct
-            Assert.IsTrue(OK);
+            Assert.IsTrue(ok);
         }
 
         [TestMethod]
@@ -189,21 +181,19 @@ namespace Testing4
         {
             //create and instance of the class we want to create
             clsPatient aPatient = new clsPatient();
-            //create Boolean var to store the results of the validation
-            Boolean found = false;
             //create a Boolean variable to record if the data is OK (assume it is)
-            Boolean OK = true;
+            Boolean ok = true;
             //create some test data to use with the method
-            Int32 patientId = 6;
+            int  patientId = 6;
             //invoke mthe method
-            found = aPatient.Find(patientId);
+            aPatient.Find(patientId);
             //chech the patient id
-            if (aPatient.pEmail != "test.email@testemail.com")
+            if (aPatient.PEmail != "test.email@testemail.com")
             {
-                OK = false;
+                ok = false;
             }
             //test to see if the result is correct
-            Assert.IsTrue(OK);
+            Assert.IsTrue(ok);
         }
 
         [TestMethod]
@@ -211,21 +201,19 @@ namespace Testing4
         {
             //create and instance of the class we want to create
             clsPatient aPatient = new clsPatient();
-            //create Boolean var to store the results of the validation
-            Boolean found = false;
             //create a Boolean variable to record if the data is OK (assume it is)
-            Boolean OK = true;
+            Boolean ok = true;
             //create some test data to use with the method
-            Int32 patientId = 6;
+            int patientId = 6;
             //invoke mthe method
-            found = aPatient.Find(patientId);
+            aPatient.Find(patientId);
             //chech the patient id
-            if (aPatient.pDOB != Convert.ToDateTime("01/01/2000"))
+            if (aPatient.PDOB != Convert.ToDateTime("01/01/2000"))
             {
-                OK = false;
+                ok = false;
             }
             //test to see if the result is correct
-            Assert.IsTrue(OK);
+            Assert.IsTrue(ok);
         }
 
         [TestMethod]
@@ -233,21 +221,19 @@ namespace Testing4
         {
             //create and instance of the class we want to create
             clsPatient aPatient = new clsPatient();
-            //create Boolean var to store the results of the validation
-            Boolean found = false;
             //create a Boolean variable to record if the data is OK (assume it is)
-            Boolean OK = true;
+            Boolean ok = true;
             //create some test data to use with the method
-            Int32 patientId = 6;
+            int patientId = 6;
             //invoke mthe method
-            found = aPatient.Find(patientId);
+            aPatient.Find(patientId);
             //chech the patient id
-            if (aPatient.pHomeAdd != "1 Test Steet,TestTown,TestShire,TE11AA")
+            if (aPatient.PHomeAdd != "1 Test Steet,TestTown,TestShire,TE11AA")
             {
-                OK = false;
+                ok = false;
             }
             //test to see if the result is correct
-            Assert.IsTrue(OK);
+            Assert.IsTrue(ok);
         }
 
         [TestMethod]
@@ -255,21 +241,19 @@ namespace Testing4
         {
             //create and instance of the class we want to create
             clsPatient aPatient = new clsPatient();
-            //create Boolean var to store the results of the validation
-            Boolean found = false;
             //create a Boolean variable to record if the data is OK (assume it is)
-            Boolean OK = true;
+            Boolean ok = true;
             //create some test data to use with the method
-            Int32 patientId = 6;
+            int patientId = 6;
             //invoke mthe method
-            found = aPatient.Find(patientId);
+            aPatient.Find(patientId);
             //chech the patient id
-            if (aPatient.pAccessReq != false)
+            if (aPatient.PAccessReq != false)
             {
-                OK = false;
+                ok = false;
             }
             //test to see if the result is correct
-            Assert.IsTrue(OK);
+            Assert.IsTrue(ok);
         }
 
         [TestMethod]
@@ -277,21 +261,19 @@ namespace Testing4
         {
             //create and instance of the class we want to create
             clsPatient aPatient = new clsPatient();
-            //create Boolean var to store the results of the validation
-            Boolean found = false;
             //create a Boolean variable to record if the data is OK (assume it is)
-            Boolean OK = true;
+            Boolean ok = true;
             //create some test data to use with the method
-            Int32 patientId = 6;
+            int patientId = 6;
             //invoke mthe method
-            found = aPatient.Find(patientId);
+            aPatient.Find(patientId);
             //chech the patient id
-            if (aPatient.pMainDocId != 4)
+            if (aPatient.PMainDocId != 4)
             {
-                OK = false;
+                ok = false;
             }
             //test to see if the result is correct
-            Assert.IsTrue(OK);
+            Assert.IsTrue(ok);
         }
 
         [TestMethod]
@@ -300,451 +282,409 @@ namespace Testing4
         {
             //create an instance of the class we want to create
             clsPatient aPatient = new clsPatient();
-            //string varible to store error message
-            String Error = "";
             //invoke method
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pNameMinLessOne()
+        public void PNameMinLessOne()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
-            String patientName = "";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreNotEqual(Error, "");
+            string patientName = "";
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreNotEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pNameMin()
+        public void PNameMin()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String patientName = "A";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pNameMinMoreOne()
+        public void PNameMinMoreOne()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String patientName = "aa";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pNameMaxLessOne()
+        public void PNameMaxLessOne()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String patientName = new string('a', 99);
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pNameMax()
+        public void PNameMax()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String patientName = new string('a', 100);
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
-        public void pNameMaxMoreOne()
+        public void PNameMaxMoreOne()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String patientName = new string('a', 101);
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreNotEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreNotEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pNameMid()
+        public void PNameMid()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String patientName = new string('a', 50);
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pNameExtremeMax()
+        public void PNameExtremeMax()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String patientName = new string('a', 500);
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreNotEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreNotEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pEmailMin()
+        public void PEmailMin()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String email = "";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pEmailMinMoreOne()
+        public void PEmailMinMoreOne()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String email = "b";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pEmailMaxLessOne()
+        public void PEmailMaxLessOne()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String email = new String('b', 254);
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pEmailMax()
+        public void PEmailMax()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String email = new String('b', 255);
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pEmailMaxMoreOne()
+        public void PEmailMaxMoreOne()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String email = new String('b', 256);
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreNotEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreNotEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pEmailMid()
+        public void PEmailMid()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String email = new String('b', 129);
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pEmailExtreme()
+        public void PEmailExtreme()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String email = new String('b', 1000);
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreNotEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreNotEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pHomeAddMin()
+        public void PHomeAddMin()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String address = "c";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pHomeAddMinMoreOne()
+        public void PHomeAddMinMoreOne()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String address = "cc";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pHomeAddMaxLessOne()
+        public void PHomeAddMaxLessOne()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String address = new String('c', 124);
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pHomeAddMax()
+        public void PHomeAddMax()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String address = new String('c', 125);
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pHomeAddMaxMoreOne()
+        public void PHomeAddMaxMoreOne()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String address = new String('c', 126);
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreNotEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreNotEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pHomeAddMid()
+        public void PHomeAddMid()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String address = new String('c', 63);
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pHomeAddExtremeMax()
+        public void PHomeAddExtremeMax()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String address = new String('c', 750);
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreNotEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreNotEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pDOBExtremeMin()
+        public void PDOBExtremeMin()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String dateOfBirthStr = "01/01/1784";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreNotEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreNotEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pDOBMinLessOne()
+        public void PDOBMinLessOne()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String dateOfBirthStr = "31/12/1883";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreNotEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreNotEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pDOBMin()
+        public void PDOBMin()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String dateOfBirthStr = "01/01/1884";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
         
         [TestMethod]
 
-        public void pDOBMinMoreOne()
+        public void PDOBMinMoreOne()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String dateOfBirthStr = "02/01/1884";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pDOBMaxLessOne()
+        public void PDOBMaxLessOne()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String dateOfBirthStr = Convert.ToString(DateTime.Now.Date.AddDays(-1));
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pDOBMax()
+        public void PDOBMax()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String dateOfBirthStr = Convert.ToString(DateTime.Now.Date);
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pDOBMaxMoreOne()
+        public void PDOBMaxMoreOne()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String dateOfBirthStr = Convert.ToString(DateTime.Now.Date.AddDays(1));
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreNotEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreNotEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pDOBMid()
+        public void PDOBMid()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
-            Int32 year = 1884 + ((DateTime.Now.Date.Year - 1844) / 2);
+            int year = 1884 + ((DateTime.Now.Date.Year - 1844) / 2);
             String dateOfBirthStr = "20/6/" + Convert.ToString(year);
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pDOBExtremeMax()
+        public void PDOBExtremeMax()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String dateOfBirthStr = Convert.ToString(DateTime.Now.Date.AddYears(100));
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreNotEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreNotEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pDOBInvalidDataType()
+        public void PDOBInvalidDataType()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String dateOfBirthStr = "not a date!";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreNotEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreNotEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pMainDocIdExtremeMin()
+        public void PMainDocIdExtremeMin()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String drIdStr = "-2147483648";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreNotEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreNotEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pMainDocIdMinLessOne()
+        public void PMainDocIdMinLessOne()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String drIdStr = "0";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreNotEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreNotEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pMainDocIdMin()
+        public void PMainDocIdMin()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String drIdStr = "1";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pMainDocIdMinMoreOne()
+        public void PMainDocIdMinMoreOne()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String drIdStr = "2";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pMainDocIdMaxLessOne()
+        public void PMainDocIdMaxLessOne()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String drIdStr = "2147483646";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pMainDocIdMax()
+        public void PMainDocIdMax()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String drIdStr = "2147483647";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
 
-        public void pMainDocIdMid()
+        public void PMainDocIdMid()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String drIdStr = "1073741824";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
-        public void pMainDocIdInvalidDataType()
+        public void PMainDocIdInvalidDataType()
         {
             clsPatient aPatient = new clsPatient();
-            String Error = "";
             String drIdStr = "test";
-            Error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
-            Assert.AreNotEqual(Error, "");
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreNotEqual(error, "");
         }
     }
 }

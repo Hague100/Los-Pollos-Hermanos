@@ -201,10 +201,7 @@ namespace ClassLibrary
             }
 
             try 
-            { 
-            
-                
-
+            {                
                 DateTemp = Convert.ToDateTime(LastDateCleaned);
                 PastMinDate = Convert.ToDateTime("01/04/2026 00:00:00");
                 if (DateTemp > DateTime.Now.Date)

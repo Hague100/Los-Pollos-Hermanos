@@ -8,8 +8,24 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+
+    // variable to store the primary key with page level scope
+    Int32 recordId;
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        // get the number of the record to be processed
+        recordId = Convert.ToInt32(Session["recordId"]);
+        if (IsPostBack == false)
+        {
+            // if this is not a new record
+            if (recordId != -1)
+            {
+                // display the current data for the record
+                DisplayMedicalRecords();
+            }
+        }
+
 
     }
 
@@ -41,7 +57,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             // capture the data 
             AnMedicalRecords.Date = Convert.ToDateTime(date);
             // capture the pending app
-            AnMedicalRecords.pendingApp = Convert.ToBoolean(pendingApp);
+            AnMedicalRecords.PendingApp = Convert.ToBoolean(pendingApp);
             // capture the doctorID
             AnMedicalRecords.DoctorID = Convert.ToInt32(doctorID);
             // capture the patientID
@@ -109,6 +125,21 @@ public partial class _1_DataEntry : System.Web.UI.Page
             // optional: show a message if not found
             lblError.Text = "Record not found.";
         }
+    }
+
+    void DisplayMedicalRecords()
+    {
+        // create an instance of the medical record collection
+        clsMedicalRecordCollection MedicalRecords = new clsMedicalRecordCollection();
+        // find the record to update
+        MedicalRecords.ThisMedicalRecord.Find(recordId);
+        // display the data for this record
+        txtPatientID.Text = MedicalRecords.ThisMedicalRecord.patientId.ToString();
+        txtDoctorID.Text = MedicalRecords.ThisMedicalRecord.DoctorID.ToString();
+        txtDate.Text = MedicalRecords.ThisMedicalRecord.Date.ToString();
+        txtAppID.Text = MedicalRecords.ThisMedicalRecord.AppID.ToString();
+        chkPending.Checked = MedicalRecords.ThisMedicalRecord.PendingApp;
+        txtAppNotes.Text = MedicalRecords.ThisMedicalRecord.AppNotes;
     }
 
 }
