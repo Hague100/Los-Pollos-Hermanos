@@ -61,4 +61,25 @@ public partial class _1_List : System.Web.UI.Page
             ErrorLabel.Text = "Please select record from the list to edit";
         }
     }
+
+    protected void DeleteButton_Click(object sender, EventArgs e)
+    {
+        // variable to store the primary key value of the record to be deleted
+        Int32 doctorId;
+        // if a record has been selected from the list
+        if(DoctorList.SelectedIndex != -1)
+        {
+            // get the primary key value of the the record to delete
+            doctorId = Convert.ToInt32(DoctorList.SelectedValue);
+            // store the data in the session object 
+            Session["dId"] = doctorId;
+            // redirect to the delete page
+            Response.Redirect("DocMConfirmDelete.aspx");
+
+        }else // if no record has been selected
+        {
+            // display an error message
+            ErrorLabel.Text = "Please select a record to delete";
+        }
+    }
 }
