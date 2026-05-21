@@ -69,4 +69,27 @@ public partial class _1_List : System.Web.UI.Page
             lblError.Text = "Please select a record to edit from the list";
         }
     }
+
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        // variable to store the primary key value of the record to be deleted
+        Int32 recordId;
+        // if a record has been selected from the list
+        if (lstMedicalRecordList.SelectedIndex != -1)
+        {
+            // get the primary key value of the record delete
+            recordId = Convert.ToInt32(lstMedicalRecordList.SelectedValue);
+            // store the data in the session object
+            Session["recordId"] = recordId;
+            // redirecr to the delete page
+            Response.Redirect("MedRecConfirmDelete.aspx");
+        }
+        else // if no record has been selected 
+        {
+            // display an error message
+            lblError.Text = "Please select a record to delete from the list";
+        }
+
+
+    }
 }
