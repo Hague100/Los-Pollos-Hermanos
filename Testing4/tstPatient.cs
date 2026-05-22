@@ -1,6 +1,7 @@
 ﻿using ClassLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Data;
 using System.Linq;
 
 namespace Testing4
@@ -685,6 +686,28 @@ namespace Testing4
             String drIdStr = "test";
             string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
             Assert.AreNotEqual(error, "");
+        }
+
+        [TestMethod]
+
+        public void StatStatisticsGroupedByDocId()
+        {
+            clsPatient aPatient = new clsPatient();
+            DataTable dT = aPatient.StatisticsGroupedByDoctorId();
+            //last recording was 4 rows of data
+            int noOfRecord = 4;
+            Assert.AreEqual(noOfRecord, dT.Rows.Count);
+        }
+
+        [TestMethod]
+
+        public void StatStatisticsGroupedByDOB()
+        {
+            clsPatient aPatient = new clsPatient();
+            DataTable dT = aPatient.StatisticsGroupedByDOB();
+            //last recording was 6 rows of data
+            int noOfRecord = 6;
+            Assert.AreEqual(noOfRecord, dT.Rows.Count);
         }
     }
 }

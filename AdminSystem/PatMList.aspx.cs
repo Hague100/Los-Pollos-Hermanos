@@ -105,4 +105,9 @@ public partial class _1_List : System.Web.UI.Page
         lstPatientList.DataTextField = "PName";
         lstPatientList.DataBind();
     }
+
+    protected void btnStatsPage_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("PatMStatistics.aspx");
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 
 namespace ClassLibrary
 {
@@ -179,6 +180,20 @@ namespace ClassLibrary
             }
             //return error message
             return error;
+        }
+
+        public DataTable StatisticsGroupedByDoctorId()
+        {
+            clsDataConnection dB = new clsDataConnection();
+            dB.Execute("sproc_tblPatients_Count_GroupByMainDocId");
+            return dB.DataTable;
+        }
+
+        public DataTable StatisticsGroupedByDOB()
+        {
+            clsDataConnection dB = new clsDataConnection();
+            dB.Execute("sproc_tblPatients_Count_GroupDOB");
+            return dB.DataTable;
         }
     }
 }
