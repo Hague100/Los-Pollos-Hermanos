@@ -180,6 +180,39 @@ namespace Testing5
             Assert.AreEqual(allDoctors.thisDoctor, testDoctor);
         }
 
+        [TestMethod]
+
+        public void DeleteMethodOk()
+        {
+            // create an instance of doctors list
+            clsDoctorCollection allDoctors = new clsDoctorCollection();
+            // create test data
+            clsDoc testDoctor = new clsDoc();
+            // variable to store the primary key
+            Int32 primaryKey = 0;
+            // set properties
+            testDoctor.dFirstName = "Tobe";
+            testDoctor.dLastName = "Deleted";
+            testDoctor.dAddress = "33 road road";
+            testDoctor.dEmail = "a@d.com";
+            testDoctor.dPhoneNumber = "123456789";
+            testDoctor.dAvailability = true;
+            // sett thisdoctor to the test doctor
+            allDoctors.thisDoctor = testDoctor;
+            // add the record
+            primaryKey = allDoctors.Add();
+            // set the primary key of the test data 
+            testDoctor.dId = primaryKey;
+            // find the record   
+            allDoctors.thisDoctor.Find(primaryKey);
+            // delete the record
+            allDoctors.Delete();
+            // find the record
+            Boolean found = allDoctors.thisDoctor.Find(primaryKey);
+            // test to see if the record was not found
+            Assert.IsFalse(found);
+        }
+
     }
 
 }

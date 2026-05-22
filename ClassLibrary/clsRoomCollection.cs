@@ -57,26 +57,7 @@ namespace ClassLibrary
 
             DB.Execute("sproc_tblRooms_SelectAll");
 
-            RecordCount = DB.Count;
-
-            while (Index < RecordCount)
-            {
-                clsRoom room = new clsRoom();
-
-                room.FloorNumber = Convert.ToInt32(DB.DataTable.Rows[Index]["FloorNumber"]);
-                room.RoomNumber = Convert.ToInt32(DB.DataTable.Rows[Index]["RoomNumber"]);
-                room.WardLocation = Convert.ToString(DB.DataTable.Rows[Index]["WardLocation"]);
-                room.BedType = Convert.ToString(DB.DataTable.Rows[Index]["BedType"]);
-                room.DisabilityAccessible = Convert.ToBoolean(DB.DataTable.Rows[Index]["DisabilityAccess"]);
-                room.HygieneStatus = Convert.ToString(DB.DataTable.Rows[Index]["HygieneStatus"]);
-                room.Inspected = Convert.ToBoolean(DB.DataTable.Rows[Index]["Inspected"]);
-                room.Maintained = Convert.ToBoolean(DB.DataTable.Rows[Index]["Maintained"]);
-                room.LastDateCleaned = Convert.ToDateTime(DB.DataTable.Rows[Index]["LastDateCleaned"]);
-            
-                mRoomsList.Add(room);
-
-                Index++;
-            }
+            PopulateArray(DB);
         }
 
         public void Add()
@@ -111,6 +92,57 @@ namespace ClassLibrary
             DB.AddParameter("@LastDateCleaned", mThisRoom.LastDateCleaned);
 
             DB.Execute("sproc_tblRoom_Update");
+        }
+
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@FloorNumber", mThisRoom.FloorNumber);
+            DB.AddParameter("@RoomNumber", mThisRoom.RoomNumber);
+
+            DB.Execute("sproc_tblRoom_Delete");
+        }
+
+        public void FilterByWard(string Ward)
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@WardLocation", Ward);
+
+            DB.Execute("sproc_tblRoom_FilterByWard");
+
+            PopulateArray(DB);
+        }
+
+        void PopulateArray(clsDataConnection DB)
+        {
+            int Index = 0;
+            int RecordCount;
+
+            RecordCount = DB.Count;
+
+            mRoomsList = new List<clsRoom>();
+
+            while (Index < RecordCount)
+            {
+                clsRoom room = new clsRoom();
+
+                room.FloorNumber = Convert.ToInt32(DB.DataTable.Rows[Index]["FloorNumber"]);
+                room.RoomNumber = Convert.ToInt32(DB.DataTable.Rows[Index]["RoomNumber"]);
+                room.WardLocation = Convert.ToString(DB.DataTable.Rows[Index]["WardLocation"]);
+                room.BedType = Convert.ToString(DB.DataTable.Rows[Index]["BedType"]);
+                room.DisabilityAccessible = Convert.ToBoolean(DB.DataTable.Rows[Index]["DisabilityAccess"]);
+                room.HygieneStatus = Convert.ToString(DB.DataTable.Rows[Index]["HygieneStatus"]);
+                room.Inspected = Convert.ToBoolean(DB.DataTable.Rows[Index]["Inspected"]);
+                room.Maintained = Convert.ToBoolean(DB.DataTable.Rows[Index]["Maintained"]);
+                room.LastDateCleaned = Convert.ToDateTime(DB.DataTable.Rows[Index]["LastDateCleaned"]);
+
+                mRoomsList.Add(room);
+
+                Index++;
+
+            }
         }
     }
 }

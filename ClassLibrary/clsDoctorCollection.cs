@@ -132,5 +132,16 @@ namespace ClassLibrary
             // execute the stored procedure
             DB.Execute("sproc_tblDoctors_Update");
         }
+
+        public void Delete()
+        {
+            // deletes the record pointed to by this doctor
+            // connect to th e database
+            clsDataConnection DB = new clsDataConnection();
+            // set the parameters for the stored procedur
+            DB.AddParameter("@DoctorId", mThisDoctor.dId);
+            // execute the stored procedure
+            DB.Execute("sproc_tblDoctors_Delete");
+        }
     }
 }
