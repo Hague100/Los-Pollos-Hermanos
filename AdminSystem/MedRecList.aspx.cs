@@ -92,4 +92,41 @@ public partial class _1_List : System.Web.UI.Page
 
 
     }
+
+    protected void btnClearFilter_Click(object sender, EventArgs e)
+    {
+        // create an instance of the medical record collection
+        clsMedicalRecordCollection MedicalRecords = new clsMedicalRecordCollection();
+        // retrieve all medical records
+        MedicalRecords.ReportByPendingApp("");
+        // set the data source to list of medical records in the collection
+        lstMedicalRecordList.DataSource = MedicalRecords.MedicalRecordList;
+        // set the name of the primary key
+        lstMedicalRecordList.DataValueField = "recordId";
+        // set the data field to display
+        lstMedicalRecordList.DataTextField = "AppNotes";
+        // bind the data to the list
+        lstMedicalRecordList.DataBind();
+    }
+
+    protected void btnApplyFilter_Click(object sender, EventArgs e)
+    {
+        // create an instance of the medical record collection
+        clsMedicalRecordCollection MedicalRecords = new clsMedicalRecordCollection();
+        // retrieve the value of the pending app entered by the user
+        MedicalRecords.ReportByPendingApp(txtPendingApp.Text);
+        // set the data source to list of medical records in the collection
+        lstMedicalRecordList.DataSource = MedicalRecords.MedicalRecordList;
+        // set the name of the primary key
+        lstMedicalRecordList.DataValueField = "recordId";
+        // set the data field to display
+        lstMedicalRecordList.DataTextField = "AppNotes";
+        // bind the data to the list
+        lstMedicalRecordList.DataBind();
+    }
+
+    protected void txtPendingApp_TextChanged(object sender, EventArgs e)
+    {
+
+    }
 }
