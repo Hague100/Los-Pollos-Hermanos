@@ -82,4 +82,47 @@ public partial class _1_List : System.Web.UI.Page
             ErrorLabel.Text = "Please select a record to delete";
         }
     }
+
+    protected void ApplyFilterButton_Click(object sender, EventArgs e)
+    {
+        // create an instance of th address object 
+        clsDoctorCollection doctorCollection = new clsDoctorCollection();
+        // retrieve the value of post code from the presntationlayer
+        doctorCollection.FilterByLastName(FilterTextBox.Text);
+        // set the dat source to the doctor in the collection
+        DoctorList.DataSource = doctorCollection.doctorList;
+        // set the primary key 
+        DoctorList.DataValueField = "dId";
+        // set the name of the field to display
+        DoctorList.DataTextField = "DLastName";
+        // bind the data to the list
+        DoctorList.DataBind();
+    }
+
+  
+
+    protected void ClearFilterButton_Click1(object sender, EventArgs e)
+    {
+        // create an instance of th address object 
+        clsDoctorCollection doctorCollection = new clsDoctorCollection();
+        // retrieve the value of post code from the presntationlayer
+        doctorCollection.FilterByLastName("");
+        // clear any existing string
+        FilterTextBox.Text = "";
+        // set the dat source to the doctor in the collection
+        DoctorList.DataSource = doctorCollection.doctorList;
+        // set the primary key 
+        DoctorList.DataValueField = "dId";
+        // set the name of the field to display
+        DoctorList.DataTextField = "DLastName";
+        // bind the data to the list
+        DoctorList.DataBind();
+    }
+
+    protected void StatisticButton_Click(object sender, EventArgs e)
+    {
+        // redirect to statistics page
+        Response.Redirect("DocMStatistics.aspx");
+
+    }
 }

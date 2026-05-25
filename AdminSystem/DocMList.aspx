@@ -20,6 +20,17 @@
                    <asp:Label ID="ErrorLabel" runat="server" style="z-index: 1; left: 130px; top: 450px; position: absolute; margin-bottom: 0px"></asp:Label>        
 
 
+                   <asp:Label ID="Label1" runat="server" style="z-index: 1; left: 381px; top: 404px; position: absolute" Text="Enter Last Name"></asp:Label>
+                   <asp:TextBox ID="FilterTextBox" runat="server" style="z-index: 1; left: 550px; top: 405px; position: absolute"></asp:TextBox>
+
+
+                   <asp:Button ID="ApplyFilterButton" runat="server" style="z-index: 1; left: 450px; top: 450px; position: absolute" Text="Apply filter" OnClick="ApplyFilterButton_Click" />
+                   <asp:Button ID="ClearFilterButton" runat="server" style="z-index: 1; left: 570px; top: 450px; position: absolute" Text="Clear filter" OnClick="ClearFilterButton_Click1" />
+
+
+                   <asp:Button ID="StatisticButton" runat="server" style="z-index: 1; left: 302px; top: 450px; position: absolute" Text="Statistics" OnClick="StatisticButton_Click" />
+
+
                </section>
             </form>
         </main>
