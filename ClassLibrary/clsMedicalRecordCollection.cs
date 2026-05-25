@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ClassLibrary
 {
@@ -10,33 +11,21 @@ namespace ClassLibrary
 
         // backing fields
         private List<clsMedicalRecords> mMedicalRecordList = new List<clsMedicalRecords>();
-        private clsMedicalRecords mThisMedicalRecord = new clsMedicalRecords()  ;
+        private clsMedicalRecords mThisMedicalRecord = new clsMedicalRecords();
 
-        public clsMedicalRecordCollection()
-        {
-            mThisMedicalRecord = new clsMedicalRecords();
-
-            // construction for the class 
-            clsDataConnection DB = new clsDataConnection();
-            DB.Execute("Testing");
-
-            int recordCount = DB.Count;
-            for (int i = 0; i < recordCount; i++)
+      
+        
+            // construction for the class
+            public clsMedicalRecordCollection()
             {
-                var record = new clsMedicalRecords
-                {
-                    recordId = Convert.ToInt32(DB.DataTable.Rows[i]["recordId"]),
-                    patientId = Convert.ToInt32(DB.DataTable.Rows[i]["patientId"]),
-                    AppID = Convert.ToInt32(DB.DataTable.Rows[i]["AppID"]),
-                    PendingApp = Convert.ToBoolean(DB.DataTable.Rows[i]["PendingApp"]),
-                    AppNotes = Convert.ToString(DB.DataTable.Rows[i]["AppNotes"]),
-                    doctorId = Convert.ToInt32(DB.DataTable.Rows[i]["doctorId"]),
-                    Date = Convert.ToDateTime(DB.DataTable.Rows[i]["Date"])
-                };
-
-                mMedicalRecordList.Add(record);
+            // connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            // execute the stored procedure
+            DB.Execute("sproc_tblmedicalRecords_SelectAll");
+            // populate the array list with the data table
+            PopulateArray(DB);
             }
-        }
+     
 
         public List<clsMedicalRecords> MedicalRecordList
         {
@@ -85,6 +74,52 @@ namespace ClassLibrary
             DB.Execute("sproc_tblmedicalRecords_Delete");
 
 
+        }
+
+        public void ReportByPendingApp(string PendingApp)
+        {
+            // pending appointment filter for the records
+            clsDataConnection DB = new clsDataConnection();
+            // convert incoming string to boolean so SQL gets a proper bit value
+            bool pendingValue = false;
+            if (!string.IsNullOrEmpty(PendingApp))
+            {
+                pendingValue = Convert.ToBoolean(PendingApp);
+            }
+            DB.AddParameter("@PendingApp", pendingValue);
+            // call the stored procedure that follows the project's naming convention
+            DB.Execute("sproc_tblmedicalRecords_FilterByPendingApp");
+            // populate the collection from the query results
+            PopulateArray(DB);
+        }
+
+        void PopulateArray(clsDataConnection DB)
+        {
+            // populates the array list based on the data table in the parameter DB
+            // var to store the index for the loop
+            Int32 Index = 0;
+            // var to store the record count
+            Int32 RecordCount = DB.Count;
+            // clear the private array list
+            mMedicalRecordList = new List<clsMedicalRecords>();
+            // while there are records to process
+            while (Index < RecordCount)
+            {
+                // create a blank medical record
+                clsMedicalRecords AnMedicalRecord = new clsMedicalRecords();
+                // read in the fields from the current record
+                AnMedicalRecord.recordId = Convert.ToInt32(DB.DataTable.Rows[Index]["recordId"]);
+                AnMedicalRecord.patientId = Convert.ToInt32(DB.DataTable.Rows[Index]["patientId"]);
+                AnMedicalRecord.AppID = Convert.ToInt32(DB.DataTable.Rows[Index]["AppID"]);
+                AnMedicalRecord.PendingApp = Convert.ToBoolean(DB.DataTable.Rows[Index]["PendingApp"]);
+                AnMedicalRecord.AppNotes = Convert.ToString(DB.DataTable.Rows[Index]["AppNotes"]);
+                AnMedicalRecord.doctorId = Convert.ToInt32(DB.DataTable.Rows[Index]["doctorId"]);
+                AnMedicalRecord.Date = Convert.ToDateTime(DB.DataTable.Rows[Index]["Date"]);
+                // add the record to the private array list
+                mMedicalRecordList.Add(AnMedicalRecord);
+                // point to the next record
+                Index++;
+            }
         }
 
         public void Update()
