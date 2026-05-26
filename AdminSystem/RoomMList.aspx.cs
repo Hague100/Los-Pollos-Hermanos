@@ -137,4 +137,9 @@ public partial class _1_List : System.Web.UI.Page
         lstRoomsList.DataBind();
 
     }
+
+    protected void StatistsBtn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("RoomMStatistics.aspx");
+    }
 }

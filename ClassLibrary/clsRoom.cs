@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 
 namespace ClassLibrary
 {
@@ -241,6 +242,32 @@ namespace ClassLibrary
 
             System.Diagnostics.Debug.WriteLine("Errors: " + error);
             return error;
+        }
+
+        public DataTable StatisticsGroupedByWard()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.Execute("sproc_tblRoom_Count_GroupByWards");
+
+            DataTable table = new DataTable();
+
+            table = DB.DataTable;
+
+            return table;
+        }
+
+        public DataTable StatisticsGroupedByLastDateCleaned()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.Execute("sproc_tblRoom_Count_GroupByLastDateCleaned");
+
+            DataTable table = new DataTable();
+
+            table = DB.DataTable;
+
+            return table;
         }
     }
 }
