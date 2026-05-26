@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 
 namespace ClassLibrary
 {
@@ -445,6 +446,19 @@ namespace ClassLibrary
 
 
             return Error;
+        }
+
+        public DataTable StatisticsGroupedBypatientId()
+        { 
+            // create an instance of the data connection
+           clsDataConnection DB = new clsDataConnection();
+
+            //execute the stored procedure
+            DB.Execute("sproc_tblmedicalRecords_count_GroupBypatientId");
+            DataTable table = new DataTable();
+            table = DB.DataTable;
+
+            return DB.DataTable;
         }
 
     }
