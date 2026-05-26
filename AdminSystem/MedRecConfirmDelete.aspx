@@ -1,12 +1,18 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"
-    CodeFile="medrecconfirmdelete.aspx.cs"
-    Inherits="_1_ConfirmDelete" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true"CodeFile="medrecconfirmdelete.aspx.cs"Inherits="_1_ConfirmDelete" %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.bundle.min.js"></script>
+    <script src="Script/bootstrap.min.js"></script>
+
+
+
+
+
+  
 </head>
 <body style="height: 274px; width: 310px">
     <form id="form1" runat="server">
