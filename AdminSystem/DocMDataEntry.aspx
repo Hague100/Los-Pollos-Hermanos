@@ -28,9 +28,11 @@
                    <asp:CheckBox ID="cbAvailability" runat="server" style="z-index: 1; left: 150px; top: 270px; position: absolute" Text="Available" />
                     <asp:Label ID="lbError" runat="server" style="z-index: 1; left: 75px ; top: 310px; position: absolute"></asp:Label>
 
-                    <asp:Button ID="btnOK" runat="server" style="z-index: 1; left: 75px; top: 350px; position: absolute" Text="OK" OnClick="btnOK_Click" />
-                   <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 130px; top: 350px; position: absolute" Text="CANCEL" />
-                   <asp:Button ID="btnFind" runat="server" style="z-index: 1; left: 350px; top: 15px; position: absolute" Text="Find" OnClick="btnFind_Click"/>
+                    <asp:Button ID="btnOK" runat="server" style="z-index: 1; left: 73px; top: 350px; position: absolute; width: 100px;" Text="OK" OnClick="btnOK_Click" />
+                   <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 208px; top: 350px; position: absolute; width: 100px;" Text="CANCEL" OnClick="btnCancel_Click" />
+                   <asp:Button ID="btnFind" runat="server" style="z-index: 1; left: 350px; top: 15px; position: absolute; width: 60px;" Text="Find" OnClick="btnFind_Click"/>
+
+                   <asp:Button ID="MainMenuButton" runat="server" style="z-index: 1; left: 84px; top: 402px; position: absolute; width: 215px;" Text="Back to main menu" OnClick="MainMenuButton_Click" />
 
                </section>
             </form>
