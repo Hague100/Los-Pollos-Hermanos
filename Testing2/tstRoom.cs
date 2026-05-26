@@ -1,6 +1,7 @@
 ﻿using ClassLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Data;
 
 namespace Testing2
 {
@@ -414,6 +415,28 @@ namespace Testing2
             string LastDateCleaned = "This is not a date";
             error = room.Valid(WardLocation, BedType, HygieneStatus, LastDateCleaned);
 
+        }
+
+        [TestMethod]
+        public void StatStatisticsGroupedByWard()
+        {
+            clsRoom room = new clsRoom();
+
+            DataTable dT = room.StatisticsGroupedByWard();
+
+            int noOfRecord = 3;
+
+            Assert.AreEqual(noOfRecord, dT.Rows.Count);
+        }
+
+        [TestMethod]
+        public void StatStatisticsGroupedByDate()
+        {
+            clsRoom room = new clsRoom();
+            DataTable dT = room.StatisticsGroupedByLastDateCleaned();
+            int noOfRecord = 6;
+
+            Assert.AreEqual(noOfRecord, dT.Rows.Count);
         }
 
     }
