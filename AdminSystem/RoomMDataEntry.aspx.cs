@@ -56,8 +56,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         string HygieneStatus = listHygieneStatus.SelectedValue;
 
-        System.Diagnostics.Debug.WriteLine("Checking capture:" + HygieneStatus);
-
         Boolean Inspected = chckbxInspected.Checked;
 
         Boolean Maintained = chckbxMaintained.Checked;
@@ -75,19 +73,14 @@ public partial class _1_DataEntry : System.Web.UI.Page
             Room.BedType = BedType;
             Room.DisabilityAccessible = DisabilityAccess;
             Room.HygieneStatus = HygieneStatus;
-            System.Diagnostics.Debug.WriteLine("Recapture:" + Room.HygieneStatus);
             Room.Inspected = Inspected;
             Room.Maintained = Maintained;
             Room.LastDateCleaned = Convert.ToDateTime(LastDateCleaned);
 
-            
-
             clsRoomCollection roomList = new clsRoomCollection();
 
-            System.Diagnostics.Debug.WriteLine(FloorNumber + RoomNumber);
-
             // If room doesnt exist, add it. else update it
-            if (Room.Exists(FloorNumber, RoomNumber))
+            if (!Room.Exists(FloorNumber, RoomNumber))
             {
                 roomList.ThisRoom = Room;
                 roomList.Add();

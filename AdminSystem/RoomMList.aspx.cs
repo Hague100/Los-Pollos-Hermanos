@@ -20,7 +20,7 @@ public partial class _1_List : System.Web.UI.Page
     void DisplayRooms()
     {
         clsRoomCollection allRooms = new clsRoomCollection();
-        var query = from rooms in allRooms.RoomList select new { CombinedNo = "Room" + " " + rooms.FloorNumber + "0" + rooms.RoomNumber + " " + rooms.WardLocation + " Ward " + "Currently: " + rooms.HygieneStatus };
+        var query = from rooms in allRooms.RoomList select new { CombinedNo = "Room" + " " + rooms.FloorNumber + rooms.RoomNumber.ToString("D2") + " " + rooms.WardLocation + " Ward " + "Currently: " + rooms.HygieneStatus };
 
         lstRoomsList.DataSource = query;
 
@@ -42,7 +42,7 @@ public partial class _1_List : System.Web.UI.Page
         int FloorNumber = GetKeys(1);
         int RoomNumber = GetKeys(2);
 
-        System.Diagnostics.Debug.WriteLine("Floor:" + FloorNumber, "\nRoom:" + RoomNumber);
+        //System.Diagnostics.Debug.WriteLine("Floor:" + FloorNumber, "\nRoom:" + RoomNumber);
 
         if (FloorNumber != -1 &&  RoomNumber != -1) 
         {
@@ -79,19 +79,28 @@ public partial class _1_List : System.Web.UI.Page
     public int GetKeys(int Value) 
     {
         string Keys;
-        //int SelectedKey = -1;
+        string SelectedRoom = "";
+ 
         Keys = lstRoomsList.SelectedValue;
 
         string[] SubKeys = Keys.Split(' ');
 
-        string SelectedRoom = SubKeys[1].Replace(" ", string.Empty);
+        try
+        {
+            SelectedRoom = SubKeys[1].Replace(" ", string.Empty);
+        }
+        catch { lblError.Text = "Woops, you didnt pick an option!"; }
 
         //System.Diagnostics.Debug.WriteLine("Floor:" + char.GetNumericValue(SelectedRoom[0]), "Room:" + char.GetNumericValue(SelectedRoom[2]));
 
         try
         {
             if (Value == 1) { return Convert.ToInt32(char.GetNumericValue(SelectedRoom[0])); }
-            else if (Value == 2) { return Convert.ToInt32(char.GetNumericValue(SelectedRoom[2])); }
+            else if (Value == 2)
+            {
+                var RoomNumber = SelectedRoom.Substring(1, 2);
+                return Convert.ToInt32(RoomNumber); 
+            }
         }
         catch 
         {
@@ -107,7 +116,7 @@ public partial class _1_List : System.Web.UI.Page
         clsRoomCollection room = new clsRoomCollection();
         room.FilterByWard(WardList.SelectedValue);
 
-        var query = from rooms in room.RoomList select new { CombinedNo = "Room" + " " + rooms.FloorNumber + "0" + rooms.RoomNumber + "\nWard Location: " + rooms.WardLocation + "\nCurrently: " + rooms.HygieneStatus };
+        var query = from rooms in room.RoomList select new { CombinedNo = "Room" + " " + rooms.FloorNumber + rooms.RoomNumber.ToString("D2") + "\nWard Location: " + rooms.WardLocation + "\nCurrently: " + rooms.HygieneStatus };
 
         lstRoomsList.DataSource = query;
 
@@ -128,7 +137,7 @@ public partial class _1_List : System.Web.UI.Page
 
         lstRoomsList.DataSource = room.RoomList;
 
-        var query = from rooms in room.RoomList select new { CombinedNo = "Room" + " " + rooms.FloorNumber + "0" + rooms.RoomNumber + "\nWard Location: " + rooms.WardLocation + "\nCurrently: " + rooms.HygieneStatus };
+        var query = from rooms in room.RoomList select new { CombinedNo = "Room" + " " + rooms.FloorNumber+ rooms.RoomNumber.ToString("D2") + "\nWard Location: " + rooms.WardLocation + "\nCurrently: " + rooms.HygieneStatus };
 
         lstRoomsList.DataSource = query;
 
@@ -141,5 +150,10 @@ public partial class _1_List : System.Web.UI.Page
     protected void StatistsBtn_Click(object sender, EventArgs e)
     {
         Response.Redirect("RoomMStatistics.aspx");
+    }
+
+    protected void MenuBtn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("TeamMainMenu.aspx");
     }
 }

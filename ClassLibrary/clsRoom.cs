@@ -162,9 +162,6 @@ namespace ClassLibrary
                 mMaintained = Convert.ToBoolean(DB.DataTable.Rows[0]["Maintained"]);
                 mLastDateCleaned = Convert.ToDateTime(DB.DataTable.Rows[0]["LastDateCleaned"]);
 
-                // PROBLEM IS HERE
-                System.Diagnostics.Debug.WriteLine("Fuck" + mHygieneStatus);
-
                 return true;
             }
 
@@ -240,7 +237,6 @@ namespace ClassLibrary
                 error += "Incorrect, ";
             }
 
-            System.Diagnostics.Debug.WriteLine("Errors: " + error);
             return error;
         }
 
