@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.ComponentModel.Design;
+using System.Data;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Testing3
@@ -284,7 +285,7 @@ namespace Testing3
 
         // record id tests //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        
+
         [TestMethod]
         public void RecordIDmin()
         {
@@ -883,177 +884,177 @@ namespace Testing3
         }
         [TestMethod]
         public void DateMin()
-                {
-                    // create an instance of the class we want to create
-                    clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
-                    //string variable to store any error message
-                    String Error = "";
-                    //create some test data to pass to the method
-                    DateTime TestDate;
-                    //set the date to todays date 
-                    TestDate = DateTime.Now.Date;
-                    //Convert the date to a string variable
-                    string Date = TestDate.ToString();
-                    //invoke the method
-                    Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
-                    //test to see that the result is correct
-                    Assert.AreEqual(Error, "");
-                }
+        {
+            // create an instance of the class we want to create
+            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            DateTime TestDate;
+            //set the date to todays date 
+            TestDate = DateTime.Now.Date;
+            //Convert the date to a string variable
+            string Date = TestDate.ToString();
+            //invoke the method
+            Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
 
-            [TestMethod]
-            public void DateMax()
-            {
-                // create an instance of the class we want to create
-                clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
-                //string variable to store any error message
-                String Error = "";
-                // set the date to todays date 
-                DateTime TestDate = DateTime.Now.Date;
-                //change the date to whatever the date is plus 100 years 
-                TestDate = TestDate.AddYears(100);
-                //convert to a string variable
-                string Date = TestDate.ToString();
-                //invoke the method
-                Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
-                //test to see that the result is correct
-                Assert.AreNotEqual(Error, "");
-            }
+        [TestMethod]
+        public void DateMax()
+        {
+            // create an instance of the class we want to create
+            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+            //string variable to store any error message
+            String Error = "";
+            // set the date to todays date 
+            DateTime TestDate = DateTime.Now.Date;
+            //change the date to whatever the date is plus 100 years 
+            TestDate = TestDate.AddYears(100);
+            //convert to a string variable
+            string Date = TestDate.ToString();
+            //invoke the method
+            Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
 
-            [TestMethod]
-            public void DateMinPlusOne()
-            {
-                //create an instance of the class we want to create
-                clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
-                //string variable to store any error message
-                String Error = "";
-                //create a variable to store the date
-                DateTime TestDate;
-                //set the date to todays date
-                TestDate = DateTime.Now.Date;
-                //change the date to whatever the date is plus one day
-                TestDate = TestDate.AddDays(1);
-                //convert the date to a string variable
-                string Date = TestDate.ToString();
-                //invoke the method
-                Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
-                //test to see that the result is correct
-                Assert.AreEqual(Error, "");
-            }
+        [TestMethod]
+        public void DateMinPlusOne()
+        {
+            //create an instance of the class we want to create
+            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+            //string variable to store any error message
+            String Error = "";
+            //create a variable to store the date
+            DateTime TestDate;
+            //set the date to todays date
+            TestDate = DateTime.Now.Date;
+            //change the date to whatever the date is plus one day
+            TestDate = TestDate.AddDays(1);
+            //convert the date to a string variable
+            string Date = TestDate.ToString();
+            //invoke the method
+            Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
 
-            [TestMethod]
-            public void DateminMinusOne()
-            {
-                //create an instance of the class we want to create
-                clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
-                //string variable to store any error message
-                String Error = "";
-                //create a variable to store the date
-                DateTime TestDate;
-                // set date to todays date
-                TestDate = DateTime.Now.Date;
-                // change the date to whatever the date is minus one day
-                TestDate = TestDate.AddDays(-1);
-                //convert the date to a string variable
-                string Date = TestDate.ToString();
-                //invoke the method
-                Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
-                //test to see that the result is correct
-                Assert.AreNotEqual(Error, "");
-            }
+        [TestMethod]
+        public void DateminMinusOne()
+        {
+            //create an instance of the class we want to create
+            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+            //string variable to store any error message
+            String Error = "";
+            //create a variable to store the date
+            DateTime TestDate;
+            // set date to todays date
+            TestDate = DateTime.Now.Date;
+            // change the date to whatever the date is minus one day
+            TestDate = TestDate.AddDays(-1);
+            //convert the date to a string variable
+            string Date = TestDate.ToString();
+            //invoke the method
+            Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
 
-            [TestMethod]
-            public void DateMaxMinusOne()
-            {
-                //create an instance of the class we want to create
-                clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
-                //string variable to store any error message
-                String Error = "";
-                // set the date to todays date
-                DateTime TestDate = DateTime.Now.Date;
-                //change the date to whatever the date is minus one year
-                TestDate = TestDate.AddYears(-1);
-                //convert to a string variable
-                string Date = TestDate.ToString();
-                //invoke the method
-                Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
-                //test to see that the result is correct
-                Assert.AreNotEqual(Error, "");
-            }
+        [TestMethod]
+        public void DateMaxMinusOne()
+        {
+            //create an instance of the class we want to create
+            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+            //string variable to store any error message
+            String Error = "";
+            // set the date to todays date
+            DateTime TestDate = DateTime.Now.Date;
+            //change the date to whatever the date is minus one year
+            TestDate = TestDate.AddYears(-1);
+            //convert to a string variable
+            string Date = TestDate.ToString();
+            //invoke the method
+            Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
 
-            [TestMethod]
-            public void DateMaxPlusOne()
-            {
-                //create an instance of the class we want to create
-                clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
-                //string variable to store any error message
-                String Error = "";
-                // set the date to todays date
-                DateTime TestDate = DateTime.Now.Date;
-                //change the date to whatever the date is plus 101 years
-                TestDate = TestDate.AddYears(101);
-                //convert to a string variable
-                string Date = TestDate.ToString();
-                //invoke the method
-                Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
-                //test to see that the result is correct
-                Assert.AreNotEqual(Error, "");
-            }
+        [TestMethod]
+        public void DateMaxPlusOne()
+        {
+            //create an instance of the class we want to create
+            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+            //string variable to store any error message
+            String Error = "";
+            // set the date to todays date
+            DateTime TestDate = DateTime.Now.Date;
+            //change the date to whatever the date is plus 101 years
+            TestDate = TestDate.AddYears(101);
+            //convert to a string variable
+            string Date = TestDate.ToString();
+            //invoke the method
+            Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
 
-            [TestMethod]
-            public void DateMaxExtreme()
-            {
-                //create an instance of the class we want to create
-                clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
-                //string variable to store any error message
-                String Error = "";
-                // set the date to todays date
-                DateTime TestDate = DateTime.Now.Date;
-                //change the date to whatever the date is plus 100 years
-                TestDate = TestDate.AddYears(500);
-                //convert to a string variable
-                string Date = TestDate.ToString();
-                //invoke the method
-                Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
-                //test to see that the result is correct
-                Assert.AreNotEqual(Error, "");
-            }
+        [TestMethod]
+        public void DateMaxExtreme()
+        {
+            //create an instance of the class we want to create
+            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+            //string variable to store any error message
+            String Error = "";
+            // set the date to todays date
+            DateTime TestDate = DateTime.Now.Date;
+            //change the date to whatever the date is plus 100 years
+            TestDate = TestDate.AddYears(500);
+            //convert to a string variable
+            string Date = TestDate.ToString();
+            //invoke the method
+            Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
 
-            [TestMethod]
-            public void DateMid()
-            {
-                //create an instance of the class we want to create
-                clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
-                //string variable to store any error message
-                String Error = "";
-                // set the date to todays date
-                DateTime TestDate = DateTime.Now.Date;
-                //change the date to whatever the date is plus 50 years
-                TestDate = TestDate.AddYears(50);
-                //convert to a string variable
-                string Date = TestDate.ToString();
-                //invoke the method
-                Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
-                //test to see that the result is correct
-                Assert.AreNotEqual(Error, "");
+        [TestMethod]
+        public void DateMid()
+        {
+            //create an instance of the class we want to create
+            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+            //string variable to store any error message
+            String Error = "";
+            // set the date to todays date
+            DateTime TestDate = DateTime.Now.Date;
+            //change the date to whatever the date is plus 50 years
+            TestDate = TestDate.AddYears(50);
+            //convert to a string variable
+            string Date = TestDate.ToString();
+            //invoke the method
+            Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
 
-            }
+        }
 
         // all of the invalid data tests 
 
-            [TestMethod]
-            public void DateInvalidData()
-            {
-                //create an instance of the class we want to create
-                clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
-                //string variable to store any error message
-                String Error = "";
-                //create some test data to pass to the method
-                string Date = "this is not a date";
-                //invoke the method
-                Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
-                //test to see that the result is correct
-                Assert.AreNotEqual(Error, "");
-            }
+        [TestMethod]
+        public void DateInvalidData()
+        {
+            //create an instance of the class we want to create
+            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string Date = "this is not a date";
+            //invoke the method
+            Error = AMedicalRecords.Valid(AppNotes, Date, pendingApp, DoctorID, PatientID, AppID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
 
         [TestMethod]
         public void DoctorIDInvalidData()
@@ -1119,10 +1120,25 @@ namespace Testing3
         }
 
 
+        [TestMethod]
+        public void StatisticsGroupedBypatientID()
+        {
+            // create an instance of the class we want to create
+            clsMedicalRecords AMedicalRecords = new clsMedicalRecords();
+            // invoke the method
+            DataTable dT = AMedicalRecords.StatisticsGroupedBypatientId();
+            // according to the last test they should see 5 records in the database
+            int noOfRecords = 5;
 
-            //pending app tests //////////////////////////////////////////////////////////////////////////////////////////////////////////
+            // test to see that the result is correct
+            Assert.AreEqual(noOfRecords, dT.Rows.Count);
+        }
+
+
+
+        //pending app tests //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // -- dont do that shi
 
-        }
+    }
     }

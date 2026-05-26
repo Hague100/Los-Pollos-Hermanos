@@ -80,16 +80,26 @@ namespace ClassLibrary
         {
             // pending appointment filter for the records
             clsDataConnection DB = new clsDataConnection();
-            // convert incoming string to boolean so SQL gets a proper bit value
-            bool pendingValue = false;
-            if (!string.IsNullOrEmpty(PendingApp))
+
+            // no filter -> return all records
+            if (string.IsNullOrWhiteSpace(PendingApp))
             {
-                pendingValue = Convert.ToBoolean(PendingApp);
+                DB.Execute("sproc_tblmedicalRecords_SelectAll");
+                PopulateArray(DB);
+                return;
             }
+
+            // try to interpret the incoming value as a boolean
+            if (!bool.TryParse(PendingApp, out bool pendingValue))
+            {
+                // invalid filter value (e.g. "xxx") -> return an empty list (test expects 0 results)
+                mMedicalRecordList = new List<clsMedicalRecords>();
+                return;
+            }
+
+            // valid boolean: run the filtered stored procedure and populate the collection
             DB.AddParameter("@PendingApp", pendingValue);
-            // call the stored procedure that follows the project's naming convention
             DB.Execute("sproc_tblmedicalRecords_FilterByPendingApp");
-            // populate the collection from the query results
             PopulateArray(DB);
         }
 
