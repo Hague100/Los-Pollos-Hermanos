@@ -125,4 +125,11 @@ public partial class _1_List : System.Web.UI.Page
         Response.Redirect("DocMStatistics.aspx");
 
     }
+
+    protected void MainMenuButton_Click(object sender, EventArgs e)
+    {
+        // redirect to main menu
+        Response.Redirect("TeamMainMenu.aspx");
+
+    }
 } 
