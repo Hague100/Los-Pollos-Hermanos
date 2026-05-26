@@ -198,5 +198,66 @@ namespace Testing3
             Assert.IsFalse(Found);
 
         }
+
+        [TestMethod]
+        public void ReportByPendingAppMethodOk()
+        {
+            // create an instance of the clas containing unfilterd results
+            clsMedicalRecordCollection AllMedicalRecords = new clsMedicalRecordCollection();
+            // create an instance of the filtered data
+            clsMedicalRecordCollection FilteredMedicalRecords = new clsMedicalRecordCollection();
+            // apply a blank string (should return all records)
+            FilteredMedicalRecords.ReportByPendingApp("");
+            // test to see that the two values are the same
+            Assert.AreEqual(AllMedicalRecords.Count, FilteredMedicalRecords.Count);
+
+        }
+
+        [TestMethod]
+        public void ReportByPendingAppNoneFound()
+        {
+            // create an instance of the clas containing unfilterd results
+            clsMedicalRecordCollection AllMedicalRecords = new clsMedicalRecordCollection();
+            // create an instance of the filtered data
+            clsMedicalRecordCollection FilteredMedicalRecords = new clsMedicalRecordCollection();
+            // apply a string that should return no records
+            FilteredMedicalRecords.ReportByPendingApp("xxx");
+            // test to see that there are no records
+            Assert.AreEqual(0, FilteredMedicalRecords.Count);
+
+        }
+
+
+        [TestMethod]
+        public void ReportByPendingAppTestDataFound() // needs Testing !!!!!!
+        {
+            // create an instance of the filterd data 
+            clsMedicalRecordCollection FilteredMedicalRecords = new clsMedicalRecordCollection();
+            // variable to store outcome
+            Boolean OK = true;
+            // apply a pending app that dosent exist
+            FilteredMedicalRecords.ReportByPendingApp("True");
+            // check that the correct number of records are found
+            if (FilteredMedicalRecords.Count == 2)
+            {
+                // check that the first record is ID 1
+                if (FilteredMedicalRecords.MedicalRecordList[0].recordId != 1)
+                {
+                    OK = false;
+                }
+                // check that the second record is ID 2
+                if (FilteredMedicalRecords.MedicalRecordList[1].recordId != 2)
+                {
+                    OK = false;
+                }
+            }
+            else
+            {
+                OK = false;
+            }
+            // test to see that there are no records
+            Assert.IsTrue(OK);
+
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Net.Http;
 
 namespace ClassLibrary
@@ -176,6 +177,35 @@ namespace ClassLibrary
             }
 
             return message;
+        }
+
+
+        public DataTable StatisticsGroupedByLastName()
+        {
+            // create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+
+            // execute the stored procedure 
+            DB.Execute("sproc_tblDoctors_Count_GroupByLastName");
+            // there should be either zero, one, or more records
+
+            DataTable table = new DataTable();
+            table = DB.DataTable;
+            return table;
+        }
+
+        public DataTable StatisticsGroupedByAvailability()
+        {
+            // create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+
+            // execute stored procedurte
+            DB.Execute("sproc_tblDoctors_Count_GroupByAvailability");
+            // there should be either zero, one, or more records
+
+            DataTable table = new DataTable();
+            table = DB.DataTable;
+            return table;
         }
     }
 }

@@ -2,6 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Net.Http;
+
 
 namespace Testing5
 {
@@ -213,6 +216,68 @@ namespace Testing5
             Assert.IsFalse(found);
         }
 
+        [TestMethod]
+
+        public void FilterByLastNameOK()
+        {
+            //create an instance of the class containing unfiltered results
+            clsDoctorCollection doctorCollection = new clsDoctorCollection();
+            // create an instance of the filtered data
+            clsDoctorCollection filteredDoctorCollection = new clsDoctorCollection();
+            // apply a blank string should return all records
+            filteredDoctorCollection.FilterByLastName("");
+            // test to see that the two values are the same
+            Assert.AreEqual(doctorCollection.count, filteredDoctorCollection.count);
+        }
+
+        [TestMethod]
+
+        public void FilterByLastNameNoneFound()
+        {
+            
+           // create an instance of the filtered data
+            clsDoctorCollection filteredDoctorCollection = new clsDoctorCollection();
+            // apply a blank string should return all records
+            filteredDoctorCollection.FilterByLastName("NoLol");
+            // test to see that the two values are the same
+            Assert.AreEqual(0, filteredDoctorCollection.count);
+        }
+
+        [TestMethod]
+
+        public void FilterByLastNameFound()
+        {
+
+            // create an instance of the filtered data
+            clsDoctorCollection filteredDoctorCollection = new clsDoctorCollection();
+            // variable to store outcom
+            Boolean ok = true;
+            // apply a blank string should return all records
+            filteredDoctorCollection.FilterByLastName("Bama");
+            // check to see ithat the correct number of records is found
+            if(filteredDoctorCollection.count == 2)
+            {
+                // check that the first record is 5
+                if(filteredDoctorCollection.doctorList[0].dId != 5)
+                {
+                    ok = false;
+                }
+                // check that second record is == 12
+                if (filteredDoctorCollection.doctorList[1].dId != 12)
+                {
+                    ok = false;
+                }
+            }
+            else
+            {
+                ok = false;
+            }
+            // test to see that there are records
+            Assert.IsTrue(ok);
+        }
+
+
+        
     }
 
 }

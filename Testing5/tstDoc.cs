@@ -1,6 +1,7 @@
 ﻿using ClassLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Data;
 
 namespace Testing5
 {
@@ -876,7 +877,21 @@ namespace Testing5
 
         }
 
-       
+        [TestMethod]
+
+        public void StatitsticsGroupedByLastName()
+        {
+            // create an instance of the class we want to create
+            clsDoc testDoctor = new clsDoc();
+            // invake the method
+
+            DataTable dT = testDoctor.StatisticsGroupedByLastName();
+            // according to the last execute sored procedure there should bre three rows of data 
+            int noOfRecord = 10;
+
+            // test to see that the result is correct
+            Assert.AreEqual(noOfRecord, dT.Rows.Count);
+        }
 
     }
 }
