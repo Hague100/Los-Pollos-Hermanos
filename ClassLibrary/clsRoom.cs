@@ -172,7 +172,9 @@ namespace ClassLibrary
             }
         }
 
-        public string Valid(string WardLocation,
+        public string Valid(int FloorNumber,
+                            int RoomNumber,
+                            string WardLocation,
                             string BedType,
                             string HygieneStatus,
                             string LastDateCleaned)
@@ -180,6 +182,8 @@ namespace ClassLibrary
             string error = "";
             DateTime DateTemp;
             DateTime PastMinDate;
+
+            if (FloorNumber <= 0 && RoomNumber <= 0) { error += "Woops, looks like you forgot to enter a valid room number!"; }
 
             switch (WardLocation)
             {

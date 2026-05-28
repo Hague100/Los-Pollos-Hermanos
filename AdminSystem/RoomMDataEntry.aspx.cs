@@ -44,9 +44,26 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //create a new instance of clsRoomNumber
         clsRoom Room = new clsRoom();
 
-        int FloorNumber = Convert.ToInt32(txtFloorNumber.Text);
+        string error = "";
 
-        int RoomNumber = Convert.ToInt32(txtRoomNumber.Text);
+        //int FloorNumber = Convert.ToInt32(txtFloorNumber.Text);
+
+        //int RoomNumber = Convert.ToInt32(txtRoomNumber.Text);
+
+        int FloorNumber;
+        int RoomNumber;
+
+        try 
+        {
+            FloorNumber = Convert.ToInt32(txtFloorNumber.Text);
+
+            RoomNumber = Convert.ToInt32(txtRoomNumber.Text);
+        }
+        catch 
+        {
+            FloorNumber = -1;
+            RoomNumber = -1;
+        }
 
         string WardLocation = listWardLocation.SelectedValue;
 
@@ -62,8 +79,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
   
         string LastDateCleaned = calLastDateCleaned.SelectedDate.ToString();
 
-        string error = "";
-        error = Room.Valid(WardLocation, BedType, HygieneStatus, LastDateCleaned);
+        error = Room.Valid(FloorNumber, RoomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
         if (error == "")
         {
             //Capture the data

@@ -90,11 +90,11 @@ namespace Testing2
             clsRoomCollection AllRooms = new clsRoomCollection();
             clsRoom TestItem = new clsRoom();
 
-            Int32 PrimaryKeyFloor = 2;
-            Int32 SecondaryKeyRoom = 6;
+            Int32 PrimaryKeyFloor = 8;
+            Int32 SecondaryKeyRoom = 9;
 
-            TestItem.FloorNumber = 2;
-            TestItem.RoomNumber = 6;
+            TestItem.FloorNumber = 8;
+            TestItem.RoomNumber = 9;
             TestItem.WardLocation = "General";
             TestItem.BedType = "General";
             TestItem.DisabilityAccessible = true;
@@ -226,11 +226,11 @@ namespace Testing2
 
             Boolean OK = true;
 
-            // 7 in general
+            // 15 in general
             // 4 in ICU
             FilteredRooms.FilterByWard("General");
 
-            if (FilteredRooms.Count == 7)
+            if (FilteredRooms.Count == 15)
             {
                 OK = true;
             }

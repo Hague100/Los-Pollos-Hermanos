@@ -10,9 +10,9 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Label ID="LblConfirm" runat="server" style="z-index: 1; left: 133px; top: 221px; position: absolute" Text="Are you sure you want to delete this record?"></asp:Label>
-            <asp:Button ID="ConfirmBtn" runat="server" OnClick="ConfirmBtn_Click" style="z-index: 1; left: 136px; top: 285px; position: absolute" Text="Yes" />
-            <asp:Button ID="CancelBtn" runat="server" style="z-index: 1; left: 305px; top: 285px; position: absolute" Text="No" OnClick="CancelBtn_Click" />
+            <asp:Label class="lead" ID="LblConfirm" runat="server" style="z-index: 1; left: 133px; top: 221px; position: absolute" Text="Are you sure you want to delete this record?"></asp:Label>
+            <asp:Button class="btn btn-success" ID="ConfirmBtn" runat="server" OnClick="ConfirmBtn_Click" style="z-index: 1; left: 136px; top: 285px; position: absolute" Text="Yes" />
+            <asp:Button class="btn btn-danger" ID="CancelBtn" runat="server" style="z-index: 1; left: 305px; top: 285px; position: absolute" Text="No" OnClick="CancelBtn_Click" />
         </div>
     </form>
 </body>
