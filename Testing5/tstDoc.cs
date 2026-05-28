@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Data;
+using System.IO;
 
 namespace Testing5
 {
@@ -15,6 +16,7 @@ namespace Testing5
         String address = "78 Bnull Rd";
         String email = "Agran@gmail.com";
         String phoneNumber = "123456789";
+        String dateAdded = DateTime.Now.Date.ToString();
         Boolean available = true;
 
 
@@ -302,6 +304,30 @@ namespace Testing5
 
         }
 
+        [TestMethod]
+        public void TestDateAddedFound()
+        {
+            // create instance of class
+            clsDoc aDoc = new clsDoc();
+            // create boolean variable to store resault of the search
+            Boolean found = false;
+            // boolean variable to record if the data is ok, hard coded/assumed it is
+            Boolean ok = true;
+            // test data
+            Int32 DoctorId = 1;
+            DateTime date = DateTime.Parse("28/03/2025 00:00:00");
+            // invoke the method
+            found = aDoc.Find(DoctorId);
+            // check date time property
+            if (aDoc.DDateAdded != date)
+            {
+                ok = false;
+            }
+            // test to see if the result is correct
+            Assert.IsTrue(ok);
+
+        }
+
 
         [TestMethod]
         public void TestValidation()
@@ -311,7 +337,7 @@ namespace Testing5
             // string variable to store any error message
             String error = "";
             // inove the method
-            error = testDoctor.isValid(firstName, lastName, address, email, phoneNumber);
+            error = testDoctor.isValid(firstName, lastName, address, email, phoneNumber, dateAdded);
             // test to see if the result is correct 
             Assert.AreEqual(error, "");
         }
@@ -326,7 +352,7 @@ namespace Testing5
             // create test data
             String testFristName = "";
             // invoke the method
-            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber);
+            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber, dateAdded);
             Assert.AreNotEqual(error, "");
 
         }
@@ -341,7 +367,7 @@ namespace Testing5
             // create test data
             String testFristName = "a";
             // invoke the method
-            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber);
+            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -356,7 +382,7 @@ namespace Testing5
             // create test data
             String testFristName = "aa";
             // invoke the method
-            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber);
+            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -372,7 +398,7 @@ namespace Testing5
             String testFristName = "";
             testFristName = testFristName.PadRight(98, 'a');
             // invoke the method
-            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber);
+            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -388,7 +414,7 @@ namespace Testing5
             String testFristName = "";
             testFristName = testFristName.PadRight(100, 'a');
             // invoke the method
-            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber);
+            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -404,7 +430,7 @@ namespace Testing5
             String testFristName = "";
             testFristName = testFristName.PadRight(101, 'a');
             // invoke the method
-            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber);
+            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber, dateAdded);
             Assert.AreNotEqual(error, "");
 
         }
@@ -420,7 +446,7 @@ namespace Testing5
             String testFristName = "";
             testFristName = testFristName.PadRight(50, 'a');
             // invoke the method
-            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber);
+            error = testDoctor.isValid(testFristName, lastName, address, email, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -435,7 +461,7 @@ namespace Testing5
             // create test data
             String testLastName = "";
             // invoke the method
-            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber);
+            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber, dateAdded);
             Assert.AreNotEqual(error, "");
 
         }
@@ -450,7 +476,7 @@ namespace Testing5
             // create test data
             String testLastName = "a";
             // invoke the method
-            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber);
+            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -465,7 +491,7 @@ namespace Testing5
             // create test data
             String testLastName = "aa";
             // invoke the method
-            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber);
+            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -481,7 +507,7 @@ namespace Testing5
             String testLastName = "";
             testLastName = testLastName.PadRight(98, 'a');
             // invoke the method
-            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber);
+            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -497,7 +523,7 @@ namespace Testing5
             String testLastName = "";
             testLastName = testLastName.PadRight(100, 'a');
             // invoke the method
-            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber);
+            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -513,7 +539,7 @@ namespace Testing5
             String testLastName = "";
             testLastName = testLastName.PadRight(101, 'a');
             // invoke the method
-            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber);
+            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber, dateAdded);
             Assert.AreNotEqual(error, "");
 
         }
@@ -529,7 +555,7 @@ namespace Testing5
             String testLastName = "";
             testLastName = testLastName.PadRight(50, 'a');
             // invoke the method
-            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber);
+            error = testDoctor.isValid(firstName, testLastName, address, email, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -544,7 +570,7 @@ namespace Testing5
             // create test data
             String testAddress = "aaaa";
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber);
+            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber, dateAdded);
             Assert.AreNotEqual(error, "");
 
         }
@@ -559,7 +585,7 @@ namespace Testing5
             // create test data
             String testAddress = "aqaqaqaqa";
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber);
+            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -574,7 +600,7 @@ namespace Testing5
             // create test data
             String testAddress = "aqaqaqaqaq";
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber);
+            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -590,7 +616,7 @@ namespace Testing5
             String testAddress = "";
             testAddress = testAddress.PadRight(254, 'a');
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber);
+            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -606,7 +632,7 @@ namespace Testing5
             String testAddress = "";
             testAddress = testAddress.PadRight(255, 'a');
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber);
+            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -622,7 +648,7 @@ namespace Testing5
             String testAddress = "";
             testAddress = testAddress.PadRight(256, 'a');
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber);
+            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber, dateAdded);
             Assert.AreNotEqual(error, "");
 
         }
@@ -638,7 +664,7 @@ namespace Testing5
             String testAddress = "";
             testAddress = testAddress.PadRight(127, 'a');
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber);
+            error = testDoctor.isValid(firstName, lastName, testAddress, email, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -653,7 +679,7 @@ namespace Testing5
             // create test data
             String testEmail = "@";
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber);
+            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber, dateAdded);
             Assert.AreNotEqual(error, "");
 
         }
@@ -668,7 +694,7 @@ namespace Testing5
             // create test data
             String testEmail = "aqaqaq@qaq";
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber);
+            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -683,7 +709,7 @@ namespace Testing5
             // create test data
             String testEmail = "aqaqaqa@aqa";
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber);
+            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -699,7 +725,7 @@ namespace Testing5
             String testEmail = "";
             testEmail = testEmail.PadRight(254, '@');
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName,address , testEmail, phoneNumber);
+            error = testDoctor.isValid(firstName, lastName,address , testEmail, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -715,7 +741,7 @@ namespace Testing5
             String testEmail = "";
             testEmail = testEmail.PadRight(255, '@');
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber);
+            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -731,7 +757,7 @@ namespace Testing5
             String testEmail = "";
             testEmail = testEmail.PadRight(256, '@');
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber);
+            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber, dateAdded);
             Assert.AreNotEqual(error, "");
 
         }
@@ -747,7 +773,7 @@ namespace Testing5
             String testEmail = "";
             testEmail = testEmail.PadRight(127, '@');
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber);
+            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -763,7 +789,7 @@ namespace Testing5
             String testEmail = "";
             testEmail = testEmail.PadRight(127, 'a');
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber);
+            error = testDoctor.isValid(firstName, lastName, address, testEmail, phoneNumber, dateAdded);
             Assert.AreNotEqual(error, "");
 
         }
@@ -778,7 +804,7 @@ namespace Testing5
             // create test data
             String testPhoneNumber = "12345678";
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber);
+            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber, dateAdded);
             Assert.AreNotEqual(error, "");
 
         }
@@ -793,7 +819,7 @@ namespace Testing5
             // create test data
             String testPhoneNumber = "123456789";
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber);
+            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -808,7 +834,7 @@ namespace Testing5
             // create test data
             String testPhoneNumber = "1234567899";
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber);
+            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -824,7 +850,7 @@ namespace Testing5
             String testPhoneNumber = "";
             testPhoneNumber = testPhoneNumber.PadRight(49, '1');
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber);
+            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -840,7 +866,7 @@ namespace Testing5
             String testPhoneNumber = "";
             testPhoneNumber = testPhoneNumber.PadRight(50, '1');
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber);
+            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
         }
@@ -856,7 +882,7 @@ namespace Testing5
             String testPhoneNumber = "";
             testPhoneNumber = testPhoneNumber.PadRight(51, '1');
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber);
+            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber, dateAdded);
             Assert.AreNotEqual(error, "");
 
         }
@@ -872,9 +898,111 @@ namespace Testing5
             String testPhoneNumber = "";
             testPhoneNumber = testPhoneNumber.PadRight(25, '1');
             // invoke the method
-            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber);
+            error = testDoctor.isValid(firstName, lastName, address, email, testPhoneNumber, dateAdded);
             Assert.AreEqual(error, "");
 
+        }
+
+        [TestMethod]
+        public void DateAddedExtremeMin()
+        {
+            //create an instance of the class we want to create
+            clsDoc testDoctor = new clsDoc();
+            //string variable to store any error message
+            String error = "";
+            //create a variable to store the test date data
+            DateTime TestDate;
+            //set the date totodays date
+            TestDate = DateTime.Now.Date;
+            //change the date to whatever the date is less 100 years
+            TestDate = TestDate.AddYears(-100);
+            //convert the date variable to a string variable
+            string testDateAdded = TestDate.ToString();
+            //invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, email, phoneNumber, testDateAdded);
+            //test to see that the result is correct
+            Assert.AreNotEqual(error, "");
+        }
+        [TestMethod]
+        public void DateAddedMinLessOne()
+        {
+            //create an instance of the class we want to create
+            clsDoc testDoctor = new clsDoc();
+            //string variable to store any error message
+            String error = "";
+            //create a variable to store the test date data
+            DateTime TestDate;
+            //set the date totodays date
+            TestDate = DateTime.Now.Date;
+            //change the date to whatever the date is less 1 years
+            TestDate = TestDate.AddYears(-1);
+            //convert the date variable to a string variable
+            string testDateAdded = TestDate.ToString();
+            //invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, email, phoneNumber, testDateAdded);
+            //test to see that the result is correct
+            Assert.AreNotEqual(error, "");
+        }
+
+        [TestMethod]
+        public void DateAddedMin()
+        {
+            //create an instance of the class we want to create
+            clsDoc testDoctor = new clsDoc();
+            //string variable to store any error message
+            String error = "";
+            //create a variable to store the test date data
+            DateTime TestDate;
+            //set the date totodays date
+            TestDate = DateTime.Now.Date;
+            //convert the date variable to a string variable
+            string testDateAdded = TestDate.ToString();
+            //invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, email, phoneNumber, testDateAdded);
+            //test to see that the result is correct
+            Assert.AreEqual(error, "");
+        }
+
+        [TestMethod]
+        public void DateAddedMinPlusOne()
+        {
+            //create an instance of the class we want to create
+            clsDoc testDoctor = new clsDoc();
+            //string variable to store any error message
+            String error = "";
+            //create a variable to store the test date data
+            DateTime TestDate;
+            //set the date totodays date
+            TestDate = DateTime.Now.Date;
+            //change the date to whatever the date is plus 1 days
+            TestDate = TestDate.AddDays(1);
+            //convert the date variable to a string variable
+            string testDateAdded = TestDate.ToString();
+            //invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, email, phoneNumber, testDateAdded);
+            //test to see that the result is correct
+            Assert.AreNotEqual(error, "");
+        }
+
+        [TestMethod]
+        public void DateAddedExtremeMax()
+        {
+            //create an instance of the class we want to create
+            clsDoc testDoctor = new clsDoc();
+            //string variable to store any error message
+            String error = "";
+            //create a variable to store the test date data
+            DateTime TestDate;
+            //set the date totodays date
+            TestDate = DateTime.Now.Date;
+            //change the date to whatever the date is plus 1 days
+            TestDate = TestDate.AddYears(100);
+            //convert the date variable to a string variable
+            string testDateAdded = TestDate.ToString();
+            //invoke the method
+            error = testDoctor.isValid(firstName, lastName, address, email, phoneNumber, testDateAdded);
+            //test to see that the result is correct
+            Assert.AreNotEqual(error, "");
         }
 
         [TestMethod]

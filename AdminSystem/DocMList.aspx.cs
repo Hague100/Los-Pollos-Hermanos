@@ -24,12 +24,20 @@ public partial class _1_List : System.Web.UI.Page
     {
         // create an instance of the doctor collection 
         clsDoctorCollection doctors = new clsDoctorCollection();
+        // query for display of multiple data fields
+        var query = from doctor in doctors.doctorList
+                    select new
+                    {
+                        doctorString = "Dr. " + doctor.dFirstName + " " + doctor.dLastName,
+                        dId = doctor.dId
+
+                    };
         // set the data source to list of doctors in the collection
-        DoctorList.DataSource = doctors.doctorList;
+        DoctorList.DataSource = query;
         // set the name of the primary key
         DoctorList.DataValueField = "dId";
         // set the data field to display 
-        DoctorList.DataTextField = "DLastName";
+        DoctorList.DataTextField = "doctorString";
         // bind the data to the list
         DoctorList.DataBind();
     }
@@ -89,12 +97,20 @@ public partial class _1_List : System.Web.UI.Page
         clsDoctorCollection doctorCollection = new clsDoctorCollection();
         // retrieve the value of post code from the presntationlayer
         doctorCollection.FilterByLastName(FilterTextBox.Text);
+        // data source to display 
+        var query = from doctor in doctorCollection.doctorList
+                    select new
+                    {
+                        doctorString = "Dr. " + doctor.dFirstName + " " + doctor.dLastName,
+                        dId = doctor.dId
+
+                    };
         // set the dat source to the doctor in the collection
-        DoctorList.DataSource = doctorCollection.doctorList;
+        DoctorList.DataSource = query;
         // set the primary key 
         DoctorList.DataValueField = "dId";
         // set the name of the field to display
-        DoctorList.DataTextField = "DLastName";
+        DoctorList.DataTextField = "doctorString";
         // bind the data to the list
         DoctorList.DataBind();
     }
@@ -109,12 +125,20 @@ public partial class _1_List : System.Web.UI.Page
         doctorCollection.FilterByLastName("");
         // clear any existing string
         FilterTextBox.Text = "";
+        // query for data source
+        var query = from doctor in doctorCollection.doctorList
+                    select new
+                    {
+                        doctorString = "Dr. " + doctor.dFirstName + " " + doctor.dLastName,
+                        dId = doctor.dId
+
+                    };
         // set the dat source to the doctor in the collection
-        DoctorList.DataSource = doctorCollection.doctorList;
+        DoctorList.DataSource = query;
         // set the primary key 
         DoctorList.DataValueField = "dId";
         // set the name of the field to display
-        DoctorList.DataTextField = "DLastName";
+        DoctorList.DataTextField = "doctorString";
         // bind the data to the list
         DoctorList.DataBind();
     }
