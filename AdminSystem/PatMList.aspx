@@ -17,14 +17,14 @@
         <form id="form1" runat="server" class="mx-auto w-100" style="max-width: 900px">
 
             <!-- Patient Search -->
-            <div class="row mb-4justify-content-md-center p-1 mx-auto">
+            <div class="row mb-4 justify-content-md-center p-1 mx-auto">
                 <div>
-                    <asp:Label ID="lblEntName" runat="server" AssociatedControlID="txtFilter" class="form-label fw-bold" Text="Enter a Name"></asp:Label>
+                    <asp:Label class="form-label fw-bold" ID="lblEntName" runat="server" AssociatedControlID="txtFilter" Text="Enter a Name"></asp:Label>
                 </div>
                 <div class="input-group">
-                    <asp:TextBox ID="txtFilter" runat="server" class="form-control" placeholder="search patients"></asp:TextBox>
-                    <asp:Button ID="btnApplyFilter" runat="server" OnClick="btnApplyFilter_Click" class="btn btn-secondary w-25" Text="Apply Filter" />
-                    <asp:Button ID="btnClearFilter" runat="server" OnClick="btnClearFilter_Click" class="btn btn-danger w-25" Text="Clear" />
+                    <asp:TextBox class="form-control" ID="txtFilter" runat="server" placeholder="search patients"></asp:TextBox>
+                    <asp:Button class="btn btn-secondary w-25" ID="btnApplyFilter" runat="server" OnClick="btnApplyFilter_Click" Text="Apply Filter" />
+                    <asp:Button class="btn btn-danger w-25" ID="btnClearFilter" runat="server" OnClick="btnClearFilter_Click" Text="Clear" />
                 </div>
             </div>
      
