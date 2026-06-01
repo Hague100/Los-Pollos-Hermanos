@@ -183,7 +183,7 @@ namespace ClassLibrary
             DateTime DateTemp;
             DateTime PastMinDate;
 
-            if (FloorNumber <= 0 && RoomNumber <= 0) { error += "Woops, looks like you forgot to enter a valid room number!"; }
+            if (FloorNumber <= 0 && RoomNumber <= 0) { error += "Woops, looks like you forgot to enter a valid room number. "; }
 
             switch (WardLocation)
             {
@@ -194,7 +194,7 @@ namespace ClassLibrary
                 case "Intensive Care Unit":
                     break;
                 default:
-                    error += "Ward Location is not valid, ";
+                    error += "Ward Location is not valid. ";
                     break;
             }
 
@@ -205,7 +205,7 @@ namespace ClassLibrary
                 case "Heavy":
                     break;
                 default:
-                    error += "Bed Type is not valid, ";
+                    error += "Bed Type is not valid. ";
                     break;
             }
 
@@ -218,7 +218,7 @@ namespace ClassLibrary
                 case "Reprocessing":
                     break;
                 default:
-                    error += "Hygiene Status is not valid, ";
+                    error += "Hygiene Status is not valid. ";
                     break;
             }
 
@@ -228,17 +228,17 @@ namespace ClassLibrary
                 PastMinDate = Convert.ToDateTime("01/04/2026 00:00:00");
                 if (DateTemp > DateTime.Now.Date)
                 {
-                    error += "Last Date Cleaned cannot be in the future, ";
+                    error += "Last Date Cleaned cannot be in the future. ";
                 }
                 if (DateTemp < PastMinDate)
                 {
-                    error = error + "Last Date Cleaned cannot be too far in the past, ";
+                    error = error + "Last Date Cleaned cannot be too far in the past. ";
                 }
 
             }
             catch 
             {
-                error += "Incorrect, ";
+                error += "Incorrect. ";
             }
 
             return error;

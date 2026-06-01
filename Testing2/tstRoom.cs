@@ -291,7 +291,7 @@ namespace Testing2
             String error = "";
             string WardLocation = "";
             error = room.Valid(FloorNumber, RoomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
-            Assert.AreEqual(error, "Ward Location is not valid, ");
+            Assert.AreEqual(error, "Ward Location is not valid. ");
         }
 
         [TestMethod]
@@ -311,7 +311,7 @@ namespace Testing2
             String error = "";
             string BedType = "";
             error = room.Valid(FloorNumber, RoomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
-            Assert.AreEqual(error, "Bed Type is not valid, ");
+            Assert.AreEqual(error, "Bed Type is not valid. ");
         }
 
         [TestMethod]
@@ -332,7 +332,7 @@ namespace Testing2
             String error = "";
             string HygieneStatus = "";
             error = room.Valid(FloorNumber, RoomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
-            Assert.AreEqual(error, "Hygiene Status is not valid, ");
+            Assert.AreEqual(error, "Hygiene Status is not valid. ");
         }
 
         [TestMethod]
@@ -356,7 +356,7 @@ namespace Testing2
             LastDateCleaned = LastDateCleaned.AddYears(-100);
             string LastDateCleanedString = LastDateCleaned.ToString();
             error = room.Valid(FloorNumber, RoomNumber, WardLocation, BedType, HygieneStatus, LastDateCleanedString);
-            Assert.AreEqual(error, "Last Date Cleaned cannot be too far in the past, ");
+            Assert.AreEqual(error, "Last Date Cleaned cannot be too far in the past. ");
         }
 
         [TestMethod]
@@ -415,7 +415,7 @@ namespace Testing2
         {
             clsRoom room = new clsRoom();
             String error = "";
-            string LastDateCleaned = "This is not a date";
+            string LastDateCleaned = "This is not a date. ";
             error = room.Valid(FloorNumber, RoomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
 
         }
