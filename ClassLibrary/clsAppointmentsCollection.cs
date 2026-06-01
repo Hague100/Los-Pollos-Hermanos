@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics.SymbolStore;
 using System.Security.Cryptography.X509Certificates;
 
 namespace ClassLibrary
@@ -55,44 +56,12 @@ namespace ClassLibrary
         }
         public clsAppointmentsCollection()
         {
-            //variable for the index
-            Int32 Index = 0;
-            //variable to store the record count
-            Int32 RecordCount = 0;
-            //object for the data connection
+            //object for data connection
             clsDataConnection DB = new clsDataConnection();
-            //execute the stored procedure to get the data
+            //execute the stored procedure
             DB.Execute("sproc_tblAppointments_SelectAll");
-            //get the count of records returned
-            RecordCount = DB.Count;
-            //while there are records to process
-            while (Index < RecordCount)
-            {
-                //create a blank appointment
-                clsAppointments AnAppointment = new clsAppointments();
-                //create a data connection to find the patient id
-                clsDataConnection DBPatient = new clsDataConnection();
-                //set the parameters for the stored procedure
-                DBPatient.AddParameter("@PatientId", Convert.ToString(DB.DataTable.Rows[Index]["PatientID"]));
-                //execute the stored procedure to find the patient name
-                DBPatient.Execute("sproc_tblAppointments_GetPatientById");
-                //read in the fields from the current record
-                AnAppointment.AppointmentNumber = Convert.ToInt32(DB.DataTable.Rows[Index]["AppointmentNumber"]);
-                AnAppointment.DoctorID = Convert.ToInt32(DB.DataTable.Rows[Index]["DoctorID"]);
-                AnAppointment.PatientFirstName = Convert.ToString(DBPatient.DataTable.Rows[0]["PName"]).Split(' ')[0];
-                AnAppointment.PatientLastName = Convert.ToString(DBPatient.DataTable.Rows[0]["PName"]).Split(' ')[1];
-                AnAppointment.PatientID = Convert.ToInt32(DB.DataTable.Rows[Index]["PatientID"]);
-                AnAppointment.DateOfAppointment = Convert.ToDateTime(DB.DataTable.Rows[Index]["AppointmentDate"]);
-                AnAppointment.TimeOfAppointment = (TimeSpan)DB.DataTable.Rows[Index]["AppointmentTime"];
-                AnAppointment.FloorNumber = Convert.ToInt32(DB.DataTable.Rows[Index]["FloorNumber"]);
-                AnAppointment.RoomNumber = Convert.ToInt32(DB.DataTable.Rows[Index]["RoomNumber"]);
-                AnAppointment.EmergencyAppointment = Convert.ToBoolean(DB.DataTable.Rows[Index]["EmergencyAppointment"]);
-                AnAppointment.Notes = Convert.ToString(DB.DataTable.Rows[Index]["Notes"]);
-                //add the record to the private data member
-                mAppointmentsList.Add(AnAppointment);
-                //point to the next record
-                Index++;
-            }
+            //populate the array list with the data table
+            PopulateArray(DB);
         }
         public int Add()
         {
@@ -128,16 +97,77 @@ namespace ClassLibrary
             clsDataConnection DB = new clsDataConnection();
             //set the parameters for the stored procedure
             DB.AddParameter("@AppointmentID", mThisAppointment.AppointmentNumber);
-            DB.AddParameter("@DoctorID", mThisAppointment.DoctorID);
             DB.AddParameter("@PatientID", mThisAppointment.PatientID);
+            DB.AddParameter("@DoctorID", mThisAppointment.DoctorID);
             DB.AddParameter("@AppointmentDate", mThisAppointment.DateOfAppointment);
-            DB.AddParameter("@AppointmentTime", mThisAppointment.TimeOfAppointment);
             DB.AddParameter("@FloorNumber", mThisAppointment.FloorNumber);
             DB.AddParameter("@RoomNumber", mThisAppointment.RoomNumber);
             DB.AddParameter("@EmergencyAppointment", mThisAppointment.EmergencyAppointment);
             DB.AddParameter("@Notes", mThisAppointment.Notes);
             //execute the stored procedure
             DB.Execute("sproc_tblAppointments_Update");
+        }
+
+        public void Delete()
+        {
+            //deletes the record pointed to by thisAppointment
+            //connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            //set the parameters for the stored procedure
+            DB.AddParameter("@AppointmentID", mThisAppointment.AppointmentNumber);
+            //execute the stored procedure
+            DB.Execute("sproc_tblAppointments_Delete");
+        }
+
+        public void FilterByDate(string date)
+        {
+            //filters the records based on a date
+            //try to convert to datetime
+            DateTime nDate;
+            try
+            {
+                nDate = Convert.ToDateTime(date);
+            } catch
+            {
+                return;
+            }
+            //connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@date", nDate);
+            //execute stored procedure
+            DB.Execute("sproc_tblAppointments_FilterByDate");
+            //populate the array list with the data table
+            PopulateArray(DB);
+        }
+        void PopulateArray(clsDataConnection DB)
+        {
+            //populates the array list based on the data table in the parameter DB
+            //variable for the index
+            Int32 Index = 0;
+            //variable to store the record count
+            Int32 RecordCount;
+            //get the amount of records
+            RecordCount = DB.Count;
+            //clear the private array list
+            mAppointmentsList = new List<clsAppointments>();
+            //while there are records to process
+            while (Index < RecordCount)
+            {
+                //create a blank appointment object
+                clsAppointments AnAppointment = new clsAppointments();
+                //read in the fields from the current record
+                AnAppointment.PatientID = Convert.ToInt32(DB.DataTable.Rows[Index]["PatientID"]);
+                AnAppointment.DoctorID = Convert.ToInt32(DB.DataTable.Rows[Index]["DoctorID"]);
+                AnAppointment.DateOfAppointment = Convert.ToDateTime(DB.DataTable.Rows[Index]["AppointmentDate"]);
+                AnAppointment.FloorNumber = Convert.ToInt32(DB.DataTable.Rows[Index]["FloorNumber"]);
+                AnAppointment.RoomNumber = Convert.ToInt32(DB.DataTable.Rows[Index]["RoomNumber"]);
+                AnAppointment.EmergencyAppointment = Convert.ToBoolean(DB.DataTable.Rows[Index]["EmergencyAppointment"]);
+                AnAppointment.Notes = Convert.ToString(DB.DataTable.Rows[Index]["Notes"]);
+                //add the record to the private data member
+                mAppointmentsList.Add(AnAppointment);
+                //point to the next record
+                Index++;
+            }
         }
     }
 }

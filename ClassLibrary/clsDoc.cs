@@ -13,6 +13,7 @@ namespace ClassLibrary
         private String doctorAddress;
         private String doctorEmail;
         private String doctorPhoneNumber;
+        private DateTime doctorDateAdded;
 
         public int dId
         {
@@ -90,6 +91,17 @@ namespace ClassLibrary
             }
         }
 
+        public DateTime DDateAdded
+        {
+            get
+            {
+                return doctorDateAdded;
+            }
+            set
+            {
+                doctorDateAdded = value;
+            }
+        }
 
         public bool Find(int docId)
         {
@@ -105,6 +117,7 @@ namespace ClassLibrary
             {
                 // coppy the data from the database to ht private data members
                 doctorId = Convert.ToInt32(DB.DataTable.Rows[0]["DoctorId"]);
+                doctorDateAdded = Convert.ToDateTime(DB.DataTable.Rows[0]["DDateAdded"]);
                 doctorAvailability = Convert.ToBoolean(DB.DataTable.Rows[0]["DAvailability"]); 
                 doctorFirstName = Convert.ToString(DB.DataTable.Rows[0]["DFirstName"]);
                 doctorLastName = Convert.ToString(DB.DataTable.Rows[0]["DLastName"]);
@@ -113,7 +126,7 @@ namespace ClassLibrary
                 doctorPhoneNumber = Convert.ToString(DB.DataTable.Rows[0]["DPhoneNumber"]);
                 return true;
             }
-            // if noo record was found
+            // if no record was found
             else
             {
                 // return false indicating there was a problem
@@ -123,10 +136,12 @@ namespace ClassLibrary
 
         }
 
-        public string isValid(string firstName, string lastName, string address, string email, string phoneNumber)
+        public string isValid(string firstName, string lastName, string address, string email, string phoneNumber, string dateAdded)
         {
             // initiation of the string variable
             String message = "";
+            //temp variable to store data values
+            DateTime dateTemp;
             // check if ther is an entered first name
             if (firstName.Length < 1)
             {
@@ -174,6 +189,16 @@ namespace ClassLibrary
             if(phoneNumber.Length > 50)
             {
                 message += "Phone number is too long";
+            }
+            // date added validation
+            dateTemp = Convert.ToDateTime(dateAdded);
+            if(dateTemp < DateTime.Now.Date)
+            {
+                message += "Date cannot be in the past";
+            }
+            if (dateTemp > DateTime.Now.Date)
+            {
+                message += "Date cannot be in the future";
             }
 
             return message;

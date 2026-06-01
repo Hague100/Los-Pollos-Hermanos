@@ -67,6 +67,8 @@ namespace ClassLibrary
             DB.AddParameter("@DEmail", mThisDoctor.dEmail);
             DB.AddParameter("@DPhoneNumber", mThisDoctor.dPhoneNumber);
             DB.AddParameter("@DAvailability", mThisDoctor.dAvailability);
+            DB.AddParameter("@DDateAdded", mThisDoctor.DDateAdded);
+
             // execute the query retuning the primary key value
             return DB.Execute("sproc_tblDoctors_Insert");
         }
@@ -84,6 +86,7 @@ namespace ClassLibrary
             DB.AddParameter("@DEmail", mThisDoctor.dEmail);
             DB.AddParameter("@DPhoneNumber", mThisDoctor.dPhoneNumber);
             DB.AddParameter("@DAvailability", mThisDoctor.dAvailability);
+            DB.AddParameter("@DDateAdded", mThisDoctor.DDateAdded);
             // execute the stored procedure
             DB.Execute("sproc_tblDoctors_Update");
         }
@@ -136,6 +139,7 @@ namespace ClassLibrary
                 someDoctor.dEmail = Convert.ToString(DB.DataTable.Rows[index]["DEmail"]);
                 someDoctor.dPhoneNumber = Convert.ToString(DB.DataTable.Rows[index]["DPhoneNumber"]);
                 someDoctor.dAvailability = Convert.ToBoolean(DB.DataTable.Rows[index]["DAvailability"]);
+                someDoctor.DDateAdded = Convert.ToDateTime(DB.DataTable.Rows[index]["DDateAdded"]);
                 // add the record to the private data member
                 mDoctorsList.Add(someDoctor);
                 // point at next record
