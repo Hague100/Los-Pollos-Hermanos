@@ -1402,7 +1402,7 @@ namespace Testing1
             //create an instance of the class we want to create
             clsAppointments AnAppointment = new clsAppointments();
             //boolean variable to store the results of the validation
-            int noOfRecords = 3;
+            int noOfRecords = 6;
             //invoke the method
             DataTable dT = AnAppointment.StatisticsGroupedByDate();
             //test to see that the result is correct

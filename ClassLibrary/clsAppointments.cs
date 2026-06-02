@@ -1,4 +1,5 @@
 ﻿using System;
+using System;
 using System.Data;
 using System.Globalization;
 
@@ -212,7 +213,6 @@ namespace ClassLibrary
                 mPatientID = Convert.ToInt32(DB.DataTable.Rows[0]["PatientID"]);
                 mPatientFirstName = patientName[0];
                 mPatientLastName = patientName[1];
-                mTimeOfAppointment = (TimeSpan)DB.DataTable.Rows[0]["AppointmentTime"];
                 mDateOfAppointment = Convert.ToDateTime(DB.DataTable.Rows[0]["AppointmentDate"]).Add(mTimeOfAppointment);
                 mFloorNumber = Convert.ToInt32(DB.DataTable.Rows[0]["FloorNumber"]);
                 mRoomNumber = Convert.ToInt32(DB.DataTable.Rows[0]["RoomNumber"]);

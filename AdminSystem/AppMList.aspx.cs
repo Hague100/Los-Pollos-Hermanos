@@ -109,4 +109,10 @@ public partial class _1_List : System.Web.UI.Page
         //bind the data to the list
         lstAppointments.DataBind();
     }
+
+    protected void btnStats_Click(object sender, EventArgs e)
+    {
+        //redirect to the data entry page
+        Response.Redirect("AppMStatistics.aspx");
+    }
 }
