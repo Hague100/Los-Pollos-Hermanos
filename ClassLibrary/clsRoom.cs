@@ -162,9 +162,6 @@ namespace ClassLibrary
                 mMaintained = Convert.ToBoolean(DB.DataTable.Rows[0]["Maintained"]);
                 mLastDateCleaned = Convert.ToDateTime(DB.DataTable.Rows[0]["LastDateCleaned"]);
 
-                // PROBLEM IS HERE
-                System.Diagnostics.Debug.WriteLine("Fuck" + mHygieneStatus);
-
                 return true;
             }
 
@@ -175,7 +172,9 @@ namespace ClassLibrary
             }
         }
 
-        public string Valid(string WardLocation,
+        public string Valid(int FloorNumber,
+                            int RoomNumber,
+                            string WardLocation,
                             string BedType,
                             string HygieneStatus,
                             string LastDateCleaned)
@@ -183,6 +182,8 @@ namespace ClassLibrary
             string error = "";
             DateTime DateTemp;
             DateTime PastMinDate;
+
+            if (FloorNumber <= 0 && RoomNumber <= 0) { error += "Woops, looks like you forgot to enter a valid room number. "; }
 
             switch (WardLocation)
             {
@@ -193,7 +194,7 @@ namespace ClassLibrary
                 case "Intensive Care Unit":
                     break;
                 default:
-                    error += "Ward Location is not valid, ";
+                    error += "Ward Location is not valid. ";
                     break;
             }
 
@@ -204,7 +205,7 @@ namespace ClassLibrary
                 case "Heavy":
                     break;
                 default:
-                    error += "Bed Type is not valid, ";
+                    error += "Bed Type is not valid. ";
                     break;
             }
 
@@ -217,7 +218,7 @@ namespace ClassLibrary
                 case "Reprocessing":
                     break;
                 default:
-                    error += "Hygiene Status is not valid, ";
+                    error += "Hygiene Status is not valid. ";
                     break;
             }
 
@@ -227,20 +228,19 @@ namespace ClassLibrary
                 PastMinDate = Convert.ToDateTime("01/04/2026 00:00:00");
                 if (DateTemp > DateTime.Now.Date)
                 {
-                    error += "Last Date Cleaned cannot be in the future, ";
+                    error += "Last Date Cleaned cannot be in the future. ";
                 }
                 if (DateTemp < PastMinDate)
                 {
-                    error = error + "Last Date Cleaned cannot be too far in the past, ";
+                    error = error + "Last Date Cleaned cannot be too far in the past. ";
                 }
 
             }
             catch 
             {
-                error += "Incorrect, ";
+                error += "Incorrect. ";
             }
 
-            System.Diagnostics.Debug.WriteLine("Errors: " + error);
             return error;
         }
 

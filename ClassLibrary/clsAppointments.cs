@@ -1,4 +1,6 @@
 ﻿using System;
+using System;
+using System.Data;
 using System.Globalization;
 
 namespace ClassLibrary
@@ -30,7 +32,8 @@ namespace ClassLibrary
         private string mNotes;
 
         //public property for the appointment number
-        public int AppointmentNumber { 
+        public int AppointmentNumber
+        {
             get
             {
                 //sends data out of the property
@@ -43,7 +46,8 @@ namespace ClassLibrary
             }
         }
         //public property for the doctor ID
-        public int DoctorID {
+        public int DoctorID
+        {
             get
             {
                 //sends data out of the property
@@ -69,7 +73,7 @@ namespace ClassLibrary
             }
         }
         //public property for the patient first name
-        public string PatientFirstName 
+        public string PatientFirstName
         {
             get
             {
@@ -209,7 +213,6 @@ namespace ClassLibrary
                 mPatientID = Convert.ToInt32(DB.DataTable.Rows[0]["PatientID"]);
                 mPatientFirstName = patientName[0];
                 mPatientLastName = patientName[1];
-                mTimeOfAppointment = (TimeSpan)DB.DataTable.Rows[0]["AppointmentTime"];
                 mDateOfAppointment = Convert.ToDateTime(DB.DataTable.Rows[0]["AppointmentDate"]).Add(mTimeOfAppointment);
                 mFloorNumber = Convert.ToInt32(DB.DataTable.Rows[0]["FloorNumber"]);
                 mRoomNumber = Convert.ToInt32(DB.DataTable.Rows[0]["RoomNumber"]);
@@ -374,6 +377,56 @@ namespace ClassLibrary
                 Error = Error + "The notes must contain letters : ";
             }
             return Error;
+        }
+        /********** Statistics Grouped by Emergency Appointment FUNCTION NOT FUCKING METHOD **********/
+        public DataTable StatisticsGroupedByEmergency()
+        {
+            //create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            //execute the stored procedure
+            DB.Execute("sproc_tblAppointments_Count_GroupByEmergency");
+            //there should be zero, one, or more records
+            return DB.DataTable;
+        }
+        /********** Statistics Grouped by Doctor FUNCTION **********/
+        public DataTable StatisticsGroupedByDoctor()
+        {
+            //create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            //execute the stored procedure
+            DB.Execute("sproc_tblAppointments_Count_GroupByDoctor");
+            //there should be zero, one, or more records
+            return DB.DataTable;
+        }
+        /********** Statistics Grouped by Date FUNCTION **********/
+        public DataTable StatisticsGroupedByDate()
+        {
+            //create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            //execute the stored procedure
+            DB.Execute("sproc_tblAppointments_Count_GroupByDate");
+            //there should be zero, one, or more records
+            return DB.DataTable;
+        }
+        /*********** Statistics Grouped by FloorNumber FUNCTION **********/
+        public DataTable StatisticsGroupedByFloorNumber()
+        {
+            //create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            //execute the stored procedure
+            DB.Execute("sproc_tblAppointments_Count_GroupByFloorNumber");
+            //there should be zero, one, or more records
+            return DB.DataTable;
+        }
+        /************ Statistics Grouped by RoomNumber FUNCTION **********/
+        public DataTable StatisticsGroupedByRoomNumber()
+        {
+            //create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            //execute the stored procedure
+            DB.Execute("sproc_tblAppointments_Count_GroupByRoomNumber");
+            //there should be zero, one, or more records
+            return DB.DataTable;
         }
     }
 }

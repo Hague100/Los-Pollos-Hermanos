@@ -106,7 +106,7 @@ namespace ClassLibrary
 
         public void FilterByWard(string Ward)
         {
-            clsDataConnection DB = new clsDataConnection();
+            clsDataConnection DB = new clsDataConnection(); 
 
             DB.AddParameter("@WardLocation", Ward);
 

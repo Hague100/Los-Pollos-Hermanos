@@ -39,6 +39,7 @@ namespace Testing5
             testDoctor.dEmail = "a@d.com";
             testDoctor.dPhoneNumber = "123456789";
             testDoctor.dAvailability = true;
+            testDoctor.DDateAdded = DateTime.Now.Date;
             // add the item to the test list
             testDoctorList.Add(testDoctor);
             // assign the data to the property
@@ -77,6 +78,7 @@ namespace Testing5
             testDoctor.dEmail = "a@d.com";
             testDoctor.dPhoneNumber = "123456789";
             testDoctor.dAvailability = true;
+            testDoctor.DDateAdded = DateTime.Now.Date;
             // assign the test data to the property
             testDoctorCollection.thisDoctor = testDoctor;
             Assert.AreEqual(testDoctorCollection.thisDoctor, testDoctor);
@@ -99,6 +101,7 @@ namespace Testing5
             testDoctor.dEmail = "a@d.com";
             testDoctor.dPhoneNumber = "123456789";
             testDoctor.dAvailability = true;
+            testDoctor.DDateAdded = DateTime.Now.Date;
             // assign the test data to the property
             testDoctorList.Add(testDoctor);
             testDoctorCollection.doctorList = testDoctorList;
@@ -133,6 +136,7 @@ namespace Testing5
             testDoctor.dEmail = "a@d.com";
             testDoctor.dPhoneNumber = "123456789";
             testDoctor.dAvailability = true;
+            testDoctor.DDateAdded = DateTime.Now.Date;
             // sett thisdoctor to the test doctor
             allDoctors.thisDoctor = testDoctor;
             // add the record
@@ -162,6 +166,7 @@ namespace Testing5
             testDoctor.dEmail = "a@d.com";
             testDoctor.dPhoneNumber = "123456789";
             testDoctor.dAvailability = true;
+            testDoctor.DDateAdded = DateTime.Now.Date;
             // sett thisdoctor to the test doctor
             allDoctors.thisDoctor = testDoctor;
             // add the record
@@ -175,6 +180,7 @@ namespace Testing5
             testDoctor.dEmail = "a@d.com";
             testDoctor.dPhoneNumber = "123456789";
             testDoctor.dAvailability = false;
+            testDoctor.DDateAdded = DateTime.Now.Date;
             // update the record
             allDoctors.Update();
             // find the record
@@ -200,6 +206,7 @@ namespace Testing5
             testDoctor.dEmail = "a@d.com";
             testDoctor.dPhoneNumber = "123456789";
             testDoctor.dAvailability = true;
+            testDoctor.DDateAdded = DateTime.Now.Date;
             // sett thisdoctor to the test doctor
             allDoctors.thisDoctor = testDoctor;
             // add the record

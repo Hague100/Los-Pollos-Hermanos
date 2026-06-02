@@ -4,17 +4,25 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Confirm Deletion</title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.bundle.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div style="height: 252px">
-            <asp:Button ID="btnYes" runat="server" OnClick="btnYes_Click" style="z-index: 1; left: 131px; top: 159px; position: absolute" Text="Yes" width="34px" />
-            <asp:Button ID="btnNo" runat="server" OnClick="btnNo_Click" style="z-index: 1; left: 272px; top: 159px; position: absolute" Text="No" />
-        </div>
-        <p>
-            <asp:Label ID="lblConfirmMsg" runat="server" style="z-index: 1; left: 83px; top: 66px; position: absolute" Text="Are you sure you want to delete this record?"></asp:Label>
-        </p>
-    </form>
+    <header class="container-fluid p-5 bg-primary text-white text-center">
+        <h1>Confirm Deletion</h1>
+    </header>
+    <main class="container my-5">
+        <form id="form1" runat="server">
+            <p class="row mb-4 justify-content-center p-3">
+                <asp:Label class="text-center d-block" ID="lblConfirmMsg" runat="server" Text="Are you sure you want to delete this record?"></asp:Label>
+            </p>
+            <div class="row mb-4 gap-5 justify-content-center p-3">
+                <asp:Button class="btn btn-success" ID="btnYes" runat="server" OnClick="btnYes_Click" Text="Yes" width="50px" />
+                <asp:Button class="btn btn-danger" ID="btnNo" runat="server" OnClick="btnNo_Click" Text="No" width="50px"/>
+            </div>
+        </form>
+    </main>
 </body>
 </html>

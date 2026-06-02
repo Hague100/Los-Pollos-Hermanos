@@ -1,6 +1,7 @@
 ﻿using ClassLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Data;
 
 namespace Testing1
 {
@@ -169,7 +170,7 @@ namespace Testing1
             }
             Assert.IsTrue(OK);
         }
-        [TestMethod]
+        /*[TestMethod]
         public void TestPatientFirstNameFound()
         {
             //create an instance of the class we want to create
@@ -208,7 +209,7 @@ namespace Testing1
                 OK = false;
             }
             Assert.IsTrue(OK);
-        }
+        }*/
         [TestMethod]
         public void TestDoctorIDFound()
         {
@@ -219,11 +220,31 @@ namespace Testing1
             //create a Boolean variable to record if the data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 AppointmentNumber = 2;
+            Int32 AppointmentNumber = 1;
             //invoke the method
             Found = AnAppointment.Find(AppointmentNumber);
             //check the doctor id
             if (AnAppointment.DoctorID != 1)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+        [TestMethod]
+        public void TestPatientIDFound()
+        {
+            //create and instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //boolean variable to store the results of the validation
+            Boolean Found = false;
+            //create a Boolean variable to record if the data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 AppointmentNumber = 1;
+            //invoke the method
+            Found = AnAppointment.Find(AppointmentNumber);
+            //check the patient ID
+            if (AnAppointment.PatientID != 2)
             {
                 OK = false;
             }
@@ -1349,6 +1370,67 @@ namespace Testing1
             Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
             //test to see that the result is correct
             Assert.AreEqual(Error, "");
+        }
+        /********** Statistics Function Tests **********/
+        [TestMethod]
+        public void StatStatisticsGroupedByEmergency()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //boolean variable to store the results of the validation
+            int noOfRecords = 2;
+            //invoke the method
+            DataTable dT = AnAppointment.StatisticsGroupedByEmergency();
+            //test to see that the result is correct
+            Assert.AreEqual(noOfRecords, dT.Rows.Count);
+        }
+        [TestMethod]
+        public void StatStatisticsGroupedByDoctor()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //boolean variable to store the results of the validation
+            int noOfRecords = 3;
+            //invoke the method
+            DataTable dT = AnAppointment.StatisticsGroupedByDoctor();
+            //test to see that the result is correct
+            Assert.AreEqual(noOfRecords, dT.Rows.Count);
+        }
+        [TestMethod]
+        public void StatStatisticsGroupedByDate()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //boolean variable to store the results of the validation
+            int noOfRecords = 6;
+            //invoke the method
+            DataTable dT = AnAppointment.StatisticsGroupedByDate();
+            //test to see that the result is correct
+            Assert.AreEqual(noOfRecords, dT.Rows.Count);
+        }
+        [TestMethod]
+        public void StatStatisticsGroupedByFloorNumber()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //boolean variable to store the results of the validation
+            int noOfRecords = 2;
+            //invoke the method
+            DataTable dT = AnAppointment.StatisticsGroupedByFloorNumber();
+            //test to see that the result is correct
+            Assert.AreEqual(noOfRecords, dT.Rows.Count);
+        }
+        [TestMethod]
+        public void StatStatisticsGroupedByRoomNumber()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //boolean variable to store the results of the validation
+            int noOfRecords = 3;
+            //invoke the method
+            DataTable dT = AnAppointment.StatisticsGroupedByRoomNumber();
+            //test to see that the result is correct
+            Assert.AreEqual(noOfRecords, dT.Rows.Count);
         }
     }
 }

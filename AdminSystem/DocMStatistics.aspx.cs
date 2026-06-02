@@ -33,4 +33,10 @@ public partial class DocMStatistics : System.Web.UI.Page
         // change the header of the first column 
         GridStatsByAvailability.HeaderRow.Cells[0].Text = " Total ";
     }
+
+    protected void BackButton_Click(object sender, EventArgs e)
+    {
+        // redirect back to list
+        Response.Redirect("DocMList.aspx");
+    }
 }

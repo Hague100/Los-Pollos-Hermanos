@@ -38,6 +38,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         tbEmail.Text = doctorCollection.thisDoctor.dEmail;
         tbPHoneNumber.Text = doctorCollection.thisDoctor.dPhoneNumber;
         cbAvailability.Checked = doctorCollection.thisDoctor.dAvailability;
+        cDateAdded.SelectedDate = doctorCollection.thisDoctor.DDateAdded;
     }
 
     protected void btnOK_Click(object sender, EventArgs e) 
@@ -56,9 +57,11 @@ public partial class _1_DataEntry : System.Web.UI.Page
         String phoneNumber = tbPHoneNumber.Text;
         // capture active check box
         String available = cbAvailability.Text;
+        // capture selcected date
+        String dateAdded = cDateAdded.SelectedDate.ToString(); 
         // initialise error messages
         String error = "";
-        error = aDoc.isValid(firstName, lastName, address, email, phoneNumber);
+        error = aDoc.isValid(firstName, lastName, address, email, phoneNumber, dateAdded);
 
         if ( error == "" )
         {
@@ -76,6 +79,8 @@ public partial class _1_DataEntry : System.Web.UI.Page
             aDoc.dPhoneNumber = tbPHoneNumber.Text;
             // capture the check box
             aDoc.dAvailability = cbAvailability.Checked;
+            // capture date picker/ calender
+            aDoc.DDateAdded = cDateAdded.SelectedDate;
             // create new instance of Doctor collection
             clsDoctorCollection doctorList = new clsDoctorCollection();
 
@@ -130,17 +135,32 @@ public partial class _1_DataEntry : System.Web.UI.Page
             tbEmail.Text = aDoc.dEmail;
             tbPHoneNumber.Text = aDoc.dPhoneNumber;
             cbAvailability.Checked = aDoc.dAvailability;
+            cDateAdded.SelectedDate = aDoc.DDateAdded;
         }
         else
         {
             // set error message, and then reset all other boxes to differetn values.
-            lbError.Text = "Oh Hell nah jit tripping";
+            lbError.Text = "No doctor with an ID of: " + tbDoctorId.Text + " was found";
             tbFirstName.Text = "";
             tbLastName.Text = "";
             tbAddress.Text = "";
             tbEmail.Text = "";
             tbPHoneNumber.Text = "";
             cbAvailability.Checked = false;
+            cDateAdded.SelectedDate = DateTime.Now;
         }
     }
+
+    protected void MainMenuButton_Click(object sender, EventArgs e)
+    {
+        // redirect to main menu
+        Response.Redirect("TeamMainMenu.aspx");
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        // redirect to Doc list
+        Response.Redirect("DocMList.aspx");
+    }
+
 }
