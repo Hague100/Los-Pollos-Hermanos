@@ -5,6 +5,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+
+    <link href="Content/bootstrap.min.cs" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+    <script src="Scripts/bootstrap.bundle.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -17,7 +22,7 @@
         <asp:TextBox ID="txtFilter" runat="server" style="z-index: 1; left: 170px; top: 587px; position: absolute"></asp:TextBox>
         <asp:Button ID="btnApply" runat="server" OnClick="btnApply_Click" style="z-index: 1; left: 14px; top: 630px; position: absolute" Text="Apply Filter" />
         <asp:Button ID="btnClear" runat="server" OnClick="btnClear_Click" style="z-index: 1; left: 165px; top: 630px; position: absolute" Text="Clear FIlter" />
-        <asp:Button ID="btnStats" runat="server" style="z-index: 1; left: 324px; top: 630px; position: absolute" Text="Statistics Page" />
+        <asp:Button ID="btnStats" runat="server" style="z-index: 1; left: 324px; top: 630px; position: absolute" Text="Statistics Page" OnClick="btnStats_Click" />
     </form>
 </body>
 </html>
