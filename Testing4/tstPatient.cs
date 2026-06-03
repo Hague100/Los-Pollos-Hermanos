@@ -443,7 +443,7 @@ namespace Testing4
         public void PHomeAddMin()
         {
             clsPatient aPatient = new clsPatient();
-            String address = "c";
+            String address = "";
             string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
             Assert.AreEqual(error, "");
         }
@@ -453,7 +453,7 @@ namespace Testing4
         public void PHomeAddMinMoreOne()
         {
             clsPatient aPatient = new clsPatient();
-            String address = "cc";
+            String address = "c";
             string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
             Assert.AreEqual(error, "");
         }
@@ -686,6 +686,25 @@ namespace Testing4
             String drIdStr = "test";
             string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
             Assert.AreNotEqual(error, "");
+        }
+
+        [TestMethod]
+        public void PMainDocIdInvalidDataType2()
+        {
+            clsPatient aPatient = new clsPatient();
+            String drIdStr = "2147483648";
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreNotEqual(error, "");
+        }
+
+        [TestMethod]
+
+        public void PMainDocIdNullValue()
+        {
+            clsPatient aPatient = new clsPatient();
+            String drIdStr = "";
+            string error = aPatient.Valid(patientName, email, address, dateOfBirthStr, drIdStr);
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
