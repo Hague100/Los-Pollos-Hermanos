@@ -65,7 +65,6 @@ namespace ClassLibrary
         }
         public int Add()
         {
-            System.Diagnostics.Debug.WriteLine(mThisAppointment.DateOfAppointment);
             //adds a new record to the database based on the values of mThisAppointment
             //connect to the database
             clsDataConnection DB = new clsDataConnection();
@@ -81,7 +80,6 @@ namespace ClassLibrary
             DB.AddParameter("@DoctorID", mThisAppointment.DoctorID);
             DB.AddParameter("@PatientID", DBPatient.DataTable.Rows[0]["PatientID"]);
             DB.AddParameter("@AppointmentDate", mThisAppointment.DateOfAppointment);
-            DB.AddParameter("@AppointmentTime", mThisAppointment.TimeOfAppointment);
             DB.AddParameter("@FloorNumber", mThisAppointment.FloorNumber);
             DB.AddParameter("@RoomNumber", mThisAppointment.RoomNumber);
             DB.AddParameter("@EmergencyAppointment", mThisAppointment.EmergencyAppointment);

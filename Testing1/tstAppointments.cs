@@ -16,7 +16,7 @@ namespace Testing1
         string TimeOfAppointment = new TimeSpan(13, 0, 0).ToString();
         string FloorNumber = "2";
         string RoomNumber = "2";
-        bool EmergencyAppointment = true;
+        string EmergencyAppointment = "true";
         string Notes = "This is a test note.";
         /*********************INSTANCE OF THE CLASS TEST*********************/
         [TestMethod]
@@ -373,6 +373,20 @@ namespace Testing1
         /****************MID MIN MAX PLUSONE LESSONE TESTS****************/
         /********PATIENT FIRST NAME********/
         [TestMethod]
+        public void PatientFirstNameExtremeMin()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string PatientFirstName = ""; //this should trigger an error
+            //invoke the method
+            Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+        [TestMethod]
         public void PatientFirstNameMinLessOne()
         {
             //create an instance of the class we want to create
@@ -436,7 +450,7 @@ namespace Testing1
             //string variable to store any error message
             String Error = "";
             //create some test data to pass to the method
-            string PatientFirstName = "Maximilianoalexandertheodoredanielchristopherjonathanbenjaminnathanielsebastianmontgomeryfitzgerald"; //this should be OK
+            string PatientFirstName = "".PadRight(99, 'a'); //this should be OK
             //invoke the method
             Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
             //test to see that the result is correct
@@ -450,7 +464,7 @@ namespace Testing1
             //string variable to store any error message
             String Error = "";
             //create some test data to pass to the method
-            string PatientFirstName = "Maximilianoalexandertheodoredanielchristopherjonathanbenjaminnathanielsebastianmontgomeryfitzgeralda"; //this should be OK
+            string PatientFirstName = "".PadRight(100, 'a'); //this should be OK
             //invoke the method
             Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
             //test to see that the result is correct
@@ -464,7 +478,7 @@ namespace Testing1
             //string variable to store any error message
             String Error = "";
             //create some test data to pass to the method
-            string PatientFirstName = "Maximilianoalexandertheodoredanielchristopherjonathanbenjaminnathanielsebastianmontgomeryfitzgeraldaa"; //this should trigger an error
+            string PatientFirstName = "".PadRight(101, 'a'); //this should trigger an error
             //invoke the method
             Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
             //test to see that the result is correct
@@ -500,6 +514,20 @@ namespace Testing1
             Assert.AreNotEqual(Error, "");
         }
         /********PATIENT LAST NAME********/
+        [TestMethod]
+        public void PatientLastNameExtremeMin()
+        {
+            //create an instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string PatientLastName = ""; //this should trigger an error
+            //invoke the method
+            Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
         [TestMethod]
         public void PatientLastNameMinLessOne()
         {
@@ -550,7 +578,7 @@ namespace Testing1
             //string variable to store any error message
             String Error = "";
             //create some test data to pass to the method
-            String PatientLastName = "Maximilianaeuphrasiatheresaalexandriettavalerineph"; //this should be OK
+            String PatientLastName = "".PadRight(50, 'a'); //this should be OK
             //invoke the method
             Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
             //test to see that the result is correct
@@ -564,7 +592,7 @@ namespace Testing1
             //string variable to store any error message
             String Error = "";
             //create some test data to pass to the method
-            string PatientLastName = "Maximilianoalexandertheodoredanielchristopherjonathanbenjaminnathanielsebastianmontgomeryfitzgerald"; //this should be OK
+            string PatientLastName = "".PadRight(99, 'a'); //this should be OK
             //invoke the method
             Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
             //test to see that the result is correct
@@ -578,7 +606,7 @@ namespace Testing1
             //string variable to store any error message
             String Error = "";
             //create some test data to pass to the method
-            string PatientLastName = "Maximilianoalexandertheodoredanielchristopherjonathanbenjaminnathanielsebastianmontgomeryfitzgeralda"; //this should be OK
+            string PatientLastName = "".PadRight(100, 'a'); //this should be OK
             //invoke the method
             Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
             //test to see that the result is correct
@@ -592,7 +620,7 @@ namespace Testing1
             //string variable to store any error message
             String Error = "";
             //create some test data to pass to the method
-            string PatientLastName = "Maximilianoalexandertheodoredanielchristopherjonathanbenjaminnathanielsebastianmontgomeryfitzgeraldaa"; //this should trigger an error
+            string PatientLastName = "".PadRight(101, 'a'); //this should trigger an error
             //invoke the method
             Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
             //test to see that the result is correct
@@ -863,7 +891,7 @@ namespace Testing1
             //string variable to store any error message
             String Error = "";
             //create some test data to pass to the method
-            string TimeOfAppointment = new TimeSpan(16, 59, 0).ToString(); //this should pass
+            string TimeOfAppointment = new TimeSpan(16, 59, 59).ToString(); //this should pass
             //invoke the method
             Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
             //test to see that the result is correct
@@ -1193,6 +1221,21 @@ namespace Testing1
             //test to see that the result is correct
             Assert.AreNotEqual(Error, "");
         }
+        /********Emergency********/
+        [TestMethod]
+        public void EmergencyAppointmentInvalid()
+        {
+            //create instance of the class we want to create
+            clsAppointments AnAppointment = new clsAppointments();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string EmergencyAppointment = "this ain't no boolean"; //this should trigger an error
+            //invoke the method
+            Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
         /********Notes********/
         [TestMethod]
         public void NotesExtremeMin()
@@ -1364,7 +1407,7 @@ namespace Testing1
             string TimeOfAppointment = new TimeSpan(10, 0, 0).ToString();
             string FloorNumber = "1";
             string RoomNumber = "2";
-            bool EmergencyAppointment = true;
+            string EmergencyAppointment = "true";
             string Notes = "This is a test note.";
             //invoke the method
             Error = AnAppointment.Valid(PatientFirstName, PatientLastName, DateOfAppointment, TimeOfAppointment, FloorNumber, RoomNumber, Notes, EmergencyAppointment);
@@ -1402,7 +1445,7 @@ namespace Testing1
             //create an instance of the class we want to create
             clsAppointments AnAppointment = new clsAppointments();
             //boolean variable to store the results of the validation
-            int noOfRecords = 3;
+            int noOfRecords = 6;
             //invoke the method
             DataTable dT = AnAppointment.StatisticsGroupedByDate();
             //test to see that the result is correct

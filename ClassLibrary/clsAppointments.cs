@@ -1,4 +1,5 @@
 ﻿using System;
+using System;
 using System.Data;
 using System.Globalization;
 
@@ -212,7 +213,6 @@ namespace ClassLibrary
                 mPatientID = Convert.ToInt32(DB.DataTable.Rows[0]["PatientID"]);
                 mPatientFirstName = patientName[0];
                 mPatientLastName = patientName[1];
-                mTimeOfAppointment = (TimeSpan)DB.DataTable.Rows[0]["AppointmentTime"];
                 mDateOfAppointment = Convert.ToDateTime(DB.DataTable.Rows[0]["AppointmentDate"]).Add(mTimeOfAppointment);
                 mFloorNumber = Convert.ToInt32(DB.DataTable.Rows[0]["FloorNumber"]);
                 mRoomNumber = Convert.ToInt32(DB.DataTable.Rows[0]["RoomNumber"]);
@@ -229,7 +229,7 @@ namespace ClassLibrary
             }
         }
 
-        public string Valid(string patientFirstName, string patientLastName, string dateOfAppointment, string timeOfAppointment, string floorNumber, string roomNumber, string notes, bool emergencyAppointment)
+        public string Valid(string patientFirstName, string patientLastName, string dateOfAppointment, string timeOfAppointment, string floorNumber, string roomNumber, string notes, string emergencyAppointment)
         {
             //create a string variable to store the error
             String Error = "";
@@ -362,6 +362,13 @@ namespace ClassLibrary
             {
                 //record the error
                 Error = Error + "The room number is not a valid integer : ";
+            }
+            /****Emergency Appointment****/
+            //if the emergency appointment value is not "true" or "false"
+            if (emergencyAppointment.ToLower() != "true" && emergencyAppointment.ToLower() != "false")
+            {
+                //record the error
+                Error = Error + "The emergency appointment value must be either true or false : ";
             }
             /****Notes****/
             //if the notes is greater than 500 characters

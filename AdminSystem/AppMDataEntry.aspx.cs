@@ -39,7 +39,8 @@ public partial class _1_DataEntry : System.Web.UI.Page
         txtFirstName.Text = AnAppointment.PatientFirstName;
         txtLastName.Text = AnAppointment.PatientLastName;
         calAppointmentDate.SelectedDate = AnAppointment.DateOfAppointment;
-        txtAppointmentTime.Text = AnAppointment.TimeOfAppointment.ToString();
+        txtAppointmentHour.SelectedValue = AnAppointment.TimeOfAppointment.Hours.ToString() + ":00:00";
+        txtAppointmentMinute.SelectedValue = AnAppointment.TimeOfAppointment.Minutes.ToString();
         txtNotes.Text = AnAppointment.Notes;
         chkEmergency.Checked = AnAppointment.EmergencyAppointment;
     }
@@ -55,8 +56,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //capture the patient last name
         AnAppointment.PatientLastName = txtLastName.Text;
         //capture the time of appointment
-        string[] timeSplit = txtAppointmentTime.Text.Split(':');
-        AnAppointment.TimeOfAppointment = new TimeSpan(Convert.ToInt32(timeSplit[0]), Convert.ToInt32(timeSplit[1]), Convert.ToInt32(timeSplit[2]));
+        AnAppointment.TimeOfAppointment = new TimeSpan(Convert.ToInt32(txtAppointmentHour.SelectedValue.Split(':')[0]), Convert.ToInt32(txtAppointmentMinute.SelectedValue) , 0);
         //capture the date of appointment
         AnAppointment.DateOfAppointment = Convert.ToDateTime(calAppointmentDate.SelectedDate).Add(AnAppointment.TimeOfAppointment);
         //(temporarily) set floor number
@@ -71,7 +71,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         string Error = "";
         //validate the data
         Error = AnAppointment.Valid(AnAppointment.PatientFirstName, AnAppointment.PatientLastName, AnAppointment.DateOfAppointment.ToString(), AnAppointment.TimeOfAppointment.ToString(), "1", "1", AnAppointment.Notes, AnAppointment.EmergencyAppointment);
-        System.Diagnostics.Debug.WriteLine("Error: ");
+        //System.Diagnostics.Debug.WriteLine("Error: ");
         //if the data is valid
         if (Error == "")
         {
@@ -130,10 +130,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
             //display the values of the properties in the form
             txtFirstName.Text = Convert.ToString(DB.DataTable.Rows[0]["PName"]).Split(' ')[0];
             txtLastName.Text = Convert.ToString(DB.DataTable.Rows[0]["PName"]).Split(' ')[1];
-            calAppointmentDate.Style["display"] = "none";
-            txtAppointmentDate.Style["display"] = "block";
-            txtAppointmentDate.Text = Convert.ToString(AnAppointment.DateOfAppointment);
-            txtAppointmentTime.Text = AnAppointment.TimeOfAppointment.ToString();
+            calAppointmentDate.SelectedDate = AnAppointment.DateOfAppointment.Date;
+            System.Diagnostics.Debug.WriteLine(txtAppointmentHour.SelectedValue);
+            txtAppointmentHour.SelectedValue = AnAppointment.TimeOfAppointment.Hours.ToString() + ":00:00";
+        txtAppointmentMinute.SelectedValue = AnAppointment.TimeOfAppointment.Minutes.ToString();
             txtNotes.Text = AnAppointment.Notes;
             chkEmergency.Checked = AnAppointment.EmergencyAppointment;
         }

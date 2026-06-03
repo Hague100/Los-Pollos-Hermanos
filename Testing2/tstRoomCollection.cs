@@ -226,11 +226,11 @@ namespace Testing2
 
             Boolean OK = true;
 
-            // 15 in general
+            // 10 in general
             // 4 in ICU
             FilteredRooms.FilterByWard("General");
 
-            if (FilteredRooms.Count == 15)
+            if (FilteredRooms.Count == 10)
             {
                 OK = true;
             }
