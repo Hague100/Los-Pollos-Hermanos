@@ -29,5 +29,15 @@ public partial class PatMStatistics : System.Web.UI.Page
         //add column title
         GridViewStGroupByDOB.HeaderRow.Cells[0].Text = "Total";
         GridViewStGroupByDOB.HeaderRow.Cells[1].Text = "DOB";
-    }   
+    }
+
+    protected void btnReturn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("PatMList.aspx");
+    }
+
+    protected void btnMainPage_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("TeamMainMenu.aspx");
+    }
 }

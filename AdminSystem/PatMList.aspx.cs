@@ -82,14 +82,14 @@ public partial class _1_List : System.Web.UI.Page
 
     protected void btnApplyFilter_Click(object sender, EventArgs e)
     {
-        //clsPatientCollection patientCollection = new clsPatientCollection();
-        //patientCollection.ReportByName(txtFilter.Text);
-        //lstPatientList.DataSource = patientCollection.PatientList;
-        ////set name of the pk
-        //lstPatientList.DataValueField = "PatientId";
-        ////set name of field to display
-        //lstPatientList.DataTextField = "PName";
-        //lstPatientList.DataBind();
+        clsPatientCollection patientCollection = new clsPatientCollection();
+        patientCollection.ReportByName(txtFilter.Text);
+        lstPatientList.DataSource = patientCollection.PatientList;
+        //set name of the pk
+        lstPatientList.DataValueField = "PatientId";
+        //set name of field to display
+        lstPatientList.DataTextField = "PName";
+        lstPatientList.DataBind();
 
     }
 
