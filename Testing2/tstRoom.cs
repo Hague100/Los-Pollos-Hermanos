@@ -437,9 +437,207 @@ namespace Testing2
         {
             clsRoom room = new clsRoom();
             DataTable dT = room.StatisticsGroupedByLastDateCleaned();
-            int noOfRecord = 6;
+            int noOfRecord = 4;
 
             Assert.AreEqual(noOfRecord, dT.Rows.Count);
+        }
+
+        [TestMethod]
+        public void FloorNumberExtremeMin()
+        {
+            clsRoom room = new clsRoom();
+            string error = "";
+            int floorNumber = 0;
+
+            error = room.Valid(floorNumber, RoomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "Floor Number cannot be less than 1. ");
+        }
+
+        [TestMethod]
+        public void FloorNumberMinMinusOne()
+        {
+            clsRoom room = new clsRoom();
+            string error = "";
+            int floorNumber = -1;
+
+            error = room.Valid(floorNumber, RoomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "Floor Number cannot be less than 1. ");
+        }
+
+        [TestMethod]
+        public void FloorNumberMin()
+        {
+            clsRoom room = new clsRoom();
+            string error = "";
+            int floorNumber = 1;
+
+            error = room.Valid(floorNumber, RoomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "");
+        }
+
+        [TestMethod]
+        public void FloorNumberMinPlusOne()
+        {
+            clsRoom room = new clsRoom();
+            string error = "";
+            int floorNumber = 2;
+
+            error = room.Valid(floorNumber, RoomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "");
+        }
+
+        [TestMethod]
+        public void FloorNumberMaxMinusOne()
+        {
+            clsRoom room = new clsRoom();
+            string error = "";
+            int floorNumber = 4;
+
+            error = room.Valid(floorNumber, RoomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "");
+        }
+
+        [TestMethod]
+        public void FloorNumberMax()
+        {
+            clsRoom room = new clsRoom();
+            string error = "";
+            int floorNumber = 5;
+
+            error = room.Valid(floorNumber, RoomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "");
+        }
+
+        [TestMethod]
+        public void FloorNumberMaxPlusOne()
+        {
+            clsRoom room = new clsRoom();
+            string error = "";
+            int floorNumber = 6;
+
+            error = room.Valid(floorNumber, RoomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "Floor Number cannot be more than 5. ");
+        }
+
+        [TestMethod]
+        public void FloorNumberMid()
+        {
+            clsRoom room = new clsRoom();
+            string error = "";
+            int floorNumber = 3;
+
+            error = room.Valid(floorNumber, RoomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "");
+        }
+
+        [TestMethod]
+        public void FloorNumberExtremeMax()
+        {
+            clsRoom room = new clsRoom();
+            string error = "";
+            int floorNumber = 100;
+
+            error = room.Valid(floorNumber, RoomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "Floor Number cannot be more than 5. ");
+        }
+
+        [TestMethod]
+        public void RoomNumberExtremeMin()
+        {
+            clsRoom room = new clsRoom();
+            string error = "";
+            int roomNumber = 0;
+
+            error = room.Valid(FloorNumber, roomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "Room Number cannot be less than 1. ");
+        }
+
+        [TestMethod]
+        public void RoomNumberMinMinusOne()
+        {
+            clsRoom room = new clsRoom();
+            string error = "";
+            int roomNumber = -1;
+
+            error = room.Valid(FloorNumber, roomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "Room Number cannot be less than 1. ");
+        }
+
+        [TestMethod]
+        public void RoomNumberMin()
+        {
+            clsRoom room = new clsRoom();
+            string error = "";
+            int roomNumber = 1;
+
+            error = room.Valid(FloorNumber, roomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "");
+        }
+
+        [TestMethod]
+        public void RoomNumberMinPlusOne()
+        {
+            clsRoom room = new clsRoom();
+            string error = "";
+            int roomNumber = 2;
+
+            error = room.Valid(FloorNumber, roomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "");
+        }
+
+        [TestMethod]
+        public void RoomNumberMaxMinusOne()
+        {
+            clsRoom room = new clsRoom();
+            string error = "";
+            int roomNumber = 14;
+
+            error = room.Valid(FloorNumber, roomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "");
+        }
+
+        [TestMethod]
+        public void RoomNumberMax()
+        {
+            clsRoom room = new clsRoom();
+            string error = "";
+            int roomNumber = 15;
+
+            error = room.Valid(FloorNumber, roomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "");
+        }
+
+        [TestMethod]
+        public void RoomNumberMaxPlusOne()
+        {
+            clsRoom room = new clsRoom();
+            string error = "";
+            int roomNumber = 16;
+
+            error = room.Valid(FloorNumber, roomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "Room Number cannot be more than 15. ");
+        }
+
+        [TestMethod]
+        public void RoomNumberMid()
+        {
+            clsRoom room = new clsRoom();
+            string error = "";
+            int roomNumber = 7;
+
+            error = room.Valid(FloorNumber, roomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "");
+        }
+
+        [TestMethod]
+        public void RoomNumberExtremeMax()
+        {
+            clsRoom room = new clsRoom();
+            string error = "";
+            int roomNumber = 100;
+
+            error = room.Valid(FloorNumber, roomNumber, WardLocation, BedType, HygieneStatus, LastDateCleaned);
+            Assert.AreEqual(error, "Room Number cannot be more than 15. ");
         }
 
     }

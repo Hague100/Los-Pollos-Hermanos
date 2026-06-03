@@ -183,20 +183,23 @@ namespace ClassLibrary
             DateTime DateTemp;
             DateTime PastMinDate;
 
-            if (FloorNumber <= 0 && RoomNumber <= 0) { error += "Woops, looks like you forgot to enter a valid room number. "; }
+            if (FloorNumber <= 0) { error += "Floor Number cannot be less than 1. "; }
+            if (RoomNumber <= 0) { error += "Room Number cannot be less than 1. "; }
+            if (FloorNumber > 5) { error += "Floor Number cannot be more than 5. "; }
+            if (RoomNumber > 15) { error += "Room Number cannot be more than 15. "; }
 
-            switch (WardLocation)
-            {
-                case "General":
-                    break;
-                case "Pediatric":
-                    break;
-                case "Intensive Care Unit":
-                    break;
-                default:
-                    error += "Ward Location is not valid. ";
-                    break;
-            }
+                switch (WardLocation)
+                {
+                    case "General":
+                        break;
+                    case "Pediatric":
+                        break;
+                    case "Intensive Care Unit":
+                        break;
+                    default:
+                        error += "Ward Location is not valid. ";
+                        break;
+                }
 
             switch (BedType)
             {
