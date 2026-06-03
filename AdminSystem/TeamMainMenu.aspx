@@ -12,24 +12,23 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons.min.css" />
 
     </head>
-    <body>
-        <header>
+    <body class="bg-light-subtle">
+        <header class="container-fluid p-5 bg-dark text-white text-center">
+             <asp:Label class="h1" ID ="TitileLabel" runat="server" Text="Private Hostpital System"></asp:Label>
         </header>
         <main>
             <form id="form1" runat="server">
-               <section style="height: 500px">
-                
-       
-
-                    <asp:Label ID="TitileLabel" runat="server" style="z-index: 1; left: 284px; top: 99px; position: absolute; width: 197px;" Text="Private Hostpital System"></asp:Label>
-                    <asp:Button ID="AppMButton" runat="server" style="z-index: 1; left: 28px; top: 150px; position: absolute; width: 150px;" Text="Appointments" OnClick="AppMButton_Click" />
-                    <asp:Button ID="DocMButton" runat="server" style="z-index: 1; left: 190px; top: 150px; position: absolute; width: 85px;" Text="Doctors" OnClick="DocMButton_Click" />
-                    <asp:Button ID="MedRecMButton" runat="server" style="z-index: 1; left: 290px; top: 150px; position: absolute; width: 184px;" Text="Medical Records" OnClick="MedRecMButton_Click" />
-                   <asp:Button ID="PatientsMButton" runat="server" style="z-index: 1; left: 490px; top: 150px; position: absolute; width: 88px; right: 280px;" Text="Patients" OnClick="PatientsMButton_Click" />
-                   <asp:Button ID="RoomMButtons" runat="server" style="z-index: 1; left: 595px; top: 150px; position: absolute; width: 75px;" Text="Rooms" OnClick="RoomMButtons_Click" />
-       
-
-               </section>
+               <nav>
+                    <div class ="col d-flex justify-content-center">
+                        <div class="gap-5 d-flex text-center p-4">
+                            <asp:Button class="btn btn-primary" ID="AppMButton" runat="server" Text="Appointments" OnClick="AppMButton_Click" style="width: 150px"/>
+                            <asp:Button class="btn btn-primary" ID="DocMButton" runat="server" Text="Doctors" OnClick="DocMButton_Click" style="width: 150px"/>
+                            <asp:Button class="btn btn-primary" ID="MedRecMButton" runat="server" Text="Medical Records" OnClick="MedRecMButton_Click" style="width: 150px"/>
+                            <asp:Button class="btn btn-primary" ID="PatientsMButton" runat="server" Text="Patients" OnClick="PatientsMButton_Click" style="width: 150px"/>
+                            <asp:Button class="btn btn-primary" ID="RoomMButtons" runat="server" Text="Rooms" OnClick="RoomMButtons_Click" style="width: 150px"/>
+                        </div>
+                    </div>
+               </nav>
             </form>
         </main>
         <footer>
