@@ -8,31 +8,99 @@
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <script src="Scripts/bootstrap.bundle.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
-    <style type="text/css">
-        #form1 {
-            height: 362px;
-        }
-    </style>
 </head>
-<body style="height: 380px">
-    <form id="form1" runat="server">
-        <asp:Label ID="lblPatientId" runat="server" style="z-index: 1; left: 15px; top: 32px; position: absolute; right: 1182px;" Text="Patient ID" width="126px"></asp:Label>
-        <asp:TextBox ID="txtPatientId" runat="server" style="z-index: 1; left: 147px; top: 29px; position: absolute; margin-bottom: 0px"></asp:TextBox>
-        <asp:Label ID="lblPName" runat="server" style="z-index: 1; left: 15px; top: 59px; position: absolute" Text="Name" width="126px"></asp:Label>
-        <asp:TextBox ID="txtPName" runat="server" style="z-index: 1; left: 147px; top: 56px; position: absolute"></asp:TextBox>
-        <asp:Label ID="lblPEmail" runat="server" style="z-index: 1; left: 15px; top: 83px; position: absolute" Text="Email" width="126px"></asp:Label>
-        <asp:TextBox ID="txtPEmail" runat="server" style="z-index: 1; left: 147px; top: 80px; position: absolute"></asp:TextBox>
-        <asp:Label ID="lblPDOB" runat="server" style="z-index: 1; left: 15px; top: 111px; position: absolute" Text="Date of Birth" width="126px"></asp:Label>
-        <asp:TextBox ID="txtPDOB" runat="server" style="z-index: 1; left: 147px; top: 108px; position: absolute"></asp:TextBox>
-        <asp:Label ID="lblPHomeAdd" runat="server" style="z-index: 1; left: 15px; top: 138px; position: absolute" Text="Home Address" width="126px"></asp:Label>
-        <asp:Label ID="lblPMainDoc" runat="server" style="z-index: 1; left: 15px; top: 164px; position: absolute" Text="Main Doctor ID"></asp:Label>
-        <asp:TextBox ID="txtPMainDocId" runat="server" style="z-index: 1; left: 147px; top: 161px; position: absolute"></asp:TextBox>
-        <asp:CheckBox ID="chkPAccessReq" runat="server" style="z-index: 1; left: 53px; top: 205px; position: absolute" Text="Access Requirements" />
-        <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" style="z-index: 1; left: 29px; top: 255px; position: absolute" Text="OK" width="60px" />
-        <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 174px; top: 252px; position: absolute" Text="Cancel" />
-        <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" style="z-index: 1; left: 366px; top: 25px; position: absolute" Text="Find" width="77px" />
-        <asp:TextBox ID="txtPHomeAdd" runat="server" style="z-index: 1; left: 147px; top: 135px; position: absolute"></asp:TextBox>
-        <asp:Label ID="lblError" runat="server" style="z-index: 1; left: 290px; top: 208px; position: absolute; height: 55px; width: 202px;"></asp:Label>
-    </form>
+<body class="bg-info">
+    <header class="container-fluid p-5 bg-primary text-white text-center">
+        <h1>Patient Entry</h1>
+    </header>
+    <main class="container my-5">
+        <form id="form1" runat="server">
+            <div class="bg-light-subtle p-3 rounded-4">
+                <!-- Patient data -->
+                <div class="container mb-4">
+                    <!-- Id and find -->
+                    <div class="row justify-content-md-center mb-3">
+                        <div class="col-sm-4 text-sm-end">
+                            <asp:Label class="col-form-label fw-semibold" ID="lblPatientId" runat="server" Text="Patient ID"></asp:Label>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <asp:TextBox class="form-control" ID="txtPatientId" runat="server"></asp:TextBox>
+                                <asp:Button class="btn btn-secondary" ID="btnFind" runat="server" OnClick="btnFind_Click" Text="Find"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Name -->
+                    <div class="row justify-content-md-center mb-3">
+                        <div class="col-sm-4 text-sm-end">
+                            <asp:Label class="col-form-label fw-semibold" ID="lblPName" runat="server" Text="Name"></asp:Label>
+                        </div>
+                        <div  class="col-sm-8">
+                            <asp:TextBox class="form-control" ID="txtPName" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                    <!-- Email -->
+                    <div class="row justify-content-md-center mb-3">
+                        <div class="col-sm-4 text-sm-end">
+                            <asp:Label class="col-form-label fw-semibold" ID="lblPEmail" runat="server" Text="Email"></asp:Label>
+                        </div>
+                        <div class="col-sm-8">
+                            <asp:TextBox class="form-control" ID="txtPEmail" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                    <!-- DOB -->
+                    <div class="row justify-content-md-center mb-3">
+                        <div class="col-sm-4 text-sm-end">
+                            <asp:Label class="col-form-label fw-semibold" ID="lblPDOB" runat="server" Text="Date of Birth"></asp:Label>
+                        </div>
+                        <div class="col-sm-8">
+                            <asp:TextBox class="form-control" ID="txtPDOB" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                    <!-- Home address -->
+                    <div class="row justify-content-md-center mb-3">
+                        <div class="col-sm-4 text-sm-end">
+                            <asp:Label class=" col-form-label fw-semibold" ID="lblPHomeAdd" runat="server" Text="Home Address"></asp:Label>
+                        </div>
+                        <div class="col-sm-8">
+                            <asp:TextBox class="form-control" ID="txtPHomeAdd" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                    <!-- Main Dr id -->
+                    <div class="row justify-content-md-center mb-3">
+                        <div class="col-sm-4 text-sm-end">
+                            <asp:Label class="col-form-label fw-semibold" ID="lblPMainDoc" runat="server" Text="Main Doctor ID"></asp:Label>
+                        </div>
+                        <div class="col-sm-8">
+                            <asp:TextBox class="form-control" ID="txtPMainDocId" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                    <!-- access req -->
+                    <div class="row justify-content-md-center mb-3">
+                        <div class="col-sm-8">
+                            <div class="offset-sm-5">
+                                <asp:CheckBox class="fw-semibold" ID="chkPAccessReq" runat="server" Text="Access Requirements" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Ok and cancel -->
+                <div class="row justify-content-center mb-3">
+                    <div class="col-sm-8">
+                        <div class="offset-sm-5 gap-5 d-flex">
+                            <asp:Button class="btn btn-success" ID="btnOK" runat="server" OnClick="btnOK_Click" Text="OK" style="width: 80px"/>
+                            <asp:Button class="btn btn-danger" ID="btnCancel" runat="server" OnClick="btnCancel_Click" Text="Cancel" style="width: 80px"/>
+                        </div>
+                    </div>
+                
+                    
+                </div>
+                <!-- error message -->
+                <div class="mb-3">
+                    <asp:Label ID="lblError" runat="server"></asp:Label>
+                </div>
+            </div>
+        </form>
+    </main>
 </body>
 </html>
