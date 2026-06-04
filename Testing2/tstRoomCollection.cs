@@ -90,12 +90,15 @@ namespace Testing2
             clsRoomCollection AllRooms = new clsRoomCollection();
             clsRoom TestItem = new clsRoom();
 
-            Int32 PrimaryKeyFloor = 8;
-            Int32 SecondaryKeyRoom = 9;
+            // Have to increase or add whatever number you want. 
+            // the db doesnt do this automatically so you have to insert the floor number and  room number
+            Int32 PrimaryKeyFloor = 5;
+            Int32 SecondaryKeyRoom = 5;
 
-            TestItem.FloorNumber = 8;
-            TestItem.RoomNumber = 9;
-            TestItem.WardLocation = "General";
+            // Same goes for these keys here, have to be the same as above
+            TestItem.FloorNumber = 5;
+            TestItem.RoomNumber = 5;
+            TestItem.WardLocation = "Intensive Care Unit";
             TestItem.BedType = "General";
             TestItem.DisabilityAccessible = true;
             TestItem.HygieneStatus = "Available";
@@ -141,7 +144,7 @@ namespace Testing2
 
             // CHECK TO SEE IF THIS IS ALREADY IN DB
          
-            if (!TestItem.Find(PrimaryKey, SecondaryKey))
+            if (!TestItem.Exists(PrimaryKey, SecondaryKey))
             { 
                 allRooms.Add(); 
             }
@@ -175,10 +178,13 @@ namespace Testing2
             clsRoomCollection allRooms = new clsRoomCollection();
             clsRoom TestItem = new clsRoom();
 
-            Int32 primaryKey = 5;
+            Int32 primaryKey = 4;
             Int32 SecondaryKey = 1;
 
-            TestItem.WardLocation = "General";
+            TestItem.FloorNumber = 4;
+            TestItem.RoomNumber = 1;
+
+            TestItem.WardLocation = "Intensive Care Unit";
             TestItem.BedType = "General";
             TestItem.DisabilityAccessible = true;
             TestItem.HygieneStatus = "Available";
@@ -226,11 +232,11 @@ namespace Testing2
 
             Boolean OK = true;
 
-            // 10 in general
+            // 12 in general
             // 4 in ICU
             FilteredRooms.FilterByWard("General");
 
-            if (FilteredRooms.Count == 10)
+            if (FilteredRooms.Count == 11)
             {
                 OK = true;
             }
