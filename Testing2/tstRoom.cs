@@ -437,7 +437,7 @@ namespace Testing2
         {
             clsRoom room = new clsRoom();
             DataTable dT = room.StatisticsGroupedByLastDateCleaned();
-            int noOfRecord = 4;
+            int noOfRecord = 5;
 
             Assert.AreEqual(noOfRecord, dT.Rows.Count);
         }
